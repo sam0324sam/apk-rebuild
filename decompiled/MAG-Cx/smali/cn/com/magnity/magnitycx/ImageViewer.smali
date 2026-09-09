@@ -585,6 +585,10 @@
     .local v2, "canvas":Landroid/graphics/Canvas;
     if-eqz v2, :cond_2
 
+    const/high16 v8, -0x1000000
+
+    invoke-virtual {v2, v8}, Landroid/graphics/Canvas;->drawColor(I)V
+
     iget v8, p0, Lcn/com/magnity/magnitycx/ImageViewer;->width_:I
 
     if-lez v8, :cond_fit
@@ -1947,9 +1951,11 @@
     .param p6, "height"    # I
 
     .prologue
-    if-gtz p5, :cond_skip_margin
+    if-lez p5, :cond_skip_margin
 
-    if-gtz p6, :cond_proceed_margin
+    if-lez p6, :cond_skip_margin
+
+    goto :cond_proceed_margin
 
     :cond_skip_margin
     return-void

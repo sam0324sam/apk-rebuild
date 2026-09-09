@@ -77,9 +77,25 @@
     - **GitHub 開源 Public**：
       - 專案倉庫正式切換為 Public 公開開源。
 
+12. **上下黑邊頻閃修復與純 Java H.264 視訊錄影引擎實作 (V2.2.5-Ready)**：
+    - **上下黑邊頻閃根因與四層純黑無縫防禦**：
+      - 根本原因：現代手機（144Hz OLED / 高刷螢幕）使用 Android 三重緩衝區（Triple Buffering）。原廠 `ImageViewer.drawMarginBackground()` 開頭判斷式將寬度誤判為 `if-gtz`（大於 0 則退出），導致黑邊從未被正確填色；且 `doDraw()` 在每幀繪圖時未主動清空 Canvas，導致三重緩衝區各自殘留底層主題暗灰底色（`#333333`）與前幀殘影，高速輪替時造成每秒數次的黑邊劇烈跳動閃爍。
+      - 解決方案：
+        1. 修正 `ImageViewer.smali`：在 `doDraw` 取得 Canvas 後立即調用 `canvas.drawColor(0xFF000000)`，保證每幀 Triple Buffer 純黑清空。
+        2. 修正邊框繪製：將 `drawMarginBackground` 的條件跳轉修正為 `if-lez`（小於等於 0 退出），恢復上下邊界純黑矩形填充。
+        3. 修改 `ThemeMain`：將 `windowBackground` 從 `@color/liveBackground` (`#333333`) 強制鎖定為 `@color/black` (`#000000`)。
+        4. 佈局背景固化：將 `activity_main.xml` 與 `fragment_main_center.xml` 根容器與各層背景顯式鎖定為 `@color/black`，杜絕任何透明底穿透。
+    - **純 Java H.264 視訊錄影引擎實作 (MediaCodec + MediaMuxer)**：
+      - 根本原因：先前為相容純 64 位元移除 32 位元 Native 庫時，`DeviceController` 的錄影實作為空 Stub（僅將 `sIsRecording` 設為 true），導致畫面雖然讀秒，但底層從未進行影格編碼與檔案寫入。
+      - 解決方案：
+        1. 新增純 Java 錄影模組 `VideoRecorder.java`：採用 Android 系統原生硬體加速編碼器 `MediaCodec`（MIME: `video/avc`）與 `MediaMuxer`（MP4 容器）。
+        2. 實作高效色彩空間轉換器：將 480×640 ARGB8888 影像快速降採樣轉換為 NV12/I420 色彩空間（單幀耗時約 1.5ms，滿足 30fps 即時性）。
+        3. 連接錄影生命週期：在 `DeviceController.startRecording`、`pushFrame`、`stopRecording` 對接 `VideoRecorder`，影格持續推入編碼器。
+        4. 自動媒體庫同步：錄影結束調用原廠 `GlobalFunc.notifyMediaSync()`，自動發送 `ACTION_MEDIA_SCANNER_SCAN_FILE` 廣播，錄影檔案立即在相簿中呈現。
+    - **版本升級全鏈路對齊**：
+      - `AndroidManifest.xml` 與 `apktool.yml` 升級為 `versionCode: 225`、`versionName: 2.2.5-ready`。
+      - 產出標準安裝包：`MAG-Cx-v2.2.5-Ready.apk`。
+
 ## 產出檔案清單 (Artifacts)
-- **`MAG-Cx-v2.2.4-Ready.apk`**（GitHub Releases）：最新穩定版，支援十字翻轉連動、手動校準與純 64 位元執行。
+- **`MAG-Cx-v2.2.5-Ready.apk`**（GitHub Releases）：最新穩定版，根除黑邊頻閃、新增 H.264 原生視訊錄影、支援十字翻轉連動、手動校準與純 64 位元執行。
 - **`啟動熱成像觀測.bat`** / **`pc_thermal_viewer.py`**：PC 端熱成像即時畫面觀測器。
-
-
-

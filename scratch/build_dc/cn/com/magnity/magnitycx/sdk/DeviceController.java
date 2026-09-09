@@ -783,19 +783,21 @@ public class DeviceController {
 
     public static boolean startRecording(String path, int w, int h, int fps, int bitrate, int format) {
         sIsRecording = true;
-        return true;
+        return VideoRecorder.getInstance().start(path, w, h, fps, bitrate);
     }
 
     public static void stopRecording() {
         sIsRecording = false;
+        VideoRecorder.getInstance().stop();
     }
 
     public static boolean isRecording() {
-        return sIsRecording;
+        return sIsRecording && VideoRecorder.getInstance().isRecording();
     }
 
     public static boolean doRecording(Bitmap bmp) {
-        return sIsRecording;
+        if (!sIsRecording) return false;
+        return VideoRecorder.getInstance().recordFrame(bmp);
     }
 
     public static boolean saveDDT(String path) {

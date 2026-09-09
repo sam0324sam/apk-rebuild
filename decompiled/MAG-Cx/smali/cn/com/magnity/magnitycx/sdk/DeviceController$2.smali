@@ -30,7 +30,7 @@
         }
     .end annotation
 
-    .line 1011
+    .line 1013
     iput-object p1, p0, Lcn/com/magnity/magnitycx/sdk/DeviceController$2;->val$activity:Landroid/app/Activity;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -43,7 +43,7 @@
 .method public run()V
     .locals 9
 
-    .line 1015
+    .line 1017
     :try_start_0
     invoke-static {}, Lcn/com/magnity/magnitycx/sdk/DeviceController;->access$200()Lcn/com/magnity/magnitycx/sdk/State;
 
@@ -57,7 +57,7 @@
 
     div-float/2addr v0, v1
 
-    .line 1016
+    .line 1018
     invoke-static {}, Lcn/com/magnity/magnitycx/sdk/DeviceController;->access$300()I
 
     move-result v2
@@ -66,7 +66,7 @@
 
     div-float/2addr v2, v1
 
-    .line 1017
+    .line 1019
     const/4 v1, 0x6
 
     new-array v1, v1, [Ljava/lang/CharSequence;
@@ -95,7 +95,7 @@
 
     aput-object v3, v1, v7
 
-    .line 1022
+    .line 1024
     invoke-static {}, Lcn/com/magnity/magnitycx/sdk/DeviceController;->access$400()I
 
     move-result v3
@@ -122,14 +122,14 @@
 
     aput-object v3, v1, v7
 
-    .line 1025
+    .line 1027
     new-instance v3, Landroid/app/AlertDialog$Builder;
 
     iget-object v7, p0, Lcn/com/magnity/magnitycx/sdk/DeviceController$2;->val$activity:Landroid/app/Activity;
 
     invoke-direct {v3, v7}, Landroid/app/AlertDialog$Builder;-><init>(Landroid/content/Context;)V
 
-    .line 1026
+    .line 1028
     sget-object v7, Ljava/util/Locale;->US:Ljava/util/Locale;
 
     const-string v8, "\u6eab\u5ea6\u6821\u6e96 (\u76ee\u524d: %.1f\u00b0C | \u88dc\u511f: %+.1f\u00b0C)"
@@ -154,7 +154,7 @@
 
     invoke-virtual {v3, v0}, Landroid/app/AlertDialog$Builder;->setTitle(Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;
 
-    .line 1027
+    .line 1029
     new-instance v0, Lcn/com/magnity/magnitycx/sdk/DeviceController$2$1;
 
     iget-object v2, p0, Lcn/com/magnity/magnitycx/sdk/DeviceController$2;->val$activity:Landroid/app/Activity;
@@ -163,33 +163,33 @@
 
     invoke-virtual {v3, v1, v0}, Landroid/app/AlertDialog$Builder;->setItems([Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;
 
-    .line 1052
+    .line 1054
     const-string v0, "\u53d6\u6d88"
 
     const/4 v1, 0x0
 
     invoke-virtual {v3, v0, v1}, Landroid/app/AlertDialog$Builder;->setNegativeButton(Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;
 
-    .line 1053
+    .line 1055
     invoke-virtual {v3}, Landroid/app/AlertDialog$Builder;->show()Landroid/app/AlertDialog;
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
-    .line 1056
+    .line 1058
     goto :goto_1
 
-    .line 1054
+    .line 1056
     :catchall_0
     move-exception v0
 
-    .line 1055
+    .line 1057
     const-string v1, "DeviceController"
 
     const-string v2, "showCalibrationDialog error"
 
     invoke-static {v1, v2, v0}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
 
-    .line 1057
+    .line 1059
     :goto_1
     return-void
 .end method
