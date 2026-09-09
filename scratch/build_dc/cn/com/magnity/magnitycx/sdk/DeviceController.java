@@ -33,6 +33,7 @@ public class DeviceController {
     private static int[] sBaseline = null;
     private static boolean sHasBaseline = false;
     private static boolean sAutoFfcDone = false;
+    private static boolean sAutoFfc2Done = false;
     private static int sManualTempOffset = 0;
     private static boolean sOffsetLoaded = false;
     private static int sFlipMode = 0;
@@ -410,6 +411,13 @@ public class DeviceController {
                 triggerFFC();
             }
 
+            // Secondary warm-up FFC at ~30s (frame 600 at 20fps) when camera reaches thermal equilibrium
+            if (!sAutoFfc2Done && sFrameCount >= 600) {
+                sAutoFfc2Done = true;
+                Log.i(TAG, "Triggering warm-up thermal equilibrium FFC at frame 600 (~30s)");
+                triggerFFC();
+            }
+
             // 1. Raw Diff calculation
             for (int i = 0; i < total; i++) {
                 sDiff[i] = sHasBaseline ? (sRawAD[i] - sBaseline[i]) : 0;
@@ -472,6 +480,26 @@ public class DeviceController {
                 }
             }
 
+            // 2.5 Lens Vignetting & Barrel Self-Radiation Shading Compensation
+            // Cancels out outer perimeter ~31.7°C heating from warm lens casing / barrel
+            int cx0 = width / 2;
+            int cy0 = height / 2;
+            int maxR2 = cx0 * cx0 + cy0 * cy0;
+            for (int y = 0; y < height; y++) {
+                int dy = y - cy0;
+                int dy2 = dy * dy;
+                int rowOffset = y * width;
+                for (int x = 0; x < width; x++) {
+                    int dx = x - cx0;
+                    int r2 = dx * dx + dy2;
+                    // Outside central sweet spot (r > 35, r2 > 1225), gently pull down barrel radiation
+                    if (r2 > 1225) {
+                        int comp = (int) (((long) (r2 - 1225) * 500) / (maxR2 - 1225));
+                        sFilteredDiff[rowOffset + x] -= comp;
+                    }
+                }
+            }
+
             // 3. Calibrated Physical Temperature Model
             // Baseline sensitivity: 7.5 mK per AD count
             // Base offset calibrated to +16,300 mK brings forehead to 35.0°C ~ 35.5°C
@@ -499,7 +527,8 @@ public class DeviceController {
             }
 
             // 4. Statistics & Min/Max tracking on filtered frame
-            int margin = 4;
+            // Exclude outer mechanical barrel / casing margin (10px on border) to ensure peak tracking within real FOV
+            int margin = 10;
             int minDiff = Integer.MAX_VALUE;
             int maxDiff = Integer.MIN_VALUE;
             int minPos = (height / 2) * width + (width / 2);
@@ -781,9 +810,23 @@ public class DeviceController {
         return client2BufferXY(client[0], client[1]);
     }
 
-    public static boolean startRecording(String path, int w, int h, int fps, int bitrate, int format) {
+    public static boolean startRecording(String path, int w, int h, int bitrate, int fps, int format) {
         sIsRecording = true;
-        return VideoRecorder.getInstance().start(path, w, h, fps, bitrate);
+        int actualFps = fps;
+        int actualBitrate = bitrate;
+        // Handle parameter inversion between bitrate (kbps, e.g. 2048) and fps (e.g. 20)
+        if (fps > 60 && bitrate <= 60) {
+            actualFps = bitrate;
+            actualBitrate = fps;
+        } else if (bitrate > 60 && fps <= 60) {
+            actualFps = fps;
+            actualBitrate = bitrate;
+        }
+        if (actualFps < 5 || actualFps > 60) actualFps = 20;
+        if (actualBitrate < 200) actualBitrate = 2000;
+
+        Log.i(TAG, "startRecording: path=" + path + ", w=" + w + ", h=" + h + ", fps=" + actualFps + ", bitrate=" + actualBitrate);
+        return VideoRecorder.getInstance().start(path, w, h, actualFps, actualBitrate);
     }
 
     public static void stopRecording() {

@@ -21,7 +21,7 @@
 .method constructor <init>()V
     .locals 0
 
-    .line 280
+    .line 281
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
     return-void
@@ -32,7 +32,7 @@
 .method public run()V
     .locals 4
 
-    .line 284
+    .line 285
     const/4 v0, 0x0
 
     :try_start_0
@@ -40,18 +40,18 @@
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
-    .line 288
+    .line 289
     :goto_0
     invoke-static {v0}, Lcn/com/magnity/magnitycx/sdk/DeviceController;->access$102(Z)Z
 
-    .line 289
+    .line 290
     goto :goto_1
 
-    .line 285
+    .line 286
     :catchall_0
     move-exception v1
 
-    .line 286
+    .line 287
     :try_start_1
     const-string v2, "DeviceController"
 
@@ -63,16 +63,16 @@
 
     goto :goto_0
 
-    .line 290
+    .line 291
     :goto_1
     return-void
 
-    .line 288
+    .line 289
     :catchall_1
     move-exception v1
 
     invoke-static {v0}, Lcn/com/magnity/magnitycx/sdk/DeviceController;->access$102(Z)Z
 
-    .line 289
+    .line 290
     throw v1
 .end method

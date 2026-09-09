@@ -18,6 +18,7 @@ public class MediaCodec {
     public void start() {}
     public void stop() {}
     public void release() {}
+    public MediaCodecInfo getCodecInfo() { return new MediaCodecInfo(); }
 
     public int dequeueInputBuffer(long timeoutUs) { return 0; }
     public ByteBuffer getInputBuffer(int index) { return null; }

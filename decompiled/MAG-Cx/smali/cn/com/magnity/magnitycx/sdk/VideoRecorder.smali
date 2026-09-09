@@ -68,102 +68,132 @@
     return-void
 .end method
 
-.method private static chooseColorFormat()I
-    .locals 7
+.method private static chooseColorFormat(Landroid/media/MediaCodec;)I
+    .locals 6
 
-    .line 266
-    const-string v0, "video/avc"
+    .line 273
+    const/16 v0, 0x15
 
-    const/16 v1, 0x15
+    if-eqz p0, :cond_4
 
+    .line 275
     :try_start_0
-    invoke-static {v0}, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->selectCodec(Ljava/lang/String;)Landroid/media/MediaCodecInfo;
+    invoke-virtual {p0}, Landroid/media/MediaCodec;->getCodecInfo()Landroid/media/MediaCodecInfo;
 
-    move-result-object v2
+    move-result-object p0
 
-    .line 267
-    if-eqz v2, :cond_3
+    .line 276
+    const-string v1, "video/avc"
 
-    .line 268
-    invoke-virtual {v2, v0}, Landroid/media/MediaCodecInfo;->getCapabilitiesForType(Ljava/lang/String;)Landroid/media/MediaCodecInfo$CodecCapabilities;
+    invoke-virtual {p0, v1}, Landroid/media/MediaCodecInfo;->getCapabilitiesForType(Ljava/lang/String;)Landroid/media/MediaCodecInfo$CodecCapabilities;
 
-    move-result-object v0
+    move-result-object p0
 
-    .line 269
-    iget-object v2, v0, Landroid/media/MediaCodecInfo$CodecCapabilities;->colorFormats:[I
+    .line 277
+    iget-object v1, p0, Landroid/media/MediaCodecInfo$CodecCapabilities;->colorFormats:[I
 
-    array-length v3, v2
+    array-length v2, v1
+
+    const/4 v3, 0x0
 
     const/4 v4, 0x0
 
-    const/4 v5, 0x0
-
     :goto_0
-    if-ge v5, v3, :cond_1
+    if-ge v4, v2, :cond_1
 
-    aget v6, v2, v5
+    aget v5, v1, v4
 
-    .line 270
-    if-ne v6, v1, :cond_0
+    .line 278
+    if-ne v5, v0, :cond_0
 
-    .line 271
-    return v6
+    .line 279
+    return v5
 
-    .line 269
+    .line 277
     :cond_0
-    add-int/lit8 v5, v5, 0x1
+    add-int/lit8 v4, v4, 0x1
 
     goto :goto_0
 
-    .line 274
+    .line 282
     :cond_1
-    iget-object v0, v0, Landroid/media/MediaCodecInfo$CodecCapabilities;->colorFormats:[I
+    iget-object p0, p0, Landroid/media/MediaCodecInfo$CodecCapabilities;->colorFormats:[I
 
-    array-length v2, v0
+    array-length v1, p0
 
     :goto_1
-    if-ge v4, v2, :cond_3
+    if-ge v3, v1, :cond_3
 
-    aget v3, v0, v4
+    aget v2, p0, v3
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
-    .line 275
-    const/16 v5, 0x13
+    .line 283
+    const/16 v4, 0x13
 
-    if-ne v3, v5, :cond_2
+    if-ne v2, v4, :cond_2
 
-    .line 276
-    return v3
+    .line 284
+    return v2
 
-    .line 274
+    .line 282
     :cond_2
-    add-int/lit8 v4, v4, 0x1
+    add-int/lit8 v3, v3, 0x1
 
     goto :goto_1
 
-    .line 280
-    :catchall_0
-    move-exception v0
-
+    .line 289
     :cond_3
-    nop
+    goto :goto_2
 
-    .line 281
-    return v1
+    .line 287
+    :catchall_0
+    move-exception p0
+
+    .line 288
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v2, "chooseColorFormat error: "
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
+
+    invoke-virtual {p0}, Ljava/lang/Throwable;->getMessage()Ljava/lang/String;
+
+    move-result-object p0
+
+    invoke-virtual {v1, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object p0
+
+    invoke-virtual {p0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object p0
+
+    const-string v1, "VideoRecorder"
+
+    invoke-static {v1, p0}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;)I
+
+    .line 291
+    :cond_4
+    :goto_2
+    return v0
 .end method
 
 .method private cleanup()V
     .locals 2
 
-    .line 237
+    .line 245
     iget-object v0, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mEncoder:Landroid/media/MediaCodec;
 
     const/4 v1, 0x0
 
     if-eqz v0, :cond_0
 
-    .line 239
+    .line 247
     :try_start_0
     iget-object v0, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mEncoder:Landroid/media/MediaCodec;
 
@@ -173,14 +203,14 @@
 
     goto :goto_0
 
-    .line 240
+    .line 248
     :catchall_0
     move-exception v0
 
     :goto_0
     nop
 
-    .line 242
+    .line 250
     :try_start_1
     iget-object v0, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mEncoder:Landroid/media/MediaCodec;
 
@@ -190,29 +220,29 @@
 
     goto :goto_1
 
-    .line 243
+    .line 251
     :catchall_1
     move-exception v0
 
     :goto_1
     nop
 
-    .line 244
+    .line 252
     iput-object v1, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mEncoder:Landroid/media/MediaCodec;
 
-    .line 247
+    .line 255
     :cond_0
     iget-object v0, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mMuxer:Landroid/media/MediaMuxer;
 
     if-eqz v0, :cond_2
 
-    .line 249
+    .line 257
     :try_start_2
     iget-boolean v0, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mMuxerStarted:Z
 
     if-eqz v0, :cond_1
 
-    .line 250
+    .line 258
     iget-object v0, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mMuxer:Landroid/media/MediaMuxer;
 
     invoke-virtual {v0}, Landroid/media/MediaMuxer;->stop()V
@@ -221,7 +251,7 @@
 
     goto :goto_2
 
-    .line 252
+    .line 260
     :catchall_2
     move-exception v0
 
@@ -229,7 +259,7 @@
     :goto_2
     nop
 
-    .line 254
+    .line 262
     :try_start_3
     iget-object v0, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mMuxer:Landroid/media/MediaMuxer;
 
@@ -239,49 +269,49 @@
 
     goto :goto_3
 
-    .line 255
+    .line 263
     :catchall_3
     move-exception v0
 
     :goto_3
     nop
 
-    .line 256
+    .line 264
     iput-object v1, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mMuxer:Landroid/media/MediaMuxer;
 
-    .line 257
+    .line 265
     const/4 v0, 0x0
 
     iput-boolean v0, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mMuxerStarted:Z
 
-    .line 260
+    .line 268
     :cond_2
     iput-object v1, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mPixelBuffer:[I
 
-    .line 261
+    .line 269
     iput-object v1, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mYuvBuffer:[B
 
-    .line 262
+    .line 270
     return-void
 .end method
 
 .method private drainEncoder(Z)V
     .locals 6
 
-    .line 187
+    .line 195
     iget-object v0, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mEncoder:Landroid/media/MediaCodec;
 
     if-nez v0, :cond_0
 
     return-void
 
-    .line 188
+    .line 196
     :cond_0
     new-instance v0, Landroid/media/MediaCodec$BufferInfo;
 
     invoke-direct {v0}, Landroid/media/MediaCodec$BufferInfo;-><init>()V
 
-    .line 191
+    .line 199
     :goto_0
     iget-object v1, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mEncoder:Landroid/media/MediaCodec;
 
@@ -299,38 +329,38 @@
 
     move-result v1
 
-    .line 192
+    .line 200
     const/4 v2, -0x1
 
     if-ne v1, v2, :cond_2
 
-    .line 193
+    .line 201
     if-nez p1, :cond_7
 
-    .line 194
+    .line 202
     goto/16 :goto_2
 
-    .line 197
+    .line 205
     :cond_2
     const/4 v2, -0x2
 
     if-ne v1, v2, :cond_4
 
-    .line 198
+    .line 206
     iget-boolean v1, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mMuxerStarted:Z
 
     const-string v2, "VideoRecorder"
 
     if-eqz v1, :cond_3
 
-    .line 199
+    .line 207
     const-string v1, "Output format changed after muxer started"
 
     invoke-static {v2, v1}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;)I
 
     goto :goto_3
 
-    .line 201
+    .line 209
     :cond_3
     iget-object v1, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mEncoder:Landroid/media/MediaCodec;
 
@@ -338,7 +368,7 @@
 
     move-result-object v1
 
-    .line 202
+    .line 210
     iget-object v3, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mMuxer:Landroid/media/MediaMuxer;
 
     invoke-virtual {v3, v1}, Landroid/media/MediaMuxer;->addTrack(Landroid/media/MediaFormat;)I
@@ -347,17 +377,17 @@
 
     iput v1, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mTrackIndex:I
 
-    .line 203
+    .line 211
     iget-object v1, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mMuxer:Landroid/media/MediaMuxer;
 
     invoke-virtual {v1}, Landroid/media/MediaMuxer;->start()V
 
-    .line 204
+    .line 212
     const/4 v1, 0x1
 
     iput-boolean v1, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mMuxerStarted:Z
 
-    .line 205
+    .line 213
     new-instance v1, Ljava/lang/StringBuilder;
 
     invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
@@ -380,27 +410,27 @@
 
     invoke-static {v2, v1}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 206
+    .line 214
     goto :goto_3
 
-    .line 207
+    .line 215
     :cond_4
     if-ltz v1, :cond_8
 
-    .line 209
+    .line 217
     nop
 
-    .line 210
+    .line 218
     iget-object v2, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mEncoder:Landroid/media/MediaCodec;
 
     invoke-virtual {v2, v1}, Landroid/media/MediaCodec;->getOutputBuffer(I)Ljava/nio/ByteBuffer;
 
     move-result-object v2
 
-    .line 215
+    .line 223
     if-eqz v2, :cond_8
 
-    .line 216
+    .line 224
     iget v3, v0, Landroid/media/MediaCodec$BufferInfo;->flags:I
 
     and-int/lit8 v3, v3, 0x2
@@ -409,10 +439,10 @@
 
     if-eqz v3, :cond_5
 
-    .line 217
+    .line 225
     iput v4, v0, Landroid/media/MediaCodec$BufferInfo;->size:I
 
-    .line 220
+    .line 228
     :cond_5
     iget v3, v0, Landroid/media/MediaCodec$BufferInfo;->size:I
 
@@ -422,12 +452,12 @@
 
     if-eqz v3, :cond_6
 
-    .line 221
+    .line 229
     iget v3, v0, Landroid/media/MediaCodec$BufferInfo;->offset:I
 
     invoke-virtual {v2, v3}, Ljava/nio/ByteBuffer;->position(I)Ljava/nio/Buffer;
 
-    .line 222
+    .line 230
     iget v3, v0, Landroid/media/MediaCodec$BufferInfo;->offset:I
 
     iget v5, v0, Landroid/media/MediaCodec$BufferInfo;->size:I
@@ -436,35 +466,35 @@
 
     invoke-virtual {v2, v3}, Ljava/nio/ByteBuffer;->limit(I)Ljava/nio/Buffer;
 
-    .line 223
+    .line 231
     iget-object v3, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mMuxer:Landroid/media/MediaMuxer;
 
     iget v5, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mTrackIndex:I
 
     invoke-virtual {v3, v5, v2, v0}, Landroid/media/MediaMuxer;->writeSampleData(ILjava/nio/ByteBuffer;Landroid/media/MediaCodec$BufferInfo;)V
 
-    .line 226
+    .line 234
     :cond_6
     iget-object v2, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mEncoder:Landroid/media/MediaCodec;
 
     invoke-virtual {v2, v1, v4}, Landroid/media/MediaCodec;->releaseOutputBuffer(IZ)V
 
-    .line 228
+    .line 236
     iget v1, v0, Landroid/media/MediaCodec$BufferInfo;->flags:I
 
     and-int/lit8 v1, v1, 0x4
 
     if-eqz v1, :cond_8
 
-    .line 229
+    .line 237
     nop
 
-    .line 234
+    .line 242
     :cond_7
     :goto_2
     return-void
 
-    .line 233
+    .line 241
     :cond_8
     :goto_3
     goto/16 :goto_0
@@ -473,28 +503,28 @@
 .method public static encodeYUV420P([B[III)V
     .locals 15
 
-    .line 334
+    .line 344
     move/from16 v0, p2
 
     move/from16 v1, p3
 
     mul-int v2, v0, v1
 
-    .line 335
+    .line 345
     nop
 
-    .line 336
+    .line 346
     nop
 
-    .line 337
+    .line 347
     div-int/lit8 v3, v2, 0x4
 
     add-int/2addr v3, v2
 
-    .line 340
+    .line 350
     nop
 
-    .line 341
+    .line 351
     const/4 v4, 0x0
 
     const/4 v5, 0x0
@@ -506,33 +536,33 @@
     :goto_0
     if-ge v5, v1, :cond_8
 
-    .line 342
+    .line 352
     const/4 v8, 0x0
 
     :goto_1
     if-ge v8, v0, :cond_7
 
-    .line 343
+    .line 353
     add-int/lit8 v9, v7, 0x1
 
     aget v7, p1, v7
 
-    .line 344
+    .line 354
     shr-int/lit8 v10, v7, 0x10
 
     const/16 v11, 0xff
 
     and-int/2addr v10, v11
 
-    .line 345
+    .line 355
     shr-int/lit8 v12, v7, 0x8
 
     and-int/2addr v12, v11
 
-    .line 346
+    .line 356
     and-int/2addr v7, v11
 
-    .line 348
+    .line 358
     mul-int/lit8 v13, v10, 0x42
 
     mul-int/lit16 v14, v12, 0x81
@@ -549,7 +579,7 @@
 
     add-int/lit8 v13, v13, 0x10
 
-    .line 349
+    .line 359
     add-int/lit8 v14, v6, 0x1
 
     if-gez v13, :cond_0
@@ -569,7 +599,7 @@
 
     aput-byte v13, p0, v6
 
-    .line 351
+    .line 361
     rem-int/lit8 v6, v5, 0x2
 
     if-nez v6, :cond_6
@@ -578,7 +608,7 @@
 
     if-nez v6, :cond_6
 
-    .line 352
+    .line 362
     mul-int/lit8 v6, v10, -0x26
 
     mul-int/lit8 v13, v12, 0x4a
@@ -595,7 +625,7 @@
 
     add-int/lit16 v6, v6, 0x80
 
-    .line 353
+    .line 363
     mul-int/lit8 v10, v10, 0x70
 
     mul-int/lit8 v12, v12, 0x5e
@@ -612,7 +642,7 @@
 
     add-int/lit16 v7, v7, 0x80
 
-    .line 355
+    .line 365
     add-int/lit8 v10, v2, 0x1
 
     if-gez v6, :cond_2
@@ -632,7 +662,7 @@
 
     aput-byte v6, p0, v2
 
-    .line 356
+    .line 366
     add-int/lit8 v2, v3, 0x1
 
     if-gez v7, :cond_4
@@ -658,7 +688,7 @@
 
     move v2, v10
 
-    .line 342
+    .line 352
     :cond_6
     add-int/lit8 v8, v8, 0x1
 
@@ -668,13 +698,13 @@
 
     goto :goto_1
 
-    .line 341
+    .line 351
     :cond_7
     add-int/lit8 v5, v5, 0x1
 
     goto :goto_0
 
-    .line 360
+    .line 370
     :cond_8
     return-void
 .end method
@@ -682,19 +712,19 @@
 .method public static encodeYUV420SP([B[III)V
     .locals 12
 
-    .line 303
+    .line 313
     mul-int v0, p2, p3
 
-    .line 304
+    .line 314
     nop
 
-    .line 305
+    .line 315
     nop
 
-    .line 308
+    .line 318
     nop
 
-    .line 309
+    .line 319
     const/4 v1, 0x0
 
     const/4 v2, 0x0
@@ -706,33 +736,33 @@
     :goto_0
     if-ge v2, p3, :cond_8
 
-    .line 310
+    .line 320
     const/4 v5, 0x0
 
     :goto_1
     if-ge v5, p2, :cond_7
 
-    .line 311
+    .line 321
     add-int/lit8 v6, v4, 0x1
 
     aget v4, p1, v4
 
-    .line 312
+    .line 322
     shr-int/lit8 v7, v4, 0x10
 
     const/16 v8, 0xff
 
     and-int/2addr v7, v8
 
-    .line 313
+    .line 323
     shr-int/lit8 v9, v4, 0x8
 
     and-int/2addr v9, v8
 
-    .line 314
+    .line 324
     and-int/2addr v4, v8
 
-    .line 316
+    .line 326
     mul-int/lit8 v10, v7, 0x42
 
     mul-int/lit16 v11, v9, 0x81
@@ -749,7 +779,7 @@
 
     add-int/lit8 v10, v10, 0x10
 
-    .line 317
+    .line 327
     add-int/lit8 v11, v3, 0x1
 
     if-gez v10, :cond_0
@@ -769,7 +799,7 @@
 
     aput-byte v10, p0, v3
 
-    .line 319
+    .line 329
     rem-int/lit8 v3, v2, 0x2
 
     if-nez v3, :cond_6
@@ -778,7 +808,7 @@
 
     if-nez v3, :cond_6
 
-    .line 320
+    .line 330
     mul-int/lit8 v3, v7, -0x26
 
     mul-int/lit8 v10, v9, 0x4a
@@ -795,7 +825,7 @@
 
     add-int/lit16 v3, v3, 0x80
 
-    .line 321
+    .line 331
     mul-int/lit8 v7, v7, 0x70
 
     mul-int/lit8 v9, v9, 0x5e
@@ -812,7 +842,7 @@
 
     add-int/lit16 v4, v4, 0x80
 
-    .line 323
+    .line 333
     add-int/lit8 v7, v0, 0x1
 
     if-gez v3, :cond_2
@@ -832,7 +862,7 @@
 
     aput-byte v3, p0, v0
 
-    .line 324
+    .line 334
     add-int/lit8 v0, v7, 0x1
 
     if-gez v4, :cond_4
@@ -854,7 +884,7 @@
 
     aput-byte v3, p0, v7
 
-    .line 310
+    .line 320
     :cond_6
     add-int/lit8 v5, v5, 0x1
 
@@ -864,13 +894,13 @@
 
     goto :goto_1
 
-    .line 309
+    .line 319
     :cond_7
     add-int/lit8 v2, v2, 0x1
 
     goto :goto_0
 
-    .line 328
+    .line 338
     :cond_8
     return-void
 .end method
@@ -927,12 +957,12 @@
 .method private static selectCodec(Ljava/lang/String;)Landroid/media/MediaCodecInfo;
     .locals 8
 
-    .line 285
+    .line 295
     invoke-static {}, Landroid/media/MediaCodecList;->getCodecCount()I
 
     move-result v0
 
-    .line 286
+    .line 296
     const/4 v1, 0x0
 
     const/4 v2, 0x0
@@ -940,12 +970,12 @@
     :goto_0
     if-ge v2, v0, :cond_3
 
-    .line 287
+    .line 297
     invoke-static {v2}, Landroid/media/MediaCodecList;->getCodecInfoAt(I)Landroid/media/MediaCodecInfo;
 
     move-result-object v3
 
-    .line 288
+    .line 298
     invoke-virtual {v3}, Landroid/media/MediaCodecInfo;->isEncoder()Z
 
     move-result v4
@@ -954,13 +984,13 @@
 
     goto :goto_2
 
-    .line 289
+    .line 299
     :cond_0
     invoke-virtual {v3}, Landroid/media/MediaCodecInfo;->getSupportedTypes()[Ljava/lang/String;
 
     move-result-object v4
 
-    .line 290
+    .line 300
     array-length v5, v4
 
     const/4 v6, 0x0
@@ -970,30 +1000,30 @@
 
     aget-object v7, v4, v6
 
-    .line 291
+    .line 301
     invoke-virtual {v7, p0}, Ljava/lang/String;->equalsIgnoreCase(Ljava/lang/String;)Z
 
     move-result v7
 
     if-eqz v7, :cond_1
 
-    .line 292
+    .line 302
     return-object v3
 
-    .line 290
+    .line 300
     :cond_1
     add-int/lit8 v6, v6, 0x1
 
     goto :goto_1
 
-    .line 286
+    .line 296
     :cond_2
     :goto_2
     add-int/lit8 v2, v2, 0x1
 
     goto :goto_0
 
-    .line 296
+    .line 306
     :cond_3
     const/4 p0, 0x0
 
@@ -1034,7 +1064,7 @@
 
     monitor-enter p0
 
-    .line 110
+    .line 118
     :try_start_0
     iget-boolean v0, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mIsRecording:Z
 
@@ -1058,7 +1088,7 @@
 
     goto/16 :goto_2
 
-    .line 116
+    .line 124
     :cond_0
     :try_start_1
     invoke-virtual {p1}, Landroid/graphics/Bitmap;->getWidth()I
@@ -1077,7 +1107,7 @@
 
     if-ne v0, v2, :cond_1
 
-    .line 117
+    .line 125
     iget-object v4, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mPixelBuffer:[I
 
     iget v6, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mWidth:I
@@ -1098,11 +1128,11 @@
 
     goto :goto_0
 
-    .line 116
+    .line 124
     :cond_1
     move-object v3, p1
 
-    .line 119
+    .line 127
     iget p1, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mWidth:I
 
     iget v0, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mHeight:I
@@ -1111,7 +1141,7 @@
 
     move-result-object v4
 
-    .line 120
+    .line 128
     iget-object v5, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mPixelBuffer:[I
 
     iget v7, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mWidth:I
@@ -1128,28 +1158,28 @@
 
     invoke-virtual/range {v4 .. v11}, Landroid/graphics/Bitmap;->getPixels([IIIIIII)V
 
-    .line 121
+    .line 129
     if-eq v4, v3, :cond_2
 
-    .line 122
+    .line 130
     invoke-virtual {v4}, Landroid/graphics/Bitmap;->recycle()V
 
-    .line 127
+    .line 135
     :cond_2
     :goto_0
     iget p1, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mColorFormat:I
     :try_end_1
     .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
-    .line 130
+    .line 138
     iget-object v0, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mYuvBuffer:[B
 
-    .line 127
+    .line 135
     const/16 v2, 0x13
 
     if-ne p1, v2, :cond_3
 
-    .line 128
+    .line 136
     :try_start_2
     iget-object p1, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mPixelBuffer:[I
 
@@ -1161,7 +1191,7 @@
 
     goto :goto_1
 
-    .line 130
+    .line 138
     :cond_3
     iget-object p1, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mPixelBuffer:[I
 
@@ -1171,7 +1201,7 @@
 
     invoke-static {v0, p1, v2, v3}, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->encodeYUV420SP([B[III)V
 
-    .line 134
+    .line 142
     :goto_1
     iget-object p1, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mEncoder:Landroid/media/MediaCodec;
 
@@ -1181,33 +1211,33 @@
 
     move-result v5
 
-    .line 135
+    .line 143
     if-ltz v5, :cond_4
 
-    .line 137
+    .line 145
     nop
 
-    .line 138
+    .line 146
     iget-object p1, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mEncoder:Landroid/media/MediaCodec;
 
     invoke-virtual {p1, v5}, Landroid/media/MediaCodec;->getInputBuffer(I)Ljava/nio/ByteBuffer;
 
     move-result-object p1
 
-    .line 142
+    .line 150
     if-eqz p1, :cond_4
 
-    .line 143
+    .line 151
     invoke-virtual {p1}, Ljava/nio/ByteBuffer;->clear()Ljava/nio/Buffer;
 
-    .line 144
+    .line 152
     iget-object v0, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mYuvBuffer:[B
 
     iget v2, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mYuvSize:I
 
     invoke-virtual {p1, v0, v1, v2}, Ljava/nio/ByteBuffer;->put([BII)Ljava/nio/ByteBuffer;
 
-    .line 145
+    .line 153
     iget-wide v2, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mFrameIndex:J
 
     long-to-double v2, v2
@@ -1224,7 +1254,7 @@
 
     double-to-long v8, v2
 
-    .line 146
+    .line 154
     iget-object v4, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mEncoder:Landroid/media/MediaCodec;
 
     iget v7, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mYuvSize:I
@@ -1235,7 +1265,7 @@
 
     invoke-virtual/range {v4 .. v10}, Landroid/media/MediaCodec;->queueInputBuffer(IIIJI)V
 
-    .line 147
+    .line 155
     iget-wide v2, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mFrameIndex:J
 
     const-wide/16 v4, 0x1
@@ -1244,26 +1274,26 @@
 
     iput-wide v2, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mFrameIndex:J
 
-    .line 152
+    .line 160
     :cond_4
     invoke-direct {p0, v1}, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->drainEncoder(Z)V
     :try_end_2
     .catchall {:try_start_2 .. :try_end_2} :catchall_0
 
-    .line 153
+    .line 161
     monitor-exit p0
 
     const/4 p1, 0x1
 
     return p1
 
-    .line 154
+    .line 162
     :catchall_0
     move-exception v0
 
     move-object p1, v0
 
-    .line 155
+    .line 163
     :try_start_3
     const-string v0, "VideoRecorder"
 
@@ -1293,19 +1323,19 @@
     :try_end_3
     .catchall {:try_start_3 .. :try_end_3} :catchall_1
 
-    .line 156
+    .line 164
     monitor-exit p0
 
     return v1
 
-    .line 111
+    .line 119
     :cond_5
     :goto_2
     monitor-exit p0
 
     return v1
 
-    .line 109
+    .line 117
     :catchall_1
     move-exception v0
 
@@ -1320,7 +1350,7 @@
 .end method
 
 .method public declared-synchronized start(Ljava/lang/String;IIII)Z
-    .locals 1
+    .locals 2
 
     monitor-enter p0
 
@@ -1333,7 +1363,7 @@
     .line 61
     invoke-virtual {p0}, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->stop()V
     :try_end_0
-    .catchall {:try_start_0 .. :try_end_0} :catchall_1
+    .catchall {:try_start_0 .. :try_end_0} :catchall_2
 
     .line 66
     :cond_0
@@ -1354,58 +1384,108 @@
     iput p3, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mHeight:I
 
     .line 68
-    if-lez p4, :cond_1
+    iget p2, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mWidth:I
+
+    if-gtz p2, :cond_1
+
+    const/16 p2, 0x1e0
+
+    iput p2, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mWidth:I
+
+    .line 69
+    :cond_1
+    iget p2, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mHeight:I
+
+    if-gtz p2, :cond_2
+
+    const/16 p2, 0x280
+
+    iput p2, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mHeight:I
+
+    .line 71
+    :cond_2
+    const/4 p2, 0x5
+
+    if-lt p4, p2, :cond_3
+
+    const/16 p2, 0x3c
+
+    if-gt p4, p2, :cond_3
 
     goto :goto_0
 
-    :cond_1
+    :cond_3
     const/16 p4, 0x14
 
     :goto_0
     iput p4, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mFps:I
 
-    .line 69
-    if-lez p5, :cond_2
+    .line 72
+    const/16 p2, 0xc8
+
+    if-lt p5, p2, :cond_4
 
     mul-int/lit16 p5, p5, 0x3e8
 
     goto :goto_1
 
-    :cond_2
+    :cond_4
     const p5, 0x1e8480
 
-    .line 71
+    .line 74
     :goto_1
     new-instance p2, Ljava/io/File;
 
     invoke-direct {p2, p1}, Ljava/io/File;-><init>(Ljava/lang/String;)V
 
-    .line 72
+    .line 75
     invoke-virtual {p2}, Ljava/io/File;->getParentFile()Ljava/io/File;
 
-    move-result-object p2
+    move-result-object p3
 
-    .line 73
-    if-eqz p2, :cond_3
+    .line 76
+    if-eqz p3, :cond_5
 
+    invoke-virtual {p3}, Ljava/io/File;->exists()Z
+
+    move-result p4
+
+    if-nez p4, :cond_5
+
+    .line 77
+    invoke-virtual {p3}, Ljava/io/File;->mkdirs()Z
+
+    .line 79
+    :cond_5
     invoke-virtual {p2}, Ljava/io/File;->exists()Z
 
     move-result p3
 
-    if-nez p3, :cond_3
+    if-eqz p3, :cond_6
 
-    .line 74
-    invoke-virtual {p2}, Ljava/io/File;->mkdirs()Z
+    .line 80
+    invoke-virtual {p2}, Ljava/io/File;->delete()Z
 
-    .line 78
-    :cond_3
-    invoke-static {}, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->chooseColorFormat()I
+    .line 83
+    :cond_6
+    const-string p2, "video/avc"
+
+    invoke-static {p2}, Landroid/media/MediaCodec;->createEncoderByType(Ljava/lang/String;)Landroid/media/MediaCodec;
+
+    move-result-object p2
+
+    iput-object p2, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mEncoder:Landroid/media/MediaCodec;
+
+    .line 84
+    iget-object p2, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mEncoder:Landroid/media/MediaCodec;
+
+    invoke-static {p2}, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->chooseColorFormat(Landroid/media/MediaCodec;)I
 
     move-result p2
 
     iput p2, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mColorFormat:I
 
-    .line 80
+    .line 86
     const-string p2, "video/avc"
 
     iget p3, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mWidth:I
@@ -1416,69 +1496,80 @@
 
     move-result-object p2
 
-    .line 81
+    .line 87
     const-string p3, "color-format"
 
     iget p4, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mColorFormat:I
 
     invoke-virtual {p2, p3, p4}, Landroid/media/MediaFormat;->setInteger(Ljava/lang/String;I)V
 
-    .line 82
+    .line 88
     const-string p3, "bitrate"
 
     invoke-virtual {p2, p3, p5}, Landroid/media/MediaFormat;->setInteger(Ljava/lang/String;I)V
 
-    .line 83
+    .line 89
     const-string p3, "frame-rate"
 
     iget p4, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mFps:I
 
     invoke-virtual {p2, p3, p4}, Landroid/media/MediaFormat;->setInteger(Ljava/lang/String;I)V
 
-    .line 84
+    .line 90
     const-string p3, "i-frame-interval"
 
     const/4 p4, 0x1
 
     invoke-virtual {p2, p3, p4}, Landroid/media/MediaFormat;->setInteger(Ljava/lang/String;I)V
+    :try_end_1
+    .catchall {:try_start_1 .. :try_end_1} :catchall_1
 
-    .line 86
-    const-string p3, "video/avc"
+    .line 92
+    :try_start_2
+    const-string p3, "bitrate-mode"
 
-    invoke-static {p3}, Landroid/media/MediaCodec;->createEncoderByType(Ljava/lang/String;)Landroid/media/MediaCodec;
+    invoke-virtual {p2, p3, p4}, Landroid/media/MediaFormat;->setInteger(Ljava/lang/String;I)V
+    :try_end_2
+    .catchall {:try_start_2 .. :try_end_2} :catchall_0
 
-    move-result-object p3
+    goto :goto_2
 
-    iput-object p3, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mEncoder:Landroid/media/MediaCodec;
+    .line 93
+    :catchall_0
+    move-exception p3
 
-    .line 87
+    :goto_2
+    nop
+
+    .line 95
+    :try_start_3
     iget-object p3, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mEncoder:Landroid/media/MediaCodec;
 
-    const/4 p5, 0x0
+    const/4 v1, 0x0
 
-    invoke-virtual {p3, p2, p5, p5, p4}, Landroid/media/MediaCodec;->configure(Landroid/media/MediaFormat;Ljava/lang/Object;Ljava/lang/Object;I)V
+    invoke-virtual {p3, p2, v1, v1, p4}, Landroid/media/MediaCodec;->configure(Landroid/media/MediaFormat;Ljava/lang/Object;Ljava/lang/Object;I)V
 
-    .line 88
+    .line 96
     iget-object p2, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mEncoder:Landroid/media/MediaCodec;
 
     invoke-virtual {p2}, Landroid/media/MediaCodec;->start()V
 
-    .line 90
+    .line 98
     new-instance p2, Landroid/media/MediaMuxer;
 
     invoke-direct {p2, p1, v0}, Landroid/media/MediaMuxer;-><init>(Ljava/lang/String;I)V
 
     iput-object p2, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mMuxer:Landroid/media/MediaMuxer;
 
-    .line 91
+    .line 99
     const/4 p2, -0x1
 
     iput p2, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mTrackIndex:I
 
-    .line 92
+    .line 100
     iput-boolean v0, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mMuxerStarted:Z
 
-    .line 94
+    .line 102
     iget p2, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mWidth:I
 
     iget p3, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mHeight:I
@@ -1491,7 +1582,7 @@
 
     iput p2, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mYuvSize:I
 
-    .line 95
+    .line 103
     iget p2, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mWidth:I
 
     iget p3, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mHeight:I
@@ -1502,31 +1593,31 @@
 
     iput-object p2, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mPixelBuffer:[I
 
-    .line 96
+    .line 104
     iget p2, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mYuvSize:I
 
     new-array p2, p2, [B
 
     iput-object p2, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mYuvBuffer:[B
 
-    .line 97
+    .line 105
     const-wide/16 p2, 0x0
 
     iput-wide p2, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mFrameIndex:J
 
-    .line 99
+    .line 107
     iput-boolean p4, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mIsRecording:Z
 
-    .line 100
+    .line 108
     const-string p2, "VideoRecorder"
 
     new-instance p3, Ljava/lang/StringBuilder;
 
     invoke-direct {p3}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string p5, "Recording started successfully: "
+    const-string v1, "Recording started successfully: "
 
-    invoke-virtual {p3, p5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {p3, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     move-result-object p3
 
@@ -1570,7 +1661,17 @@
 
     move-result-object p1
 
-    const-string p3, "fps, colorFormat="
+    const-string p3, "fps, bitrate="
+
+    invoke-virtual {p1, p3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object p1
+
+    invoke-virtual {p1, p5}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object p1
+
+    const-string p3, ", colorFormat="
 
     invoke-virtual {p1, p3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
@@ -1593,20 +1694,20 @@
     move-result-object p1
 
     invoke-static {p2, p1}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
-    :try_end_1
-    .catchall {:try_start_1 .. :try_end_1} :catchall_0
+    :try_end_3
+    .catchall {:try_start_3 .. :try_end_3} :catchall_1
 
-    .line 101
+    .line 109
     monitor-exit p0
 
     return p4
 
-    .line 102
-    :catchall_0
+    .line 110
+    :catchall_1
     move-exception p1
 
-    .line 103
-    :try_start_2
+    .line 111
+    :try_start_4
     const-string p2, "VideoRecorder"
 
     new-instance p3, Ljava/lang/StringBuilder;
@@ -1633,24 +1734,24 @@
 
     invoke-static {p2, p3, p1}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
 
-    .line 104
+    .line 112
     invoke-direct {p0}, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->cleanup()V
-    :try_end_2
-    .catchall {:try_start_2 .. :try_end_2} :catchall_1
+    :try_end_4
+    .catchall {:try_start_4 .. :try_end_4} :catchall_2
 
-    .line 105
+    .line 113
     monitor-exit p0
 
     return v0
 
     .line 59
-    :catchall_1
+    :catchall_2
     move-exception p1
 
-    :try_start_3
+    :try_start_5
     monitor-exit p0
-    :try_end_3
-    .catchall {:try_start_3 .. :try_end_3} :catchall_1
+    :try_end_5
+    .catchall {:try_start_5 .. :try_end_5} :catchall_2
 
     throw p1
 .end method
@@ -1660,7 +1761,7 @@
 
     monitor-enter p0
 
-    .line 161
+    .line 169
     :try_start_0
     iget-boolean v0, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mIsRecording:Z
     :try_end_0
@@ -1668,12 +1769,12 @@
 
     if-nez v0, :cond_0
 
-    .line 162
+    .line 170
     monitor-exit p0
 
     return-void
 
-    .line 164
+    .line 172
     :cond_0
     :try_start_1
     const-string v0, "VideoRecorder"
@@ -1706,20 +1807,20 @@
 
     invoke-static {v0, v1}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 165
+    .line 173
     const/4 v0, 0x0
 
     iput-boolean v0, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mIsRecording:Z
     :try_end_1
     .catchall {:try_start_1 .. :try_end_1} :catchall_2
 
-    .line 168
+    .line 176
     :try_start_2
     iget-object v0, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mEncoder:Landroid/media/MediaCodec;
 
     if-eqz v0, :cond_2
 
-    .line 170
+    .line 178
     iget-object v0, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mEncoder:Landroid/media/MediaCodec;
 
     const-wide/16 v1, 0x4e20
@@ -1728,10 +1829,10 @@
 
     move-result v4
 
-    .line 171
+    .line 179
     if-ltz v4, :cond_1
 
-    .line 172
+    .line 180
     iget-wide v0, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mFrameIndex:J
 
     long-to-double v0, v0
@@ -1748,7 +1849,7 @@
 
     double-to-long v7, v0
 
-    .line 173
+    .line 181
     iget-object v3, p0, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->mEncoder:Landroid/media/MediaCodec;
 
     const/4 v6, 0x0
@@ -1759,7 +1860,7 @@
 
     invoke-virtual/range {v3 .. v9}, Landroid/media/MediaCodec;->queueInputBuffer(IIIJI)V
 
-    .line 176
+    .line 184
     :cond_1
     const/4 v0, 0x1
 
@@ -1767,7 +1868,7 @@
     :try_end_2
     .catchall {:try_start_2 .. :try_end_2} :catchall_0
 
-    .line 181
+    .line 189
     :cond_2
     :goto_0
     :try_start_3
@@ -1775,14 +1876,14 @@
     :try_end_3
     .catchall {:try_start_3 .. :try_end_3} :catchall_2
 
-    .line 182
+    .line 190
     goto :goto_1
 
-    .line 178
+    .line 186
     :catchall_0
     move-exception v0
 
-    .line 179
+    .line 187
     :try_start_4
     const-string v1, "VideoRecorder"
 
@@ -1814,7 +1915,7 @@
 
     goto :goto_0
 
-    .line 183
+    .line 191
     :goto_1
     :try_start_5
     const-string v0, "VideoRecorder"
@@ -1825,22 +1926,22 @@
     :try_end_5
     .catchall {:try_start_5 .. :try_end_5} :catchall_2
 
-    .line 184
+    .line 192
     monitor-exit p0
 
     return-void
 
-    .line 181
+    .line 189
     :catchall_1
     move-exception v0
 
     :try_start_6
     invoke-direct {p0}, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->cleanup()V
 
-    .line 182
+    .line 190
     throw v0
 
-    .line 160
+    .line 168
     :catchall_2
     move-exception v0
 

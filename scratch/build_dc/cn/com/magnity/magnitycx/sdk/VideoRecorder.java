@@ -65,25 +65,33 @@ public class VideoRecorder {
             // Ensure even dimensions
             mWidth = (width / 2) * 2;
             mHeight = (height / 2) * 2;
-            mFps = (fps > 0) ? fps : 20;
-            int bitRate = (bitrateKbps > 0) ? bitrateKbps * 1000 : 2000000;
+            if (mWidth <= 0) mWidth = 480;
+            if (mHeight <= 0) mHeight = 640;
+
+            mFps = (fps >= 5 && fps <= 60) ? fps : 20;
+            int bitRate = (bitrateKbps >= 200) ? bitrateKbps * 1000 : 2000000;
 
             File outputFile = new File(outputPath);
             File parentDir = outputFile.getParentFile();
             if (parentDir != null && !parentDir.exists()) {
                 parentDir.mkdirs();
             }
+            if (outputFile.exists()) {
+                outputFile.delete();
+            }
 
-            // Determine supported color format (prefer NV12, fallback to I420)
-            mColorFormat = chooseColorFormat();
+            mEncoder = MediaCodec.createEncoderByType(MIME_TYPE);
+            mColorFormat = chooseColorFormat(mEncoder);
 
             MediaFormat format = MediaFormat.createVideoFormat(MIME_TYPE, mWidth, mHeight);
             format.setInteger(MediaFormat.KEY_COLOR_FORMAT, mColorFormat);
             format.setInteger(MediaFormat.KEY_BIT_RATE, bitRate);
             format.setInteger(MediaFormat.KEY_FRAME_RATE, mFps);
             format.setInteger(MediaFormat.KEY_I_FRAME_INTERVAL, 1);
+            try {
+                format.setInteger("bitrate-mode", 1); // VBR
+            } catch (Throwable ignored) {}
 
-            mEncoder = MediaCodec.createEncoderByType(MIME_TYPE);
             mEncoder.configure(format, null, null, MediaCodec.CONFIGURE_FLAG_ENCODE);
             mEncoder.start();
 
@@ -97,7 +105,7 @@ public class VideoRecorder {
             mFrameIndex = 0;
 
             mIsRecording = true;
-            Log.i(TAG, "Recording started successfully: " + outputPath + " (" + mWidth + "x" + mHeight + "@" + mFps + "fps, colorFormat=" + mColorFormat + ")");
+            Log.i(TAG, "Recording started successfully: " + outputPath + " (" + mWidth + "x" + mHeight + "@" + mFps + "fps, bitrate=" + bitRate + ", colorFormat=" + mColorFormat + ")");
             return true;
         } catch (Throwable t) {
             Log.e(TAG, "Failed to start recording: " + t.getMessage(), t);
@@ -261,10 +269,10 @@ public class VideoRecorder {
         mYuvBuffer = null;
     }
 
-    private static int chooseColorFormat() {
-        try {
-            MediaCodecInfo codecInfo = selectCodec(MIME_TYPE);
-            if (codecInfo != null) {
+    private static int chooseColorFormat(MediaCodec codec) {
+        if (codec != null) {
+            try {
+                MediaCodecInfo codecInfo = codec.getCodecInfo();
                 MediaCodecInfo.CodecCapabilities capabilities = codecInfo.getCapabilitiesForType(MIME_TYPE);
                 for (int colorFormat : capabilities.colorFormats) {
                     if (colorFormat == MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420SemiPlanar) {
@@ -276,8 +284,10 @@ public class VideoRecorder {
                         return colorFormat; // I420
                     }
                 }
+            } catch (Throwable t) {
+                Log.w(TAG, "chooseColorFormat error: " + t.getMessage());
             }
-        } catch (Throwable ignored) {}
+        }
         return MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420SemiPlanar; // default NV12
     }
 
