@@ -52,9 +52,19 @@
      - 原因：在 `startProcess()` 內搶先發送了同步快門指令 `setShutterState(1)`（`0x6bb6b672`），打亂了相機固件狀態，導致隨後發送的 `0x6bb6b673`（StartTransfer）等待 ACK 逾時失敗（`Fail to start remote transferring`），造成連線立即被中斷銷毀，畫面黑屏且無幀流入，原本設計在第 15 幀觸發的自動 FFC 亦從未執行。
      - 處置：自 `startProcess()` 中徹底移除同步快門調用，使其秒回 `true`；由 `UsbCommunication` 順暢完成握手並送出 `0x6bb6b673` 啟動串流；當前 15 幀穩定流入後，由獨立背景執行緒安全執行實體 FFC 快門開闔與物理校準。
 
+8. **坐標轉置對齊與溫度精細對齊 (V2.2.1-Aligned)**：
+   - **最高溫紅十字位置漂移修復**：直向模式下（Orientation 90°）Canvas Matrix 旋轉 90°，底層 Java 實作 `buffer2ClientXY()`（$cx = 120 - 1 - by, \; cy = bx$），使 UI 上的最高溫十字準確吸附在額頭真實熱源上。
+   - **中心幾何錨定**：取感測器幾何中心 `(80, 60)` 3×3 均值採樣，排除原廠奇偶偏移。
+
+9. **手動溫度校準與底層物理模型修正 (V2.2.2-Calibratable)**：
+   - **移除虛高 +16.3°C 硬編碼**：解決快門關閉時畫面飆升至 51.4°C 的問題，使快門零點回歸真實機溫。
+   - **手機音量鍵即時微調**：按音量【+】/【-】即時微調 $\pm 0.5^\circ\text{C}$ 並彈出 Toast 提示，對齊額溫槍只需 2 秒。
+   - **螢幕長按一鍵體溫校準**：長按熱像儀畫面中央彈出選單，支援一鍵校準為 36.4°C / 36.8°C / 微調 / 重置。
+   - **永久記憶**：校準補償值自動寫入 `SharedPreferences`，下次開機自動生效。
+
 ## 產出檔案清單 (Artifacts)
-- **`MAG-Cx-Xiaomi-64bit-Ready.apk`**（專案根目錄）：**【V3 終極純淨版】小米 14T Pro 專用純 64 位元直裝 APK**（純熱成像全螢幕、無手機相機權限與視窗、純 DEX 無原生庫、USB 握手修復、開機第 15 幀自動實體 FFC 快門校準）。
-- **`啟動熱成像觀測.bat`** / **`pc_thermal_viewer.py`**：PC 端熱成像即時畫面觀測器（支援即時影像、FFC 快門校準、調色盤切換、溫度 CSV 匯出）。
-- `release/MAG-Cx-pure-thermal-aligned-debugSigned.apk`：已完成 V1/V2/V3 簽名與對齊之最新純熱成像 APK。
-- 詳細演進與操作說明見：`walkthrough.md`。
+- **`MAG-Cx-v2.2.2-Calibratable.apk`**（專案根目錄）：最新版手動校準與音量鍵微調安裝包。
+- **`MAG-Cx-Xiaomi-64bit-Ready.apk`**（專案根目錄）：最新版鏡像副本。
+- **`啟動熱成像觀測.bat`** / **`pc_thermal_viewer.py`**：PC 端熱成像即時畫面觀測器。
+
 

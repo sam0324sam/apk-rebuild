@@ -250,3 +250,15 @@
 
     goto :goto_1
 .end method
+
+.method public onLongPress(Landroid/view/MotionEvent;)V
+    .locals 1
+    .param p1, "e"    # Landroid/view/MotionEvent;
+
+    .prologue
+    iget-object v0, p0, Lcn/com/magnity/magnitycx/MainActivity$MyGestureListener;->this$0:Lcn/com/magnity/magnitycx/MainActivity;
+
+    invoke-static {v0}, Lcn/com/magnity/magnitycx/sdk/DeviceController;->showCalibrationDialog(Landroid/app/Activity;)V
+
+    return-void
+.end method

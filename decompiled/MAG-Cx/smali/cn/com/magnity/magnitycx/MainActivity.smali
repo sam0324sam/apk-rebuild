@@ -932,3 +932,38 @@
     .line 169
     return-void
 .end method
+
+.method public onKeyDown(ILandroid/view/KeyEvent;)Z
+    .locals 2
+    .param p1, "keyCode"    # I
+    .param p2, "event"    # Landroid/view/KeyEvent;
+
+    .prologue
+    const/16 v0, 0x18
+
+    if-ne p1, v0, :cond_vol_down
+
+    invoke-static {p0}, Lcn/com/magnity/magnitycx/sdk/DeviceController;->adjustTempOffsetUp(Landroid/content/Context;)V
+
+    const/4 v0, 0x1
+
+    return v0
+
+    :cond_vol_down
+    const/16 v0, 0x19
+
+    if-ne p1, v0, :cond_super
+
+    invoke-static {p0}, Lcn/com/magnity/magnitycx/sdk/DeviceController;->adjustTempOffsetDown(Landroid/content/Context;)V
+
+    const/4 v0, 0x1
+
+    return v0
+
+    :cond_super
+    invoke-super {p0, p1, p2}, Landroid/support/v7/app/AppCompatActivity;->onKeyDown(ILandroid/view/KeyEvent;)Z
+
+    move-result v0
+
+    return v0
+.end method
