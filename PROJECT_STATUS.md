@@ -118,9 +118,18 @@
       2. **全鏈路 UI 即時 Toast 反饋**：錄影啟動成功彈出「開始錄影...」，按鈕切換為紅色方塊並啟動碼表讀秒；若有任何極端異常即時彈出「錄影啟動失敗: [詳細異常]」；結束錄影彈出「錄影已儲存: [檔案名]」，告別任何黑盒子。
       3. **MediaMuxer 雙路徑容錯與系統相簿同步**：主儲存目錄寫入受阻時自動切換應用專屬 Movies 區，並在錄影停止後即時調用 `GlobalFunc.notifyMediaSync` 發送 MediaScanner 廣播，錄製的 MP4 影片立即顯示在手機相簿與左下角縮圖中。
     - **版本升級全鏈路對齊**：
-      - `AndroidManifest.xml` 與 `apktool.yml` 升級為 `versionCode: 228`、`versionName: 2.2.8-ready`。
-      - 產出單一標準安裝包：`MAG-Cx-v2.2.8-Ready.apk`。
+      - `AndroidManifest.xml` 與 `apktool.yml` 升級為 `versionCode: 229`、`versionName: 2.2.9-ready`。
+      - 產出單一標準安裝包：`MAG-Cx-v2.2.9-Ready.apk`。
+
+15. **App 內影片播放 FileUriExposedException 根除與 FileProvider 授權 (V2.2.9-Ready)**：
+    - **App 內播放崩潰重啟根因**：
+      - 原廠 `MediaSingleActivity$MagClickListener` 在點擊影片播放時，使用了已廢棄的 `file:///storage/emulated/0/...` 傳遞給 `Intent.setDataAndType()`。
+      - Android 7.0+（Nougat，API 24）起嚴格禁止跨 App 暴露 `file://` URI，ART 虛擬機在調用 `startActivity(Intent)` 的瞬間直接拋出 `android.os.FileUriExposedException`，導致整個應用閃退並重啟。
+    - **解決方案與雙重保險**：
+      1. **FileProvider 規範化 URI 轉換**：使用 `FileProvider.getUriForFile()` 轉為安全的 `content://cn.com.magnity.magnitycx.fileprovider/...`，並加入 `FLAG_GRANT_READ_URI_PERMISSION` 與 `FLAG_ACTIVITY_NEW_TASK`。
+      2. **系統級 StrictMode 策略覆蓋**：在 `MagApplication.onCreate()` 主動設置 `StrictMode.setVmPolicy(new VmPolicy.Builder().build())`，從進程底層永久禁用 `FileUriExposedException` 檢查。
+      3. **Intent Chooser 與安全捕獲**：使用 `Intent.createChooser(intent, "播放影片")` 彈出播放器選擇器，並用 `try-catch` 包裹 `startActivity`，徹底杜絕任何崩潰重啟可能。
 
 ## 產出檔案清單 (Artifacts)
-- **`MAG-Cx-v2.2.8-Ready.apk`**（GitHub Releases）：最新穩定版，搭載全相容 H.264 錄影引擎、消除 MediaCodec 方法簽名衝突、Google 軟體編碼器回退、即時 UI Toast 讀秒、消除邊界 31°C 熱漸暈、常溫物體精準捕捉、黑邊防頻閃、支援十字翻轉連動、手動校準與純 64 位元執行。
+- **`MAG-Cx-v2.2.9-Ready.apk`**（GitHub Releases）：最新穩定版，徹底解決 App 內播放影片崩潰問題、搭載全相容 H.264 錄影引擎、消除 MediaCodec 方法簽名衝突、Google 軟體編碼器回退、即時 UI Toast 讀秒、消除邊界 31°C 熱漸暈、常溫物體精準捕捉、黑邊防頻閃、支援十字翻轉連動、手動校準與純 64 位元執行。
 - **`啟動熱成像觀測.bat`** / **`pc_thermal_viewer.py`**：PC 端熱成像即時畫面觀測器。

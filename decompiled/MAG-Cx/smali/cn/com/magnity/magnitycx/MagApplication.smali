@@ -194,6 +194,20 @@
     .line 48
     sput-object p0, Lcn/com/magnity/magnitycx/MagApplication;->instance_:Lcn/com/magnity/magnitycx/MagApplication;
 
+    :try_start_strict
+    new-instance v0, Landroid/os/StrictMode$VmPolicy$Builder;
+
+    invoke-direct {v0}, Landroid/os/StrictMode$VmPolicy$Builder;-><init>()V
+
+    invoke-virtual {v0}, Landroid/os/StrictMode$VmPolicy$Builder;->build()Landroid/os/StrictMode$VmPolicy;
+
+    move-result-object v0
+
+    invoke-static {v0}, Landroid/os/StrictMode;->setVmPolicy(Landroid/os/StrictMode$VmPolicy;)V
+    :try_end_strict
+    .catch Ljava/lang/Throwable; {:try_start_strict .. :try_end_strict} :catch_strict
+
+    :catch_strict
     .line 50
     new-instance v3, Lcn/com/magnity/magnitycx/sdk/MagParameter;
 

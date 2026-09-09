@@ -61,9 +61,9 @@
 ## 📦 最新版本下載 (Releases)
 
 安裝包請至 GitHub Releases 頁面下載：
-👉 **[下載 MAG-Cx 最新 Release APK (v2.2.8)](https://github.com/sam0324sam/apk-rebuild/releases/latest)**
+👉 **[下載 MAG-Cx 最新 Release APK (v2.2.9)](https://github.com/sam0324sam/apk-rebuild/releases/latest)**
 
-- **`MAG-Cx-v2.2.8-Ready.apk`**：**唯一標準推薦安裝包**（適用所有 64 位元 Android 手機，含小米 14T Pro / 天璣 9300+ / 高通驍龍等裝置；已修復全相容 H.264 錄影引擎、消除 MediaCodec 方法簽名衝突、即時 UI Toast 讀秒、最外圈熱漸暈平場校準、常溫物體精準捕捉、黑邊防閃爍、十字翻轉連動與音量鍵微調）。
+- **`MAG-Cx-v2.2.9-Ready.apk`**：**唯一標準推薦安裝包**（適用所有 64 位元 Android 手機，含小米 14T Pro / 天璣 9300+ / 高通驍龍等裝置；已修復 App 內影片播放 FileProvider 授權免崩潰、全相容 H.264 錄影引擎、消除 MediaCodec 簽名衝突、即時 UI Toast 讀秒、最外圈熱漸暈平場校準、常溫物體精準捕捉、黑邊防閃爍、十字翻轉連動與音量鍵微調）。
 
 ---
 

@@ -188,54 +188,78 @@
 
     .line 350
     .local v3, "pathName":Ljava/lang/String;
-    new-instance v4, Ljava/lang/StringBuilder;
+    new-instance v4, Ljava/io/File;
 
-    invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {v4, v3}, Ljava/io/File;-><init>(Ljava/lang/String;)V
 
-    const-string v5, "file:///"
+    :try_start_uri
+    iget-object v5, p0, Lcn/com/magnity/magnitycx/MediaSingleActivity$MagClickListener;->this$0:Lcn/com/magnity/magnitycx/MediaSingleActivity;
 
-    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    const-string v6, "cn.com.magnity.magnitycx.fileprovider"
+
+    invoke-static {v5, v6, v4}, Landroid/support/v4/content/FileProvider;->getUriForFile(Landroid/content/Context;Ljava/lang/String;Ljava/io/File;)Landroid/net/Uri;
+
+    move-result-object v4
+    :try_end_uri
+    .catch Ljava/lang/Throwable; {:try_start_uri .. :try_end_uri} :catch_uri
+
+    goto :goto_uri
+
+    :catch_uri
+    move-exception v5
+
+    invoke-static {v4}, Landroid/net/Uri;->fromFile(Ljava/io/File;)Landroid/net/Uri;
 
     move-result-object v4
 
-    invoke-virtual {v4, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v4
-
-    invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v4
-
-    invoke-static {v4}, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
-
-    move-result-object v4
-
+    :goto_uri
     const-string v5, "video/*"
 
     invoke-virtual {v2, v4, v5}, Landroid/content/Intent;->setDataAndType(Landroid/net/Uri;Ljava/lang/String;)Landroid/content/Intent;
 
-    .line 351
+    const/4 v4, 0x1
+
+    invoke-virtual {v2, v4}, Landroid/content/Intent;->addFlags(I)Landroid/content/Intent;
+
+    const v4, 0x10000000
+
+    invoke-virtual {v2, v4}, Landroid/content/Intent;->addFlags(I)Landroid/content/Intent;
+
     const/4 v4, 0x0
 
     invoke-static {v4}, Lcn/com/magnity/magnitycx/MagApplication;->setUsbDeinitAllowed(Z)V
 
-    .line 352
-    iget-object v4, p0, Lcn/com/magnity/magnitycx/MediaSingleActivity$MagClickListener;->this$0:Lcn/com/magnity/magnitycx/MediaSingleActivity;
+    :try_start_play
+    const-string v4, "\u64ad\u653e\u5f71\u7247"
 
-    invoke-virtual {v4}, Lcn/com/magnity/magnitycx/MediaSingleActivity;->getPackageManager()Landroid/content/pm/PackageManager;
-
-    move-result-object v4
-
-    invoke-virtual {v2, v4}, Landroid/content/Intent;->resolveActivity(Landroid/content/pm/PackageManager;)Landroid/content/ComponentName;
+    invoke-static {v2, v4}, Landroid/content/Intent;->createChooser(Landroid/content/Intent;Ljava/lang/CharSequence;)Landroid/content/Intent;
 
     move-result-object v4
 
-    if-eqz v4, :cond_0
+    iget-object v5, p0, Lcn/com/magnity/magnitycx/MediaSingleActivity$MagClickListener;->this$0:Lcn/com/magnity/magnitycx/MediaSingleActivity;
 
-    .line 353
-    iget-object v4, p0, Lcn/com/magnity/magnitycx/MediaSingleActivity$MagClickListener;->this$0:Lcn/com/magnity/magnitycx/MediaSingleActivity;
+    invoke-virtual {v5, v4}, Lcn/com/magnity/magnitycx/MediaSingleActivity;->startActivity(Landroid/content/Intent;)V
+    :try_end_play
+    .catch Ljava/lang/Throwable; {:try_start_play .. :try_end_play} :catch_play
 
-    invoke-virtual {v4, v2}, Lcn/com/magnity/magnitycx/MediaSingleActivity;->startActivity(Landroid/content/Intent;)V
+    goto/16 :goto_0
+
+    :catch_play
+    move-exception v4
+
+    iget-object v5, p0, Lcn/com/magnity/magnitycx/MediaSingleActivity$MagClickListener;->this$0:Lcn/com/magnity/magnitycx/MediaSingleActivity;
+
+    invoke-virtual {v4}, Ljava/lang/Throwable;->getMessage()Ljava/lang/String;
+
+    move-result-object v4
+
+    const/4 v6, 0x1
+
+    invoke-static {v5, v4, v6}, Landroid/widget/Toast;->makeText(Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;
+
+    move-result-object v4
+
+    invoke-virtual {v4}, Landroid/widget/Toast;->show()V
 
     goto/16 :goto_0
 
