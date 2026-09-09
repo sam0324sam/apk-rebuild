@@ -1,4 +1,4 @@
-﻿# Magnity 熱成像儀 (MAG-Cx) 64 位元 Android 重構與手動校準專案
+# Magnity 熱成像儀 (MAG-Cx) 64 位元 Android 重構與手動校準專案
 
 本專案致力於將巨哥科技（Magnity）熱像儀（USB VID: `0x833C`, PID: `0x0001`）的原廠 Android 應用程式重構為純 64 位元環境相容架構，徹底解決現代 64-bit-only 手機（如小米 14T Pro / 天璣 9300+ / Snapdragon 8 Gen 3/4 等無 32 位元架構之裝置）安裝崩潰、快門卡死、熱漂移與測溫失真等問題。
 
@@ -21,9 +21,10 @@
      - 【重置補償為 0.0°C】
    - **永久記憶儲存**：校準補償量自動寫入手機內部 `SharedPreferences`，每次開機自動生效。
 
-3. **直向模式坐標轉置對齊（Rotation Alignment）**
+3. **直向模式坐標轉置與成像翻轉連動（Flip & Crosshair Sync）**
    - 修復原廠直向預覽（Orientation 90°）時 Canvas 矩陣旋轉產生的對角拉扯問題。
-   - 實作雙向坐標映射算法 `buffer2ClientXY()`，最高溫紅十字與最低溫藍十字精確吸附在人臉與發熱體熱點上。
+   - **影像翻轉引擎**：支援水平翻轉（左右鏡像反轉）與垂直翻轉，長按螢幕校準選單即可一鍵切換。
+   - **十字座標完全同步連動**：翻轉畫面時，最高溫紅十字與最低溫藍十字即時同步鏡像映射，100% 精準吸附在翻轉後的熱點上，觸控取溫亦同步對齊。
 
 4. **純熱成像全螢幕鎖定**
    - 徹底移除不必要的手機相機權限與子母畫面（PIP）小浮動視窗，啟動即進入乾淨全螢幕熱成像。
@@ -37,10 +38,9 @@
 ## 📦 最新版本下載 (Releases)
 
 安裝包請至 GitHub Releases 頁面下載：
-👉 **[下載 MAG-Cx 最新 Release APK](https://github.com/sam0324sam/apk-rebuild/releases/latest)**
+👉 **[下載 MAG-Cx 最新 Release APK (v2.2.4)](https://github.com/sam0324sam/apk-rebuild/releases/latest)**
 
-- **`MAG-Cx-v2.2.2-Calibratable.apk`**：完整功能版（含手動校準與音量鍵微調）。
-- **`MAG-Cx-Xiaomi-64bit-Ready.apk`**：小米 14T Pro 專用純 64 位元直裝包。
+- **`MAG-Cx-v2.2.4-Ready.apk`**：**唯一標準推薦安裝包**（適用所有 64 位元 Android 手機，含小米 14T Pro / 天璣 9300+ / 高通驍龍等裝置；已修復十字翻轉連動、含音量鍵微調與一鍵體溫校準）。
 
 ---
 

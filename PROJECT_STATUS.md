@@ -67,9 +67,18 @@
     - **長按選單快捷翻轉**：長按螢幕校準彈窗內新增【切換水平翻轉】，無須進設定頁即可一鍵校正鏡像。
     - **版本號顯式同步**：在 `AndroidManifest.xml` 與 `apktool.yml` 顯式標記 `versionCode: 223` 與 `versionName: 2.2.3-flipped`，解決 Android 系統應用資訊與 App 關於頁面版本號未更新的問題。
 
+11. **十字座標翻轉同步連動、單一安裝包與開源 Public (V2.2.4-Ready)**：
+    - **十字座標與翻轉畫面 100% 同步連動**：
+      - 根本原因：原廠 `ImageViewer` 繪製十字時直接調用 `DeviceController.clientXY2ScreenXY`，Smali 層並未在 `screenCoor` 進行 `imageFlip` 鏡像，而是預期底層 C++ 在回傳 `intMaxX/Y` 前已套用 `dwFlip` 映射。純 Java 版本先前未對極值座標套用翻轉，導致影像翻轉後十字仍留在舊位置。
+      - 解決方案：在 `DeviceController.pushFrame()` 中，根據 `sFlipMode`（水平翻轉反轉 X，垂直翻轉反轉 Y）同步計算鏡像坐標 `cMin` 與 `cMax`，並同步修復 `screenXY2SensorXY()` 觸控取溫映射，使最高溫紅十字、最低溫藍十字與觸控測溫在任何翻轉狀態下 100% 精準連動吸附在熱點上！
+    - **精簡單一標準安裝包**：
+      - 徹底移除多重別名與冗餘副本，統一規範單一交付檔案名稱：`MAG-Cx-v2.2.4-Ready.apk`。
+      - 同步更新版本宣告：`versionCode: 224`、`versionName: 2.2.4-ready`。
+    - **GitHub 開源 Public**：
+      - 專案倉庫正式切換為 Public 公開開源。
+
 ## 產出檔案清單 (Artifacts)
-- **`MAG-Cx-v2.2.3-Flipped.apk`**（GitHub Releases）：最新版影像翻轉修復與手動校準安裝包。
-- **`MAG-Cx-Xiaomi-64bit-Ready.apk`**（GitHub Releases）：最新版鏡像副本。
+- **`MAG-Cx-v2.2.4-Ready.apk`**（GitHub Releases）：最新穩定版，支援十字翻轉連動、手動校準與純 64 位元執行。
 - **`啟動熱成像觀測.bat`** / **`pc_thermal_viewer.py`**：PC 端熱成像即時畫面觀測器。
 
 

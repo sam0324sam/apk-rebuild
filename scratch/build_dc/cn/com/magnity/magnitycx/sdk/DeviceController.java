@@ -562,6 +562,18 @@ public class DeviceController {
             int[] cMin = buffer2ClientXY(minPos % width, minPos / width);
             int[] cMax = buffer2ClientXY(maxPos % width, maxPos / width);
 
+            int clientW = (sPreviewOrientation == 90 || sPreviewOrientation == 270) ? height : width;
+            int clientH = (sPreviewOrientation == 90 || sPreviewOrientation == 270) ? width : height;
+
+            if ((sFlipMode & 1) != 0) {
+                cMin[0] = clientW - 1 - cMin[0];
+                cMax[0] = clientW - 1 - cMax[0];
+            }
+            if ((sFlipMode & 2) != 0) {
+                cMin[1] = clientH - 1 - cMin[1];
+                cMax[1] = clientH - 1 - cMax[1];
+            }
+
             sState.intMinX = cMin[0];
             sState.intMinY = cMin[1];
             sState.intMaxX = cMax[0];
@@ -758,6 +770,14 @@ public class DeviceController {
 
     public static int[] screenXY2SensorXY(int screenX, int screenY, int screenWidth, int screenHeight) {
         int[] client = screenXY2ClientXY(screenX, screenY, screenWidth, screenHeight);
+        int clientW = (sPreviewOrientation == 90 || sPreviewOrientation == 270) ? sFpaHeight : sFpaWidth;
+        int clientH = (sPreviewOrientation == 90 || sPreviewOrientation == 270) ? sFpaWidth : sFpaHeight;
+        if ((sFlipMode & 1) != 0) {
+            client[0] = clientW - 1 - client[0];
+        }
+        if ((sFlipMode & 2) != 0) {
+            client[1] = clientH - 1 - client[1];
+        }
         return client2BufferXY(client[0], client[1]);
     }
 
