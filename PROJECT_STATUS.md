@@ -118,9 +118,9 @@
       2. **全鏈路 UI 即時 Toast 反饋**：錄影啟動成功彈出「開始錄影...」，按鈕切換為紅色方塊並啟動碼表讀秒；若有任何極端異常即時彈出「錄影啟動失敗: [詳細異常]」；結束錄影彈出「錄影已儲存: [檔案名]」，告別任何黑盒子。
       3. **MediaMuxer 雙路徑容錯與系統相簿同步**：主儲存目錄寫入受阻時自動切換應用專屬 Movies 區，並在錄影停止後即時調用 `GlobalFunc.notifyMediaSync` 發送 MediaScanner 廣播，錄製的 MP4 影片立即顯示在手機相簿與左下角縮圖中。
     - **版本升級全鏈路對齊**：
-      - `AndroidManifest.xml` 與 `apktool.yml` 升級為 `versionCode: 227`、`versionName: 2.2.7-ready`。
-      - 產出單一標準安裝包：`MAG-Cx-v2.2.7-Ready.apk`。
+      - `AndroidManifest.xml` 與 `apktool.yml` 升級為 `versionCode: 228`、`versionName: 2.2.8-ready`。
+      - 產出單一標準安裝包：`MAG-Cx-v2.2.8-Ready.apk`。
 
 ## 產出檔案清單 (Artifacts)
-- **`MAG-Cx-v2.2.7-Ready.apk`**（GitHub Releases）：最新穩定版，搭載全相容 H.264 錄影引擎、Google 軟體編碼器回退、即時 UI Toast 讀秒、消除邊界 31°C 熱漸暈、常溫物體精準捕捉、黑邊防頻閃、支援十字翻轉連動、手動校準與純 64 位元執行。
+- **`MAG-Cx-v2.2.8-Ready.apk`**（GitHub Releases）：最新穩定版，搭載全相容 H.264 錄影引擎、消除 MediaCodec 方法簽名衝突、Google 軟體編碼器回退、即時 UI Toast 讀秒、消除邊界 31°C 熱漸暈、常溫物體精準捕捉、黑邊防頻閃、支援十字翻轉連動、手動校準與純 64 位元執行。
 - **`啟動熱成像觀測.bat`** / **`pc_thermal_viewer.py`**：PC 端熱成像即時畫面觀測器。
