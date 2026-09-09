@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="@color/colorSettingsSubDialogBackground" android:layout_width="match_parent" android:layout_height="match_parent" android:minWidth="@dimen/taskwindow_min_width" android:minHeight="@dimen/taskwindow_min_height" android:keepScreenOn="true"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textSize="@dimen/dialog_caption_size" android:textColor="@color/colorSettingsItemTitleText" android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dialog_item_vertical_margin" android:layout_marginBottom="@dimen/dialog_item_vertical_margin" android:text="@string/settingsTaskManager" />
+    <ImageView style="@style/DividerTheme4px" />
+    <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dialog_item_vertical_margin" android:layout_marginBottom="@dimen/dialog_item_vertical_margin" android:layout_marginStart="@dimen/dialog_left_margin" android:layout_marginEnd="@dimen/dialog_left_margin">
+        <RelativeLayout android:paddingTop="@dimen/setting_padding" android:paddingBottom="@dimen/setting_padding" android:visibility="gone" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="4.0dp">
+            <TextView android:textSize="@dimen/dialog_caption_size" android:textColor="@color/colorSettingsItemCaptionText" android:id="@id/task_goto_next" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/taskGotoNextAuto" />
+            <cn.com.magnity.magnitymx.util.SlideSwitch android:id="@id/task_goto_next_switch" android:layout_width="@dimen/switch_width" android:layout_height="@dimen/switch_height" android:layout_alignParentEnd="true" />
+        </RelativeLayout>
+        <RelativeLayout android:paddingTop="@dimen/setting_padding" android:paddingBottom="@dimen/setting_padding" android:layout_width="match_parent" android:layout_height="wrap_content">
+            <TextView android:textSize="@dimen/dialog_caption_size" android:textColor="@color/colorSettingsItemCaptionText" android:id="@id/task_item_caption" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/settingsTaskSelection" />
+            <cn.com.magnity.magnitymx.util.SlideSwitch android:id="@id/task_switch" android:layout_width="@dimen/switch_width" android:layout_height="@dimen/switch_height" android:layout_alignParentEnd="true" />
+        </RelativeLayout>
+        <RelativeLayout android:paddingTop="@dimen/setting_padding" android:paddingBottom="@dimen/setting_padding" android:layout_width="match_parent" android:layout_height="wrap_content">
+            <TextView android:textSize="@dimen/dialog_caption_size" android:textColor="@color/colorSettingsItemCaptionText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/settingsTaskDownload" />
+            <ImageView android:id="@id/task_download" android:layout_width="@dimen/switch_width" android:layout_height="@dimen/switch_height" android:src="@drawable/task_download" android:layout_alignParentEnd="true" />
+        </RelativeLayout>
+    </LinearLayout>
+    <ListView android:id="@id/task_list" android:layout_width="wrap_content" android:layout_height="wrap_content" android:divider="@color/colorDividerLine" android:dividerHeight="1.0dp" android:layout_marginStart="@dimen/dialog_left_margin" android:layout_marginEnd="@dimen/dialog_left_margin" />
+    <ImageView style="@style/DividerTheme4px" />
+</LinearLayout>

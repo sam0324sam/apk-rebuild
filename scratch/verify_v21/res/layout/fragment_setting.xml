@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
+        <ImageView style="@style/LineDividerLine" />
+        <include android:id="@id/id_setting_subheader_about" layout="@layout/include_setting_subheader" />
+        <ImageView style="@style/LineDividerLine" />
+        <include android:id="@id/id_setting_item_aboutProduct" layout="@layout/include_setting_item" />
+        <ImageView style="@style/LineDividerLine" />
+        <include android:id="@id/id_setting_item_aboutAbout" layout="@layout/include_setting_item" />
+        <ImageView style="@style/LineDividerLine" />
+        <ImageView style="@style/LineDividerLine" />
+        <include android:id="@id/id_setting_subheader_visible" layout="@layout/include_setting_subheader" />
+        <ImageView style="@style/LineDividerLine" />
+        <include android:id="@id/id_setting_item_visiblesize" layout="@layout/include_setting_item" />
+        <ImageView style="@style/LineDividerLine" />
+        <ImageView android:id="@id/trace_divider1" style="@style/LineDividerLine" />
+        <include android:id="@id/id_setting_subheader_maxmintrace" layout="@layout/include_setting_subheader" />
+        <ImageView android:id="@id/trace_divider2" style="@style/LineDividerLine" />
+        <include android:id="@id/id_setting_item_maxmintrace" layout="@layout/include_setting_item" />
+        <ImageView android:id="@id/trace_divider3" style="@style/LineDividerLine" />
+        <include android:id="@id/id_setting_item_roitrace" layout="@layout/include_setting_item" />
+        <ImageView android:id="@id/trace_divider4" style="@style/LineDividerLine" />
+        <ImageView style="@style/LineDividerLine" />
+        <include android:id="@id/id_setting_subheader_imageflip" layout="@layout/include_setting_subheader" />
+        <ImageView style="@style/LineDividerLine" />
+        <include android:id="@id/id_setting_item_imageHorflip" layout="@layout/include_setting_item" />
+        <ImageView style="@style/LineDividerLine" />
+        <include android:id="@id/id_setting_item_imageVerflip" layout="@layout/include_setting_item" />
+        <ImageView style="@style/LineDividerLine" />
+        <include android:id="@id/id_setting_item_imageEX" android:visibility="gone" layout="@layout/include_setting_item" />
+        <ImageView android:id="@id/id_imageEX_divider" android:visibility="gone" style="@style/LineDividerLine" />
+        <ImageView android:id="@id/id_emissivity_divider1" style="@style/LineDividerLine" />
+        <include android:id="@id/id_setting_subheader_emissivity" layout="@layout/include_setting_subheader" />
+        <ImageView android:id="@id/id_emissivity_divider2" style="@style/LineDividerLine" />
+        <include android:id="@id/id_setting_item_emissivity" layout="@layout/include_setting_item" />
+        <ImageView android:id="@id/id_emissivity_divider3" style="@style/LineDividerLine" />
+        <ImageView android:id="@id/id_fps_divider1" style="@style/LineDividerLine" />
+        <include android:id="@id/id_setting_subheader_fps" layout="@layout/include_setting_subheader" />
+        <ImageView android:id="@id/id_fps_divider2" style="@style/LineDividerLine" />
+        <include android:id="@id/id_setting_item_fps" layout="@layout/include_setting_item" />
+        <ImageView android:id="@id/id_fps_divider3" style="@style/LineDividerLine" />
+        <ImageView android:id="@id/id_moving_cross_divider1" style="@style/LineDividerLine" />
+        <include android:id="@id/id_setting_subheader_moving_cross" layout="@layout/include_setting_subheader" />
+        <ImageView android:id="@id/id_moving_cross_divider2" style="@style/LineDividerLine" />
+        <include android:id="@id/id_setting_item_moving_cross" layout="@layout/include_setting_item" />
+        <ImageView android:id="@id/id_moving_cross_divider3" style="@style/LineDividerLine" />
+    </LinearLayout>
+</ScrollView>

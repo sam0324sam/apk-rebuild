@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_vertical" android:background="@color/colorTaskBarBackground" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="@dimen/live_bottom_bar_minheight"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center" android:layout_width="0.0dp" android:layout_height="wrap_content" android:layout_weight="1.0">
+        <de.hdodenhof.circleimageview.CircleImageView android:id="@id/media_browse_btn" android:background="?android:selectableItemBackgroundBorderless" android:layout_width="32.0dp" android:layout_height="32.0dp" />
+    </LinearLayout>
+    <ImageView android:gravity="center" android:id="@id/live_roi_btn" android:background="?android:selectableItemBackgroundBorderless" android:layout_width="0.0dp" android:layout_height="wrap_content" android:src="@mipmap/iv_live_roi" android:layout_weight="1.0" />
+    <LinearLayout android:gravity="center" android:layout_width="0.0dp" android:layout_height="wrap_content" android:layout_marginLeft="20.0dp" android:layout_marginRight="20.0dp" android:layout_weight="1.0">
+        <ImageView android:gravity="center" android:id="@id/live_capture_btn" android:background="?android:selectableItemBackgroundBorderless" android:layout_width="wrap_content" android:layout_height="match_parent" android:src="@drawable/camera_capture" />
+        <ImageView android:id="@id/live_capture_opt_btn" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="match_parent" android:src="@drawable/camera_capture" />
+    </LinearLayout>
+    <ImageView android:id="@id/live_pause_btn" android:background="?android:selectableItemBackgroundBorderless" android:layout_width="0.0dp" android:layout_height="wrap_content" android:src="@drawable/pause" android:layout_weight="1.0" />
+    <ImageView android:gravity="center" android:id="@id/live_online_device_btn" android:background="?android:selectableItemBackgroundBorderless" android:layout_width="0.0dp" android:layout_height="wrap_content" android:src="@drawable/online_camera" android:layout_weight="1.0" />
+</LinearLayout>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout android:background="@color/colorMediaBackgroundTransparent" android:padding="10.0dp" android:layout_width="wrap_content" android:layout_height="match_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="vertical" android:id="@id/tune_first_layout" android:padding="10.0dp" android:layout_width="wrap_content" android:layout_height="match_parent" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toStartOf="@id/tune_second_layout" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:id="@id/color_palette_layout" android:layout_width="match_parent" android:layout_height="0.0dp" android:layout_weight="1.0">
+            <ImageView android:layout_gravity="center" android:id="@id/color_palette" android:layout_width="match_parent" android:layout_height="wrap_content" android:src="@drawable/color_palette" />
+            <TextView android:textSize="12.0sp" android:textColor="#ffffffff" android:gravity="center" android:layout_gravity="center" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/settingsColorbar" android:textAllCaps="false" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:id="@id/emissivity_layout" android:layout_width="match_parent" android:layout_height="0.0dp" android:layout_weight="1.0">
+            <ImageView android:layout_gravity="center" android:id="@id/emissivity" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/emissivity" />
+            <TextView android:textSize="12.0sp" android:textColor="#ffffffff" android:gravity="center" android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/settingsEmissivity" android:textAllCaps="false" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:id="@id/isothermy_layout" android:layout_width="match_parent" android:layout_height="0.0dp" android:layout_weight="1.0">
+            <ImageView android:layout_gravity="center" android:id="@id/isothermy" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/isothermy" />
+            <TextView android:textSize="12.0sp" android:textColor="#ffffffff" android:gravity="center" android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/settingsIso" android:textAllCaps="false" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:id="@id/manual_stretch_layout" android:layout_width="match_parent" android:layout_height="0.0dp" android:layout_weight="1.0">
+            <ImageView android:layout_gravity="center" android:id="@id/manual_stretch" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/stretch" />
+            <TextView android:textSize="12.0sp" android:textColor="#ffffffff" android:gravity="center" android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/settingsManual" android:textAllCaps="false" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout android:orientation="vertical" android:id="@id/tune_second_layout" android:padding="10.0dp" android:layout_width="wrap_content" android:layout_height="match_parent" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toEndOf="@id/tune_first_layout" app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:id="@id/barcode_scan_layout" android:layout_width="match_parent" android:layout_height="0.0dp" android:layout_weight="1.0">
+            <ImageView android:layout_gravity="center" android:id="@id/barcode_scan" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/scan" />
+            <TextView android:textSize="12.0sp" android:textColor="#ffffffff" android:gravity="center" android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/settingsScan" android:textAllCaps="false" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:id="@id/base_image_layout" android:layout_width="match_parent" android:layout_height="0.0dp" android:layout_weight="1.0">
+            <ImageView android:layout_gravity="center" android:id="@id/base_image" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/base_image_32" />
+            <TextView android:textSize="12.0sp" android:textColor="#ffffffff" android:gravity="center" android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/settingsIrRef" android:textAllCaps="false" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:id="@id/task_manager_layout" android:layout_width="match_parent" android:layout_height="0.0dp" android:layout_weight="1.0">
+            <ImageView android:layout_gravity="center" android:id="@id/task_manager" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/task_manager" />
+            <TextView android:textSize="12.0sp" android:textColor="#ffffffff" android:gravity="center" android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/settingsTaskManager" android:textAllCaps="false" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:id="@id/temperature_alarm_layout" android:layout_width="match_parent" android:layout_height="0.0dp" android:layout_weight="1.0">
+            <ImageView android:layout_gravity="center" android:id="@id/temperature_alarm" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/temperature_alarm" />
+            <TextView android:textSize="12.0sp" android:textColor="#ffffffff" android:gravity="center" android:layout_gravity="center" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/settingsAlarm" android:textAllCaps="false" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout android:orientation="vertical" android:id="@id/tune_third_layout" android:padding="10.0dp" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="match_parent" app:layout_constraintEnd_toStartOf="@id/tunebar_expand_layout" app:layout_constraintStart_toEndOf="@id/tune_second_layout" app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:id="@id/reserved1_layout" android:visibility="invisible" android:layout_width="match_parent" android:layout_height="0.0dp" android:layout_weight="1.0">
+            <ImageView android:layout_gravity="center" android:id="@id/reserved1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/scan" />
+            <TextView android:textSize="12.0sp" android:textColor="#ffffffff" android:gravity="center" android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/settingsScan" android:textAllCaps="false" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:id="@id/reserved2_layout" android:visibility="invisible" android:layout_width="match_parent" android:layout_height="0.0dp" android:layout_weight="1.0">
+            <ImageView android:layout_gravity="center" android:id="@id/reserved2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/base_image_32" />
+            <TextView android:textSize="12.0sp" android:textColor="#ffffffff" android:gravity="center" android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/settingsIrRef" android:textAllCaps="false" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:id="@id/reserved3_layout" android:visibility="invisible" android:layout_width="match_parent" android:layout_height="0.0dp" android:layout_weight="1.0">
+            <ImageView android:layout_gravity="center" android:id="@id/reserved3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/task_manager" />
+            <TextView android:textSize="12.0sp" android:textColor="#ffffffff" android:gravity="center" android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/settingsTaskManager" android:textAllCaps="false" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:id="@id/code_stream_layout" android:layout_width="match_parent" android:layout_height="0.0dp" android:layout_weight="1.0">
+            <ImageView android:layout_gravity="center" android:id="@id/code_stream" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/code_stream" />
+            <TextView android:textSize="12.0sp" android:textColor="#ffffffff" android:gravity="center" android:layout_gravity="center" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/settingsStreamType" android:textAllCaps="false" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout android:id="@id/tunebar_expand_layout" android:layout_width="wrap_content" android:layout_height="match_parent" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toEndOf="@id/tune_third_layout" app:layout_constraintTop_toTopOf="parent">
+        <ImageView android:layout_gravity="center" android:id="@id/tunebar_expand_indicator" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/more_open_white" android:paddingStart="5.0dp" android:paddingEnd="0.0dp" />
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

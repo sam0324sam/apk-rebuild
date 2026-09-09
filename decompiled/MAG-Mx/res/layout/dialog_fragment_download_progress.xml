@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout android:padding="@dimen/setting_padding" android:layout_width="match_parent" android:layout_height="match_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView android:id="@id/download_progress_title" android:paddingTop="@dimen/setting_padding" android:paddingBottom="@dimen/setting_padding" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/update_downloading" app:layout_constraintTop_toTopOf="parent" />
+    <ProgressBar android:id="@id/download_progress_indicator" android:padding="@dimen/setting_padding" android:layout_width="match_parent" android:layout_height="wrap_content" android:progress="0" app:layout_constraintTop_toBottomOf="@id/download_progress_title" style="@style/Widget.AppCompat.ProgressBar.Horizontal" />
+    <TextView android:gravity="end" android:id="@id/download_progress_text" android:padding="@dimen/setting_padding" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/update_progress_format" app:layout_constraintTop_toBottomOf="@id/download_progress_indicator" />
+</android.support.constraint.ConstraintLayout>

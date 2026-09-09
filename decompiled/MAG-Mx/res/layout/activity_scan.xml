@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="@android:color/black" android:clipChildren="true" android:layout_width="match_parent" android:layout_height="match_parent" android:keepScreenOn="true"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <cn.com.magnity.magnitymx.camera.CameraView android:id="@id/camera" android:layout_width="match_parent" android:layout_height="match_parent" android:adjustViewBounds="true" android:layout_alignParentTop="true" android:layout_alignParentStart="true" />
+    <cn.com.magnity.magnitymx.scanner.ViewfinderView android:id="@id/finder_view" android:layout_width="match_parent" android:layout_height="match_parent" />
+    <TextView android:textColor="@color/colorLiveText" android:id="@id/status_view" android:background="@color/colorTransparent" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/barScanMsg" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true" />
+    <ImageView android:id="@id/image_view" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+    <Button android:id="@id/test_button" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="8.0dp" android:text="test" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true" android:layout_marginStart="8.0dp" android:layout_marginEnd="8.0dp" />
+</RelativeLayout>

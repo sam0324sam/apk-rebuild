@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minWidth="@dimen/activity_list_min_width" android:minHeight="@dimen/activity_list_min_height" android:keepScreenOn="true"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <include android:id="@id/onlineDeviceToolbar" layout="@layout/include_online_toolbar" />
+    <FrameLayout android:id="@id/device_online_list" android:layout_width="match_parent" android:layout_height="match_parent" />
+    <FrameLayout android:id="@id/device_peer_list" android:layout_width="match_parent" android:layout_height="match_parent" />
+</LinearLayout>

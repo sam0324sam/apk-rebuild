@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="#ff000000" android:paddingLeft="@dimen/dialog_left_margin" android:paddingTop="@dimen/dialog_title_top_margin" android:layout_width="match_parent" android:layout_height="match_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ScrollView android:layout_width="match_parent" android:layout_height="match_parent">
+        <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content">
+            <include android:id="@id/id_productType" layout="@layout/include_textview_textview" />
+            <include android:id="@id/id_swVersion" layout="@layout/include_textview_textview" />
+            <include android:id="@id/id_hwVersion" layout="@layout/include_textview_textview" />
+            <include android:id="@id/id_magPhone" layout="@layout/include_textview_textview" />
+            <include android:id="@id/id_company" layout="@layout/include_textview_textview" />
+            <include android:id="@id/id_right" layout="@layout/include_textview_textview" />
+            <include android:id="@id/id_space" layout="@layout/include_textview_textview" />
+            <include android:id="@id/id_cooperated" layout="@layout/include_textview_textview" />
+            <include android:id="@id/id_cooperatedPhone" layout="@layout/include_textview_textview" />
+            <Button android:id="@id/id_moreInfo" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/moreInfo" />
+            <ImageView android:layout_gravity="center_horizontal" android:id="@id/id_barcode" android:layout_width="@dimen/barcode_size" android:layout_height="@dimen/barcode_size" android:layout_margin="20.0dp" android:src="@mipmap/barcode" android:scaleType="fitCenter" />
+            <TextView android:textColor="#ffaaaaaa" android:layout_gravity="center_horizontal" android:id="@id/id_barcode_tip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/barcodeDescription" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@id/id_main_center" android:layout_width="match_parent" android:layout_height="match_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <cn.com.magnity.magnitycx.ImageViewerVisible android:id="@id/id_imgViewerVisible" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+    <cn.com.magnity.magnitycx.ImageViewer android:id="@id/id_imgviewer" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_centerInParent="true" />
+    <ImageView android:id="@id/id_imgViewAnim" android:background="#ffffffff" android:visibility="invisible" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_centerInParent="true" />
+    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/id_layoutDevUnconn" android:background="@android:color/transparent" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true">
+        <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="8.0dp" android:src="@mipmap/dev_unconnected" />
+    </LinearLayout>
+    <com.github.lzyzsd.circleprogress.DonutProgress android:id="@id/id_loading" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true" />
+    <TextView android:textColor="@color/primaryText" android:id="@id/id_text" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="20.0dp" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true" />
+    <ProgressBar android:id="@id/id_loading2" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true" />
+</RelativeLayout>

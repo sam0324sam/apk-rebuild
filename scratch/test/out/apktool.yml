@@ -1,0 +1,4 @@
+version: 3.0.3
+apkFileName: test.apk
+sdkInfo:
+  minSdkVersion: 23

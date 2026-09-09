@@ -1,0 +1,22 @@
+version: 3.0.3
+apkFileName: 【专业版】MAG-Mx.apk
+usesFramework:
+  ids:
+  - 1
+sdkInfo:
+  minSdkVersion: 21
+  targetSdkVersion: 28
+versionInfo:
+  versionCode: 27
+  versionName: 2.0.7
+resourcesInfo:
+  packageId: 127
+doNotCompress:
+- arsc
+- gif
+- ogg
+- png
+- wav
+- cn/com/magnity/coresdk/META-INF/MANIFEST.MF
+- cn/com/magnity/sdk/META-INF/MANIFEST.MF
+- okhttp3/internal/publicsuffix/publicsuffixes.gz

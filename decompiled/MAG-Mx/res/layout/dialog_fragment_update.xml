@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout android:padding="@dimen/setting_padding" android:layout_width="match_parent" android:layout_height="match_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView android:textSize="@dimen/update_dialog_title_text_size" android:textColor="@android:color/black" android:id="@id/update_title" android:paddingTop="@dimen/setting_padding" android:paddingBottom="@dimen/setting_padding" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/update_dialog_title" app:layout_constraintTop_toTopOf="parent" />
+    <TextView android:textSize="@dimen/update_dialog_content_text_size" android:id="@id/update_description" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="更新内容" android:lineSpacingMultiplier="1.5" app:layout_constraintTop_toBottomOf="@id/update_title" />
+    <Button android:textColor="@android:color/black" android:id="@id/update_button" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/update" android:textAllCaps="false" app:layout_constraintBottom_toBottomOf="parent" />
+</android.support.constraint.ConstraintLayout>

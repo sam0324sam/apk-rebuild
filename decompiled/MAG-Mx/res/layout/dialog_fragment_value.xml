@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="@color/colorSettingsSubDialogBackground" android:layout_width="match_parent" android:layout_height="wrap_content" android:keepScreenOn="true"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:rsb="http://schemas.android.com/apk/res-auto">
+    <TextView android:textSize="@dimen/dialog_caption_size" android:textColor="@color/colorSettingsItemTitleText" android:gravity="center_horizontal" android:layout_gravity="center" android:id="@id/title" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dialog_item_vertical_margin" android:layout_marginBottom="@dimen/dialog_item_vertical_margin" />
+    <ImageView style="@style/DividerTheme4px" />
+    <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dialog_item_vertical_margin" android:layout_marginBottom="@dimen/dialog_item_vertical_margin" android:layout_marginStart="@dimen/dialog_left_margin" android:layout_marginEnd="@dimen/dialog_left_margin">
+        <TextView android:textSize="@dimen/dialog_caption_size" android:textColor="@color/colorSettingsItemCaptionText" android:id="@id/item_caption" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        <cn.com.magnity.magnitymx.util.SlideSwitch android:id="@id/on_off_witch" android:layout_width="47.0dp" android:layout_height="23.0dp" android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+    <com.yahoo.mobile.client.android.util.rangeseekbar.RangeSeekBar android:id="@id/range_seek_bar" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginStart="@dimen/dialog_left_margin" android:layout_marginEnd="@dimen/dialog_left_margin" rsb:absoluteMaxValue="500" rsb:absoluteMinValue="-20" rsb:singleThumb="true" />
+</LinearLayout>

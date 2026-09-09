@@ -1,0 +1,17 @@
+﻿# Build outputs & intermediate directories
+build_out/
+dist/
+release/
+decompiled/**/build/
+scratch/dex_out/
+scratch/build_dc/**/*.class
+__pycache__/
+
+# Executables & signatures
+*.idsig
+zadig.exe
+
+# Intermediate APK builds
+MAG-Cx-v2.0-PureThermal.apk
+MAG-Cx-v2.1-PureThermal.apk
+MAG-Cx-v2.2-Calibrated.apk

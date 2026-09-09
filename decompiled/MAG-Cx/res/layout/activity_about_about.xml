@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="@color/black" android:paddingLeft="@dimen/dialogContentLeftMargin" android:paddingTop="@dimen/dialogTitleTopMargin" android:layout_width="match_parent" android:layout_height="match_parent" android:keepScreenOn="true"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <include android:id="@id/id_productType" layout="@layout/include_textview_textview" />
+    <include android:id="@id/id_swVersion" layout="@layout/include_textview_textview" />
+    <include android:id="@id/id_fwVersion" layout="@layout/include_textview_textview" />
+    <include android:id="@id/id_hwVersion" layout="@layout/include_textview_textview" />
+    <include android:id="@id/id_right" layout="@layout/include_textview_textview" />
+    <include android:id="@id/id_company" layout="@layout/include_textview_textview" />
+    <ImageView android:layout_gravity="center_horizontal" android:id="@id/id_barcodeView" android:layout_width="@dimen/barcodesize" android:layout_height="@dimen/barcodesize" android:layout_margin="20.0dp" android:src="@mipmap/barcode" android:scaleType="fitCenter" />
+    <TextView android:textColor="#ffaaaaaa" android:layout_gravity="center_horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/barcodeDescription" />
+</LinearLayout>

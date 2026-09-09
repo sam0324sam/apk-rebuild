@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="@color/colorSettingsSubDialogBackground" android:padding="@dimen/setting_padding" android:layout_width="wrap_content" android:layout_height="wrap_content" android:keepScreenOn="true"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textSize="@dimen/dialog_caption_size" android:textColor="@color/colorSettingsItemTitleText" android:gravity="center_horizontal" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dialog_item_vertical_margin" android:layout_marginBottom="@dimen/dialog_item_vertical_margin" android:text="@string/no_action_inform_title" />
+    <ImageView style="@style/DividerTheme4px" />
+    <TextView android:textSize="18.0sp" android:textColor="@android:color/white" android:padding="@dimen/setting_padding" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/setting_padding" android:text="@string/no_action_inform_body" android:lineSpacingMultiplier="1.5" />
+    <LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="wrap_content">
+        <TextView android:textSize="18.0sp" android:textColor="@android:color/white" android:gravity="center" android:layout_gravity="center" android:id="@id/play_cancel" android:background="?android:selectableItemBackground" android:padding="@dimen/setting_padding" android:layout_width="0.0dp" android:layout_height="wrap_content" android:text="@string/no_action_cancel" android:layout_weight="1.0" />
+        <TextView android:textSize="18.0sp" android:textColor="@color/colorAccent" android:gravity="center" android:layout_gravity="center" android:id="@id/play_resume" android:background="?android:selectableItemBackground" android:padding="@dimen/setting_padding" android:layout_width="0.0dp" android:layout_height="wrap_content" android:text="@string/no_action_ok" android:layout_weight="1.0" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="horizontal" android:id="@id/deviceItemLayout" android:layout_width="match_parent" android:layout_height="match_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textAppearance="?android:textAppearanceListItemSmall" android:textColor="@color/colorListText" android:gravity="center_vertical" android:layout_gravity="center" android:id="@id/deviceName" android:layout_width="0.0dp" android:layout_height="wrap_content" android:minHeight="?android:listPreferredItemHeightSmall" android:layout_weight="1.0" android:paddingStart="?android:listPreferredItemPaddingStart" android:paddingEnd="?android:listPreferredItemPaddingEnd" />
+    <ImageView android:layout_gravity="center" android:id="@id/deviceCheckBox" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/uncheck" />
+</LinearLayout>

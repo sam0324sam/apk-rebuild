@@ -1,0 +1,635 @@
+.class public final Lokio/Okio;
+.super Ljava/lang/Object;
+.source "Okio.kt"
+
+
+# annotations
+.annotation system Ldalvik/annotation/SourceDebugExtension;
+    value = "SMAP\nOkio.kt\nKotlin\n*S Kotlin\n*F\n+ 1 Okio.kt\nokio/Okio\n*L\n1#1,215:1\n*E\n"
+.end annotation
+
+.annotation runtime Lkotlin/Metadata;
+    bv = {
+        0x1,
+        0x0,
+        0x2
+    }
+    d1 = {
+        "\u0000R\n\u0000\n\u0002\u0010\u000b\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0008\u0002\n\u0002\u0018\u0002\n\u0002\u0008\u0002\n\u0002\u0018\u0002\n\u0000\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0008\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0000\n\u0002\u0010\u0011\n\u0002\u0018\u0002\n\u0002\u0008\u0002\n\u0002\u0018\u0002\n\u0002\u0008\u0002\u001a\r\u0010\u0005\u001a\u00020\u0006H\u0007\u00a2\u0006\u0002\u0008\u0007\u001a\n\u0010\u0008\u001a\u00020\u0006*\u00020\t\u001a\n\u0010\n\u001a\u00020\u000b*\u00020\u0006\u001a\n\u0010\n\u001a\u00020\u000c*\u00020\r\u001a\u0016\u0010\u000e\u001a\u00020\u0006*\u00020\t2\u0008\u0008\u0002\u0010\u000f\u001a\u00020\u0001H\u0007\u001a\n\u0010\u000e\u001a\u00020\u0006*\u00020\u0010\u001a\n\u0010\u000e\u001a\u00020\u0006*\u00020\u0011\u001a%\u0010\u000e\u001a\u00020\u0006*\u00020\u00122\u0012\u0010\u0013\u001a\n\u0012\u0006\u0008\u0001\u0012\u00020\u00150\u0014\"\u00020\u0015H\u0007\u00a2\u0006\u0002\u0010\u0016\u001a\n\u0010\u0017\u001a\u00020\r*\u00020\t\u001a\n\u0010\u0017\u001a\u00020\r*\u00020\u0018\u001a\n\u0010\u0017\u001a\u00020\r*\u00020\u0011\u001a%\u0010\u0017\u001a\u00020\r*\u00020\u00122\u0012\u0010\u0013\u001a\n\u0012\u0006\u0008\u0001\u0012\u00020\u00150\u0014\"\u00020\u0015H\u0007\u00a2\u0006\u0002\u0010\u0019\"\u001c\u0010\u0000\u001a\u00020\u0001*\u00060\u0002j\u0002`\u00038@X\u0080\u0004\u00a2\u0006\u0006\u001a\u0004\u0008\u0000\u0010\u0004\u00a8\u0006\u001a"
+    }
+    d2 = {
+        "isAndroidGetsocknameError",
+        "",
+        "Ljava/lang/AssertionError;",
+        "Lkotlin/AssertionError;",
+        "(Ljava/lang/AssertionError;)Z",
+        "blackholeSink",
+        "Lokio/Sink;",
+        "blackhole",
+        "appendingSink",
+        "Ljava/io/File;",
+        "buffer",
+        "Lokio/BufferedSink;",
+        "Lokio/BufferedSource;",
+        "Lokio/Source;",
+        "sink",
+        "append",
+        "Ljava/io/OutputStream;",
+        "Ljava/net/Socket;",
+        "Ljava/nio/file/Path;",
+        "options",
+        "",
+        "Ljava/nio/file/OpenOption;",
+        "(Ljava/nio/file/Path;[Ljava/nio/file/OpenOption;)Lokio/Sink;",
+        "source",
+        "Ljava/io/InputStream;",
+        "(Ljava/nio/file/Path;[Ljava/nio/file/OpenOption;)Lokio/Source;",
+        "jvm"
+    }
+    k = 0x2
+    mv = {
+        0x1,
+        0x1,
+        0xb
+    }
+.end annotation
+
+.annotation build Lkotlin/jvm/JvmName;
+    name = "Okio"
+.end annotation
+
+
+# direct methods
+.method public static final appendingSink(Ljava/io/File;)Lokio/Sink;
+    .locals 2
+    .param p0, "$receiver"    # Ljava/io/File;
+        .annotation build Lorg/jetbrains/annotations/NotNull;
+        .end annotation
+    .end param
+    .annotation system Ldalvik/annotation/Throws;
+        value = {
+            Ljava/io/FileNotFoundException;
+        }
+    .end annotation
+
+    .annotation build Lorg/jetbrains/annotations/NotNull;
+    .end annotation
+
+    .prologue
+    const-string v0, "$receiver"
+
+    invoke-static {p0, v0}, Lkotlin/jvm/internal/Intrinsics;->checkParameterIsNotNull(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 190
+    new-instance v0, Ljava/io/FileOutputStream;
+
+    const/4 v1, 0x1
+
+    invoke-direct {v0, p0, v1}, Ljava/io/FileOutputStream;-><init>(Ljava/io/File;Z)V
+
+    check-cast v0, Ljava/io/OutputStream;
+
+    invoke-static {v0}, Lokio/Okio;->sink(Ljava/io/OutputStream;)Lokio/Sink;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public static final blackhole()Lokio/Sink;
+    .locals 1
+    .annotation build Lkotlin/jvm/JvmName;
+        name = "blackhole"
+    .end annotation
+
+    .annotation build Lorg/jetbrains/annotations/NotNull;
+    .end annotation
+
+    .prologue
+    .line 122
+    new-instance v0, Lokio/BlackholeSink;
+
+    invoke-direct {v0}, Lokio/BlackholeSink;-><init>()V
+
+    check-cast v0, Lokio/Sink;
+
+    return-object v0
+.end method
+
+.method public static final buffer(Lokio/Sink;)Lokio/BufferedSink;
+    .locals 1
+    .param p0, "$receiver"    # Lokio/Sink;
+        .annotation build Lorg/jetbrains/annotations/NotNull;
+        .end annotation
+    .end param
+    .annotation build Lorg/jetbrains/annotations/NotNull;
+    .end annotation
+
+    .prologue
+    const-string v0, "$receiver"
+
+    invoke-static {p0, v0}, Lkotlin/jvm/internal/Intrinsics;->checkParameterIsNotNull(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 48
+    new-instance v0, Lokio/RealBufferedSink;
+
+    invoke-direct {v0, p0}, Lokio/RealBufferedSink;-><init>(Lokio/Sink;)V
+
+    check-cast v0, Lokio/BufferedSink;
+
+    return-object v0
+.end method
+
+.method public static final buffer(Lokio/Source;)Lokio/BufferedSource;
+    .locals 1
+    .param p0, "$receiver"    # Lokio/Source;
+        .annotation build Lorg/jetbrains/annotations/NotNull;
+        .end annotation
+    .end param
+    .annotation build Lorg/jetbrains/annotations/NotNull;
+    .end annotation
+
+    .prologue
+    const-string v0, "$receiver"
+
+    invoke-static {p0, v0}, Lkotlin/jvm/internal/Intrinsics;->checkParameterIsNotNull(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 42
+    new-instance v0, Lokio/RealBufferedSource;
+
+    invoke-direct {v0, p0}, Lokio/RealBufferedSource;-><init>(Lokio/Source;)V
+
+    check-cast v0, Lokio/BufferedSource;
+
+    return-object v0
+.end method
+
+.method public static final isAndroidGetsocknameError(Ljava/lang/AssertionError;)Z
+    .locals 5
+    .param p0, "$receiver"    # Ljava/lang/AssertionError;
+        .annotation build Lorg/jetbrains/annotations/NotNull;
+        .end annotation
+    .end param
+
+    .prologue
+    const/4 v2, 0x0
+
+    const-string v0, "$receiver"
+
+    invoke-static {p0, v0}, Lkotlin/jvm/internal/Intrinsics;->checkParameterIsNotNull(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 213
+    invoke-virtual {p0}, Ljava/lang/AssertionError;->getCause()Ljava/lang/Throwable;
+
+    move-result-object v0
+
+    if-eqz v0, :cond_1
+
+    invoke-virtual {p0}, Ljava/lang/AssertionError;->getMessage()Ljava/lang/String;
+
+    move-result-object v0
+
+    if-eqz v0, :cond_0
+
+    check-cast v0, Ljava/lang/CharSequence;
+
+    const-string v1, "getsockname failed"
+
+    check-cast v1, Ljava/lang/CharSequence;
+
+    const/4 v3, 0x2
+
+    const/4 v4, 0x0
+
+    invoke-static {v0, v1, v2, v3, v4}, Lkotlin/text/StringsKt;->contains$default(Ljava/lang/CharSequence;Ljava/lang/CharSequence;ZILjava/lang/Object;)Z
+
+    move-result v0
+
+    :goto_0
+    if-eqz v0, :cond_1
+
+    const/4 v0, 0x1
+
+    :goto_1
+    return v0
+
+    :cond_0
+    move v0, v2
+
+    goto :goto_0
+
+    :cond_1
+    move v0, v2
+
+    goto :goto_1
+.end method
+
+.method public static final sink(Ljava/io/File;)Lokio/Sink;
+    .locals 3
+    .param p0, "$receiver"    # Ljava/io/File;
+        .annotation build Lorg/jetbrains/annotations/NotNull;
+        .end annotation
+    .end param
+    .annotation system Ldalvik/annotation/Throws;
+        value = {
+            Ljava/io/FileNotFoundException;
+        }
+    .end annotation
+
+    .annotation build Lkotlin/jvm/JvmOverloads;
+    .end annotation
+
+    .annotation build Lorg/jetbrains/annotations/NotNull;
+    .end annotation
+
+    .prologue
+    const/4 v0, 0x0
+
+    const/4 v1, 0x1
+
+    const/4 v2, 0x0
+
+    invoke-static {p0, v0, v1, v2}, Lokio/Okio;->sink$default(Ljava/io/File;ZILjava/lang/Object;)Lokio/Sink;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public static final sink(Ljava/io/File;Z)Lokio/Sink;
+    .locals 1
+    .param p0, "$receiver"    # Ljava/io/File;
+        .annotation build Lorg/jetbrains/annotations/NotNull;
+        .end annotation
+    .end param
+    .param p1, "append"    # Z
+    .annotation system Ldalvik/annotation/Throws;
+        value = {
+            Ljava/io/FileNotFoundException;
+        }
+    .end annotation
+
+    .annotation build Lkotlin/jvm/JvmOverloads;
+    .end annotation
+
+    .annotation build Lorg/jetbrains/annotations/NotNull;
+    .end annotation
+
+    .prologue
+    const-string v0, "$receiver"
+
+    invoke-static {p0, v0}, Lkotlin/jvm/internal/Intrinsics;->checkParameterIsNotNull(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 186
+    new-instance v0, Ljava/io/FileOutputStream;
+
+    invoke-direct {v0, p0, p1}, Ljava/io/FileOutputStream;-><init>(Ljava/io/File;Z)V
+
+    check-cast v0, Ljava/io/OutputStream;
+
+    invoke-static {v0}, Lokio/Okio;->sink(Ljava/io/OutputStream;)Lokio/Sink;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public static final sink(Ljava/io/OutputStream;)Lokio/Sink;
+    .locals 2
+    .param p0, "$receiver"    # Ljava/io/OutputStream;
+        .annotation build Lorg/jetbrains/annotations/NotNull;
+        .end annotation
+    .end param
+    .annotation build Lorg/jetbrains/annotations/NotNull;
+    .end annotation
+
+    .prologue
+    const-string v0, "$receiver"
+
+    invoke-static {p0, v0}, Lkotlin/jvm/internal/Intrinsics;->checkParameterIsNotNull(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 51
+    new-instance v0, Lokio/OutputStreamSink;
+
+    new-instance v1, Lokio/Timeout;
+
+    invoke-direct {v1}, Lokio/Timeout;-><init>()V
+
+    invoke-direct {v0, p0, v1}, Lokio/OutputStreamSink;-><init>(Ljava/io/OutputStream;Lokio/Timeout;)V
+
+    check-cast v0, Lokio/Sink;
+
+    return-object v0
+.end method
+
+.method public static final sink(Ljava/net/Socket;)Lokio/Sink;
+    .locals 4
+    .param p0, "$receiver"    # Ljava/net/Socket;
+        .annotation build Lorg/jetbrains/annotations/NotNull;
+        .end annotation
+    .end param
+    .annotation system Ldalvik/annotation/Throws;
+        value = {
+            Ljava/io/IOException;
+        }
+    .end annotation
+
+    .annotation build Lorg/jetbrains/annotations/NotNull;
+    .end annotation
+
+    .prologue
+    const-string v2, "$receiver"
+
+    invoke-static {p0, v2}, Lkotlin/jvm/internal/Intrinsics;->checkParameterIsNotNull(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 138
+    new-instance v1, Lokio/SocketAsyncTimeout;
+
+    invoke-direct {v1, p0}, Lokio/SocketAsyncTimeout;-><init>(Ljava/net/Socket;)V
+
+    .line 139
+    .local v1, "timeout":Lokio/SocketAsyncTimeout;
+    new-instance v0, Lokio/OutputStreamSink;
+
+    invoke-virtual {p0}, Ljava/net/Socket;->getOutputStream()Ljava/io/OutputStream;
+
+    move-result-object v3
+
+    const-string v2, "getOutputStream()"
+
+    invoke-static {v3, v2}, Lkotlin/jvm/internal/Intrinsics;->checkExpressionValueIsNotNull(Ljava/lang/Object;Ljava/lang/String;)V
+
+    move-object v2, v1
+
+    check-cast v2, Lokio/Timeout;
+
+    invoke-direct {v0, v3, v2}, Lokio/OutputStreamSink;-><init>(Ljava/io/OutputStream;Lokio/Timeout;)V
+
+    .line 140
+    .local v0, "sink":Lokio/OutputStreamSink;
+    check-cast v0, Lokio/Sink;
+
+    .end local v0    # "sink":Lokio/OutputStreamSink;
+    invoke-virtual {v1, v0}, Lokio/SocketAsyncTimeout;->sink(Lokio/Sink;)Lokio/Sink;
+
+    move-result-object v2
+
+    return-object v2
+.end method
+
+.method public static final varargs sink(Ljava/nio/file/Path;[Ljava/nio/file/OpenOption;)Lokio/Sink;
+    .locals 2
+    .param p0, "$receiver"    # Ljava/nio/file/Path;
+        .annotation build Lorg/jetbrains/annotations/NotNull;
+        .end annotation
+    .end param
+    .param p1, "options"    # [Ljava/nio/file/OpenOption;
+        .annotation build Lorg/jetbrains/annotations/NotNull;
+        .end annotation
+    .end param
+    .annotation system Ldalvik/annotation/Throws;
+        value = {
+            Ljava/io/IOException;
+        }
+    .end annotation
+
+    .annotation build Lorg/codehaus/mojo/animal_sniffer/IgnoreJRERequirement;
+    .end annotation
+
+    .annotation build Lorg/jetbrains/annotations/NotNull;
+    .end annotation
+
+    .prologue
+    const-string v0, "$receiver"
+
+    invoke-static {p0, v0}, Lkotlin/jvm/internal/Intrinsics;->checkParameterIsNotNull(Ljava/lang/Object;Ljava/lang/String;)V
+
+    const-string v0, "options"
+
+    invoke-static {p1, v0}, Lkotlin/jvm/internal/Intrinsics;->checkParameterIsNotNull(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 200
+    array-length v0, p1
+
+    invoke-static {p1, v0}, Ljava/util/Arrays;->copyOf([Ljava/lang/Object;I)[Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, [Ljava/nio/file/OpenOption;
+
+    invoke-static {p0, v0}, Ljava/nio/file/Files;->newOutputStream(Ljava/nio/file/Path;[Ljava/nio/file/OpenOption;)Ljava/io/OutputStream;
+
+    move-result-object v0
+
+    const-string v1, "Files.newOutputStream(this, *options)"
+
+    invoke-static {v0, v1}, Lkotlin/jvm/internal/Intrinsics;->checkExpressionValueIsNotNull(Ljava/lang/Object;Ljava/lang/String;)V
+
+    invoke-static {v0}, Lokio/Okio;->sink(Ljava/io/OutputStream;)Lokio/Sink;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public static bridge synthetic sink$default(Ljava/io/File;ZILjava/lang/Object;)Lokio/Sink;
+    .locals 1
+    .annotation system Ldalvik/annotation/Throws;
+        value = {
+            Ljava/io/FileNotFoundException;
+        }
+    .end annotation
+
+    .annotation build Lkotlin/jvm/JvmOverloads;
+    .end annotation
+
+    .annotation build Lorg/jetbrains/annotations/NotNull;
+    .end annotation
+
+    .prologue
+    and-int/lit8 v0, p2, 0x1
+
+    if-eqz v0, :cond_0
+
+    .line 186
+    const/4 p1, 0x0
+
+    :cond_0
+    invoke-static {p0, p1}, Lokio/Okio;->sink(Ljava/io/File;Z)Lokio/Sink;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public static final source(Ljava/io/File;)Lokio/Source;
+    .locals 1
+    .param p0, "$receiver"    # Ljava/io/File;
+        .annotation build Lorg/jetbrains/annotations/NotNull;
+        .end annotation
+    .end param
+    .annotation system Ldalvik/annotation/Throws;
+        value = {
+            Ljava/io/FileNotFoundException;
+        }
+    .end annotation
+
+    .annotation build Lorg/jetbrains/annotations/NotNull;
+    .end annotation
+
+    .prologue
+    const-string v0, "$receiver"
+
+    invoke-static {p0, v0}, Lkotlin/jvm/internal/Intrinsics;->checkParameterIsNotNull(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 194
+    new-instance v0, Ljava/io/FileInputStream;
+
+    invoke-direct {v0, p0}, Ljava/io/FileInputStream;-><init>(Ljava/io/File;)V
+
+    check-cast v0, Ljava/io/InputStream;
+
+    invoke-static {v0}, Lokio/Okio;->source(Ljava/io/InputStream;)Lokio/Source;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public static final source(Ljava/io/InputStream;)Lokio/Source;
+    .locals 2
+    .param p0, "$receiver"    # Ljava/io/InputStream;
+        .annotation build Lorg/jetbrains/annotations/NotNull;
+        .end annotation
+    .end param
+    .annotation build Lorg/jetbrains/annotations/NotNull;
+    .end annotation
+
+    .prologue
+    const-string v0, "$receiver"
+
+    invoke-static {p0, v0}, Lkotlin/jvm/internal/Intrinsics;->checkParameterIsNotNull(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 88
+    new-instance v0, Lokio/InputStreamSource;
+
+    new-instance v1, Lokio/Timeout;
+
+    invoke-direct {v1}, Lokio/Timeout;-><init>()V
+
+    invoke-direct {v0, p0, v1}, Lokio/InputStreamSource;-><init>(Ljava/io/InputStream;Lokio/Timeout;)V
+
+    check-cast v0, Lokio/Source;
+
+    return-object v0
+.end method
+
+.method public static final source(Ljava/net/Socket;)Lokio/Source;
+    .locals 4
+    .param p0, "$receiver"    # Ljava/net/Socket;
+        .annotation build Lorg/jetbrains/annotations/NotNull;
+        .end annotation
+    .end param
+    .annotation system Ldalvik/annotation/Throws;
+        value = {
+            Ljava/io/IOException;
+        }
+    .end annotation
+
+    .annotation build Lorg/jetbrains/annotations/NotNull;
+    .end annotation
+
+    .prologue
+    const-string v2, "$receiver"
+
+    invoke-static {p0, v2}, Lkotlin/jvm/internal/Intrinsics;->checkParameterIsNotNull(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 150
+    new-instance v1, Lokio/SocketAsyncTimeout;
+
+    invoke-direct {v1, p0}, Lokio/SocketAsyncTimeout;-><init>(Ljava/net/Socket;)V
+
+    .line 151
+    .local v1, "timeout":Lokio/SocketAsyncTimeout;
+    new-instance v0, Lokio/InputStreamSource;
+
+    invoke-virtual {p0}, Ljava/net/Socket;->getInputStream()Ljava/io/InputStream;
+
+    move-result-object v3
+
+    const-string v2, "getInputStream()"
+
+    invoke-static {v3, v2}, Lkotlin/jvm/internal/Intrinsics;->checkExpressionValueIsNotNull(Ljava/lang/Object;Ljava/lang/String;)V
+
+    move-object v2, v1
+
+    check-cast v2, Lokio/Timeout;
+
+    invoke-direct {v0, v3, v2}, Lokio/InputStreamSource;-><init>(Ljava/io/InputStream;Lokio/Timeout;)V
+
+    .line 152
+    .local v0, "source":Lokio/InputStreamSource;
+    check-cast v0, Lokio/Source;
+
+    .end local v0    # "source":Lokio/InputStreamSource;
+    invoke-virtual {v1, v0}, Lokio/SocketAsyncTimeout;->source(Lokio/Source;)Lokio/Source;
+
+    move-result-object v2
+
+    return-object v2
+.end method
+
+.method public static final varargs source(Ljava/nio/file/Path;[Ljava/nio/file/OpenOption;)Lokio/Source;
+    .locals 2
+    .param p0, "$receiver"    # Ljava/nio/file/Path;
+        .annotation build Lorg/jetbrains/annotations/NotNull;
+        .end annotation
+    .end param
+    .param p1, "options"    # [Ljava/nio/file/OpenOption;
+        .annotation build Lorg/jetbrains/annotations/NotNull;
+        .end annotation
+    .end param
+    .annotation system Ldalvik/annotation/Throws;
+        value = {
+            Ljava/io/IOException;
+        }
+    .end annotation
+
+    .annotation build Lorg/codehaus/mojo/animal_sniffer/IgnoreJRERequirement;
+    .end annotation
+
+    .annotation build Lorg/jetbrains/annotations/NotNull;
+    .end annotation
+
+    .prologue
+    const-string v0, "$receiver"
+
+    invoke-static {p0, v0}, Lkotlin/jvm/internal/Intrinsics;->checkParameterIsNotNull(Ljava/lang/Object;Ljava/lang/String;)V
+
+    const-string v0, "options"
+
+    invoke-static {p1, v0}, Lkotlin/jvm/internal/Intrinsics;->checkParameterIsNotNull(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 206
+    array-length v0, p1
+
+    invoke-static {p1, v0}, Ljava/util/Arrays;->copyOf([Ljava/lang/Object;I)[Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, [Ljava/nio/file/OpenOption;
+
+    invoke-static {p0, v0}, Ljava/nio/file/Files;->newInputStream(Ljava/nio/file/Path;[Ljava/nio/file/OpenOption;)Ljava/io/InputStream;
+
+    move-result-object v0
+
+    const-string v1, "Files.newInputStream(this, *options)"
+
+    invoke-static {v0, v1}, Lkotlin/jvm/internal/Intrinsics;->checkExpressionValueIsNotNull(Ljava/lang/Object;Ljava/lang/String;)V
+
+    invoke-static {v0}, Lokio/Okio;->source(Ljava/io/InputStream;)Lokio/Source;
+
+    move-result-object v0
+
+    return-object v0
+.end method

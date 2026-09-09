@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:padding="10.0dp" android:layout_width="match_parent" android:layout_height="match_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textSize="20.0sp" android:textColor="@android:color/black" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="10.0dp" android:text="@string/settingsCameraRotate" android:labelFor="@id/rotate_group" />
+    <RadioGroup android:id="@id/rotate_group" android:layout_width="match_parent" android:layout_height="wrap_content">
+        <RadioButton android:textSize="18.0sp" android:id="@id/camera_rotate_0" android:paddingBottom="10.0dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/settingsCameraRotate_0" />
+        <RadioButton android:textSize="18.0sp" android:id="@id/camera_rotate_90" android:paddingBottom="10.0dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/settingsCameraRotate_90" />
+        <RadioButton android:textSize="18.0sp" android:id="@id/camera_rotate_180" android:paddingBottom="10.0dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/settingsCameraRotate_180" />
+        <RadioButton android:textSize="18.0sp" android:id="@id/camera_rotate_270" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/settingsCameraRotate_270" />
+    </RadioGroup>
+</LinearLayout>

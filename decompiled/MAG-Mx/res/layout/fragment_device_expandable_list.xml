@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center" android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content" android:keepScreenOn="true"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:custom="http://schemas.android.com/apk/res-auto">
+    <TextView android:id="@id/title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dialog_subtitle_top_margin" android:layout_marginBottom="@dimen/dialog_subtitle_bottom_margin" android:layout_marginStart="@dimen/list_border_padding" />
+    <cn.com.magnity.magnitymx.online.ConstraintHeightExpandableListView android:id="@id/expandable_list_view" android:background="@drawable/list_shape" android:scrollbars="vertical" android:layout_width="match_parent" android:layout_height="wrap_content" android:childDivider="@color/colorListItemDivider" android:divider="@color/colorListItemDivider" android:dividerHeight="@dimen/list_item_divider_height" android:indicatorEnd="10.0dp" custom:maxHeight="@dimen/devices_list_max_height" />
+</LinearLayout>

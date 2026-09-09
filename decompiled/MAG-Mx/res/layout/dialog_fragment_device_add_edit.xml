@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="@color/colorSettingsSubDialogBackground" android:layout_width="wrap_content" android:layout_height="wrap_content" android:keepScreenOn="true"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textSize="@dimen/dialog_caption_size" android:textColor="@color/colorSettingsItemTitleText" android:gravity="center_horizontal" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dialog_item_vertical_margin" android:layout_marginBottom="@dimen/dialog_item_vertical_margin" android:text="@string/deviceAddEdit" />
+    <ImageView style="@style/DividerTheme4px" />
+    <LinearLayout android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="4.0dp" android:layout_marginEnd="4.0dp">
+        <TextView android:gravity="end" android:layout_width="@dimen/device_text_label_width" android:layout_height="wrap_content" android:text="@string/connectCloud" />
+        <Switch android:gravity="center" android:layout_gravity="center" android:id="@id/id_connect_cloud" android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="false" android:switchMinWidth="60.0dp" />
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="4.0dp" android:layout_marginEnd="4.0dp">
+        <TextView android:gravity="end" android:layout_width="@dimen/device_text_label_width" android:layout_height="wrap_content" android:text="@string/deviceIp" />
+        <EditText android:textColorHint="#ff666666" android:id="@id/id_ip" android:layout_width="@dimen/device_text_input_width" android:layout_height="wrap_content" android:hint="@string/inputRequired" android:inputType="text" />
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="4.0dp" android:layout_marginEnd="4.0dp">
+        <TextView android:gravity="end" android:layout_width="@dimen/device_text_label_width" android:layout_height="wrap_content" android:text="@string/deviceSN" />
+        <EditText android:textColorHint="#ff666666" android:id="@id/id_devicesn" android:layout_width="@dimen/device_text_input_width" android:layout_height="wrap_content" android:hint="@string/inputOptional" android:inputType="number" />
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="4.0dp" android:layout_marginEnd="4.0dp">
+        <TextView android:gravity="end" android:layout_width="@dimen/device_text_label_width" android:layout_height="wrap_content" android:text="@string/userName" />
+        <EditText android:textColorHint="#ff666666" android:id="@id/id_username" android:layout_width="@dimen/device_text_input_width" android:layout_height="wrap_content" android:hint="@string/inputOptional" />
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="4.0dp" android:layout_marginEnd="4.0dp">
+        <TextView android:gravity="end" android:layout_width="@dimen/device_text_label_width" android:layout_height="wrap_content" android:text="@string/userPwd" />
+        <EditText android:textColorHint="#ff666666" android:id="@id/id_userpwd" android:layout_width="@dimen/device_text_input_width" android:layout_height="wrap_content" android:hint="@string/inputOptional" android:inputType="textPassword" />
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="4.0dp" android:layout_marginEnd="4.0dp">
+        <TextView android:gravity="end" android:layout_width="@dimen/device_text_label_width" android:layout_height="wrap_content" android:text="@string/controlPort" />
+        <EditText android:id="@id/id_cmd_port" android:layout_width="@dimen/device_text_input_width" android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="4.0dp" android:layout_marginEnd="4.0dp">
+        <TextView android:gravity="end" android:layout_width="@dimen/device_text_label_width" android:layout_height="wrap_content" android:text="@string/imagePort" />
+        <EditText android:id="@id/id_img_port" android:layout_width="@dimen/device_text_input_width" android:layout_height="wrap_content" />
+    </LinearLayout>
+    <TextView android:id="@id/id_cameraTitle" android:visibility="gone" android:layout_width="@dimen/device_text_label_width" android:layout_height="wrap_content" android:text="@string/camera" android:layout_marginStart="4.0dp" />
+    <LinearLayout android:orientation="horizontal" android:id="@id/id_cameraUser" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="12.0dp" android:layout_marginEnd="4.0dp">
+        <TextView android:gravity="end" android:layout_width="@dimen/device_text_label_width" android:layout_height="wrap_content" android:text="@string/userName" />
+        <EditText android:id="@id/id_username1" android:layout_width="@dimen/device_text_input_width" android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:id="@id/id_cameraPwd" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="12.0dp" android:layout_marginEnd="4.0dp">
+        <TextView android:gravity="end" android:layout_width="@dimen/device_text_label_width" android:layout_height="wrap_content" android:text="@string/userPwd" />
+        <EditText android:id="@id/id_userpwd1" android:layout_width="@dimen/device_text_input_width" android:layout_height="wrap_content" android:inputType="textPassword" />
+    </LinearLayout>
+    <LinearLayout android:layout_gravity="center_horizontal" android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <Button android:id="@id/id_ok" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/ok" />
+        <Button android:id="@id/id_cancel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/cancel" />
+    </LinearLayout>
+</LinearLayout>

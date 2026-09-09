@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@id/node_layout" android:paddingTop="@dimen/tree_item_top_margin" android:paddingBottom="@dimen/tree_item_top_margin" android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingStart="@dimen/tree_item1_left_margin" android:paddingEnd="@dimen/tree_item1_left_margin"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textSize="@dimen/tree_item1_text_size" android:textColor="@color/colorTreeItem1Text" android:id="@id/node_text" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+    <ImageView android:id="@id/node_img" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerVertical="true" android:layout_alignParentEnd="true" />
+</RelativeLayout>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="@color/colorSettingsDialogBackground" android:layout_width="@dimen/tree_width" android:layout_height="match_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ProgressBar android:id="@id/waiting_cursor" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:indeterminateDrawable="@drawable/progressbar" android:layout_centerInParent="true" />
+    <TextView android:textSize="@dimen/tree_item1_text_size" android:textColor="@color/warning" android:id="@id/txt_info" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true" />
+    <ExpandableListView android:id="@id/tree" android:layout_width="match_parent" android:layout_height="match_parent" android:listSelector="@android:color/transparent" android:divider="@color/colorListItemDivider" android:dividerHeight="@dimen/list_item_divider_height" android:choiceMode="singleChoice" />
+</RelativeLayout>

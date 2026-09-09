@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:padding="10.0dp" android:layout_width="match_parent" android:layout_height="match_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="horizontal" android:id="@id/settingsLanguagesAuto" android:paddingTop="15.0dp" android:paddingBottom="15.0dp" android:layout_width="match_parent" android:layout_height="wrap_content">
+        <ImageView android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/entry" android:layout_marginEnd="10.0dp" />
+        <TextView android:textSize="18.0sp" android:textColor="@android:color/black" android:gravity="center" android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/settingsLanguagesAuto" android:textAllCaps="false" />
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:id="@id/settingsLanguagesChineseSimplified" android:paddingTop="15.0dp" android:paddingBottom="15.0dp" android:layout_width="match_parent" android:layout_height="wrap_content">
+        <ImageView android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/entry" android:layout_marginEnd="10.0dp" />
+        <TextView android:textSize="18.0sp" android:textColor="@android:color/black" android:gravity="center" android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/settingsLanguagesChineseSimplified" android:textAllCaps="false" />
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:id="@id/settingsLanguagesChineseTraditional" android:paddingTop="15.0dp" android:paddingBottom="15.0dp" android:visibility="gone" android:layout_width="match_parent" android:layout_height="wrap_content">
+        <ImageView android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/entry" android:layout_marginEnd="10.0dp" />
+        <TextView android:textSize="18.0sp" android:textColor="@android:color/black" android:gravity="center" android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/settingsLanguagesChineseTraditional" android:textAllCaps="false" />
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:id="@id/settingsLanguagesEnglish" android:paddingTop="15.0dp" android:paddingBottom="15.0dp" android:layout_width="match_parent" android:layout_height="wrap_content">
+        <ImageView android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/entry" android:layout_marginEnd="10.0dp" />
+        <TextView android:textSize="18.0sp" android:textColor="@android:color/black" android:gravity="center" android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/settingsLanguagesEnglish" android:textAllCaps="false" />
+    </LinearLayout>
+</LinearLayout>

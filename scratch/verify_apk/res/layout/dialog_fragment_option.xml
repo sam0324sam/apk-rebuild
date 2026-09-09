@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="@drawable/dialog_border" android:layout_width="match_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textSize="@dimen/dialogTextSize" android:textColor="@color/primaryText" android:layout_gravity="center" android:id="@id/id_option_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/settingItemVerticalMargin" android:layout_marginBottom="@dimen/settingItemVerticalMargin" />
+    <ImageView style="@style/LineDividerLine" />
+    <include android:id="@id/id_option_sel1" layout="@layout/include_setting_item" />
+    <ImageView style="@style/LineDividerLine" />
+    <include android:id="@id/id_option_sel2" layout="@layout/include_setting_item" />
+    <ImageView style="@style/LineDividerLine" />
+    <include android:id="@id/id_option_sel3" layout="@layout/include_setting_item" />
+    <ImageView style="@style/LineDividerLine" />
+    <include android:id="@id/id_option_sel4" layout="@layout/include_setting_item" />
+    <ImageView style="@style/LineDividerLine" />
+    <include android:id="@id/id_option_sel5" layout="@layout/include_setting_item" />
+    <ImageView style="@style/LineDividerLine" />
+    <TextView android:textSize="@dimen/settingItemTextSize" android:textColor="@color/primaryText" android:id="@id/id_text" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/settingItemVerticalMargin" android:layout_marginStart="@dimen/settingItemLeftMargin" />
+    <LinearLayout android:gravity="center_horizontal" android:paddingTop="@dimen/dialogTailTopMargin" android:layout_width="match_parent" android:layout_height="wrap_content">
+        <Button android:textSize="@dimen/dialogTextSize" android:textColor="@drawable/button_select_color" android:id="@id/id_btn_cancel" android:background="@drawable/dialog_button_select" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/labelCancel" android:textAllCaps="false" />
+    </LinearLayout>
+</LinearLayout>
