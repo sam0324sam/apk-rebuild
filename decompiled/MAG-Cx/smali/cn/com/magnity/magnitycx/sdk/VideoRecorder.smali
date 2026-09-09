@@ -1325,7 +1325,7 @@
     const/4 v6, 0x0
 
     :try_start_b
-    invoke-virtual {v10, v14, v6, v6, v11}, Landroid/media/MediaCodec;->configure(Landroid/media/MediaFormat;Ljava/lang/Object;Ljava/lang/Object;I)V
+    invoke-virtual {v10, v14, v6, v6, v11}, Landroid/media/MediaCodec;->configure(Landroid/media/MediaFormat;Landroid/view/Surface;Landroid/media/MediaCrypto;I)V
 
     .line 221
     invoke-virtual {v10}, Landroid/media/MediaCodec;->start()V

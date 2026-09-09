@@ -18,7 +18,7 @@ public class MediaCodec {
         return new MediaCodec();
     }
 
-    public void configure(MediaFormat format, Object surface, Object crypto, int flags) {}
+    public void configure(MediaFormat format, android.view.Surface surface, MediaCrypto crypto, int flags) {}
     public void start() {}
     public void stop() {}
     public void release() {}
