@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<set android:ordering="sequentially"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <objectAnimator android:duration="80" android:repeatCount="1" android:repeatMode="reverse" android:valueFrom="#000000" android:valueTo="#ffffff" android:valueType="intType" android:propertyName="backgroundColor" />
-    <objectAnimator android:duration="0" android:valueFrom="#000000" android:valueTo="#00000000" android:valueType="floatType" android:propertyName="backgroundColor" />
-</set>

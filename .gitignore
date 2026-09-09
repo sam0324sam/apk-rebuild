@@ -1,17 +1,37 @@
-﻿# Build outputs & intermediate directories
+﻿# =======================================================
+# Build outputs & temporary directories
+# =======================================================
 build_out/
 dist/
 release/
 decompiled/**/build/
 scratch/dex_out/
+scratch/**/smali_out/
 scratch/build_dc/**/*.class
+scratch/verify_apk/
+scratch/verify_v21/
+scratch/test/
+scratch/native_inspect/
+scratch/*.apk
+scratch/*.jar
 __pycache__/
 
-# Executables & signatures
+# =======================================================
+# Android & binary packages (Hosted on GitHub Releases)
+# =======================================================
+*.apk
 *.idsig
-zadig.exe
+*.exe
 
-# Intermediate APK builds
-MAG-Cx-v2.0-PureThermal.apk
-MAG-Cx-v2.1-PureThermal.apk
-MAG-Cx-v2.2-Calibrated.apk
+# =======================================================
+# OS & debug artifacts
+# =======================================================
+desktop.ini
+Thumbs.db
+*.csv
+*.png
+*.jpg
+!assets/**
+!res/**
+!decompiled/**/res/**
+!decompiled/**/assets/**
