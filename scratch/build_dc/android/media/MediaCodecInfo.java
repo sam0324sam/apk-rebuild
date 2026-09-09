@@ -1,6 +1,10 @@
 package android.media;
 
 public class MediaCodecInfo {
+    public String getName() {
+        return "";
+    }
+
     public boolean isEncoder() {
         return true;
     }

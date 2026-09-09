@@ -7,15 +7,23 @@ import android.media.MediaCodecList;
 import android.media.MediaFormat;
 import android.media.MediaMuxer;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
+import java.util.List;
+
+import cn.com.magnity.magnitycx.MagApplication;
 
 /**
  * Pure Java Android H.264 Video Recorder using MediaCodec and MediaMuxer.
- * Compatible with 64-bit Android (API 21+).
+ * Robust implementation compatible with Android 14+ / MediaTek Dimensity 9300+.
+ * Features automatic software encoder fallback and visible UI Toast feedback.
  */
 public class VideoRecorder {
     private static final String TAG = "VideoRecorder";
@@ -29,6 +37,7 @@ public class VideoRecorder {
     private boolean mMuxerStarted = false;
     private volatile boolean mIsRecording = false;
 
+    private String mActualOutputPath;
     private int mWidth;
     private int mHeight;
     private int mFps;
@@ -62,9 +71,9 @@ public class VideoRecorder {
         }
 
         try {
-            // Ensure even dimensions
-            mWidth = (width / 2) * 2;
-            mHeight = (height / 2) * 2;
+            // Ensure even dimensions (minimum 16-pixel aligned)
+            mWidth = (width / 16) * 16;
+            mHeight = (height / 16) * 16;
             if (mWidth <= 0) mWidth = 480;
             if (mHeight <= 0) mHeight = 640;
 
@@ -80,22 +89,35 @@ public class VideoRecorder {
                 outputFile.delete();
             }
 
-            mEncoder = MediaCodec.createEncoderByType(MIME_TYPE);
-            mColorFormat = chooseColorFormat(mEncoder);
-
-            MediaFormat format = MediaFormat.createVideoFormat(MIME_TYPE, mWidth, mHeight);
-            format.setInteger(MediaFormat.KEY_COLOR_FORMAT, mColorFormat);
-            format.setInteger(MediaFormat.KEY_BIT_RATE, bitRate);
-            format.setInteger(MediaFormat.KEY_FRAME_RATE, mFps);
-            format.setInteger(MediaFormat.KEY_I_FRAME_INTERVAL, 1);
+            // 1. Initialize MediaMuxer with path fallback
+            mActualOutputPath = outputPath;
             try {
-                format.setInteger("bitrate-mode", 1); // VBR
-            } catch (Throwable ignored) {}
+                mMuxer = new MediaMuxer(mActualOutputPath, MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4);
+            } catch (Throwable muxEx) {
+                Log.w(TAG, "Failed to create MediaMuxer at " + outputPath + ", trying app external files dir", muxEx);
+                File fallbackDir = null;
+                try {
+                    MagApplication app = MagApplication.getInstance();
+                    if (app != null) {
+                        fallbackDir = app.getExternalFilesDir("media");
+                        if (fallbackDir == null) fallbackDir = app.getFilesDir();
+                    }
+                } catch (Throwable ignored) {}
 
-            mEncoder.configure(format, null, null, MediaCodec.CONFIGURE_FLAG_ENCODE);
-            mEncoder.start();
+                if (fallbackDir != null) {
+                    if (!fallbackDir.exists()) fallbackDir.mkdirs();
+                    File fbFile = new File(fallbackDir, outputFile.getName());
+                    if (fbFile.exists()) fbFile.delete();
+                    mActualOutputPath = fbFile.getAbsolutePath();
+                    mMuxer = new MediaMuxer(mActualOutputPath, MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4);
+                } else {
+                    throw muxEx;
+                }
+            }
 
-            mMuxer = new MediaMuxer(outputPath, MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4);
+            // 2. Initialize Encoder with fallback
+            initEncoderWithFallback(mWidth, mHeight, mFps, bitRate);
+
             mTrackIndex = -1;
             mMuxerStarted = false;
 
@@ -105,12 +127,118 @@ public class VideoRecorder {
             mFrameIndex = 0;
 
             mIsRecording = true;
-            Log.i(TAG, "Recording started successfully: " + outputPath + " (" + mWidth + "x" + mHeight + "@" + mFps + "fps, bitrate=" + bitRate + ", colorFormat=" + mColorFormat + ")");
+            Log.i(TAG, "Recording started successfully: " + mActualOutputPath + " (" + mWidth + "x" + mHeight + "@" + mFps + "fps, bitrate=" + bitRate + ", colorFormat=" + mColorFormat + ")");
+            showToast("開始錄影...");
             return true;
         } catch (Throwable t) {
             Log.e(TAG, "Failed to start recording: " + t.getMessage(), t);
+            showToast("錄影啟動失敗: " + t.getClass().getSimpleName() + " (" + t.getMessage() + ")");
             cleanup();
             return false;
+        }
+    }
+
+    private void initEncoderWithFallback(int width, int height, int fps, int bitRate) throws Exception {
+        List<String> candidateNames = new ArrayList<String>();
+
+        // Query MediaCodecList for AVC encoders that support ByteBuffer YUV input
+        try {
+            int numCodecs = MediaCodecList.getCodecCount();
+            for (int i = 0; i < numCodecs; i++) {
+                MediaCodecInfo info = MediaCodecList.getCodecInfoAt(i);
+                if (!info.isEncoder()) continue;
+                for (String type : info.getSupportedTypes()) {
+                    if (type.equalsIgnoreCase(MIME_TYPE)) {
+                        try {
+                            MediaCodecInfo.CodecCapabilities caps = info.getCapabilitiesForType(type);
+                            for (int cf : caps.colorFormats) {
+                                if (cf == MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420SemiPlanar ||
+                                    cf == MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420Planar) {
+                                    String name = info.getName();
+                                    if (!candidateNames.contains(name)) {
+                                        candidateNames.add(name);
+                                    }
+                                    break;
+                                }
+                            }
+                        } catch (Throwable ignored) {}
+                    }
+                }
+            }
+        } catch (Throwable t) {
+            Log.w(TAG, "Error querying MediaCodecList: " + t.getMessage());
+        }
+
+        // Always ensure standard Google software encoders are available in candidate list
+        if (!candidateNames.contains("c2.android.avc.encoder")) {
+            candidateNames.add("c2.android.avc.encoder");
+        }
+        if (!candidateNames.contains("OMX.google.h264.encoder")) {
+            candidateNames.add("OMX.google.h264.encoder");
+        }
+        candidateNames.add("DEFAULT_AVC");
+
+        Throwable lastException = null;
+        for (String candidate : candidateNames) {
+            MediaCodec codec = null;
+            try {
+                if ("DEFAULT_AVC".equals(candidate)) {
+                    codec = MediaCodec.createEncoderByType(MIME_TYPE);
+                } else {
+                    codec = MediaCodec.createByCodecName(candidate);
+                }
+
+                int chosenColorFormat = MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420SemiPlanar;
+                boolean hasPlanar = false;
+                boolean hasSemiPlanar = false;
+                try {
+                    MediaCodecInfo.CodecCapabilities caps = codec.getCodecInfo().getCapabilitiesForType(MIME_TYPE);
+                    for (int cf : caps.colorFormats) {
+                        if (cf == MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420SemiPlanar) {
+                            hasSemiPlanar = true;
+                        } else if (cf == MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420Planar) {
+                            hasPlanar = true;
+                        }
+                    }
+                } catch (Throwable ignored) {}
+
+                if (hasSemiPlanar) {
+                    chosenColorFormat = MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420SemiPlanar;
+                } else if (hasPlanar) {
+                    chosenColorFormat = MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420Planar;
+                }
+
+                MediaFormat format = MediaFormat.createVideoFormat(MIME_TYPE, width, height);
+                format.setInteger(MediaFormat.KEY_COLOR_FORMAT, chosenColorFormat);
+                format.setInteger(MediaFormat.KEY_BIT_RATE, bitRate);
+                format.setInteger(MediaFormat.KEY_FRAME_RATE, fps);
+                format.setInteger(MediaFormat.KEY_I_FRAME_INTERVAL, 1);
+                try {
+                    format.setInteger("bitrate-mode", 1); // VBR
+                } catch (Throwable ignored) {}
+
+                codec.configure(format, null, null, MediaCodec.CONFIGURE_FLAG_ENCODE);
+                codec.start();
+
+                mEncoder = codec;
+                mColorFormat = chosenColorFormat;
+                Log.i(TAG, "Successfully initialized encoder: " + candidate + " with colorFormat=" + mColorFormat);
+                return;
+            } catch (Throwable t) {
+                Log.w(TAG, "Failed candidate encoder " + candidate + ": " + t.getMessage());
+                lastException = t;
+                if (codec != null) {
+                    try { codec.stop(); } catch (Throwable ignored) {}
+                    try { codec.release(); } catch (Throwable ignored) {}
+                    codec = null;
+                }
+            }
+        }
+
+        if (lastException != null) {
+            throw new RuntimeException("All AVC encoders failed: " + lastException.getMessage(), lastException);
+        } else {
+            throw new RuntimeException("No suitable AVC encoder found");
         }
     }
 
@@ -188,6 +316,19 @@ public class VideoRecorder {
         } finally {
             cleanup();
         }
+
+        if (mActualOutputPath != null) {
+            File savedFile = new File(mActualOutputPath);
+            if (savedFile.exists() && savedFile.length() > 0) {
+                showToast("錄影已儲存: " + savedFile.getName());
+                try {
+                    MagApplication app = MagApplication.getInstance();
+                    if (app != null) {
+                        GlobalFunc.notifyMediaSync(app, savedFile);
+                    }
+                } catch (Throwable ignored) {}
+            }
+        }
         Log.i(TAG, "Recording stopped and saved successfully.");
     }
 
@@ -199,7 +340,7 @@ public class VideoRecorder {
             int encoderStatus = mEncoder.dequeueOutputBuffer(bufferInfo, endOfStream ? 20000 : 0);
             if (encoderStatus == MediaCodec.INFO_TRY_AGAIN_LATER) {
                 if (!endOfStream) {
-                    break; // No more output ready right now
+                    break;
                 }
                 break;
             } else if (encoderStatus == MediaCodec.INFO_OUTPUT_FORMAT_CHANGED) {
@@ -269,41 +410,21 @@ public class VideoRecorder {
         mYuvBuffer = null;
     }
 
-    private static int chooseColorFormat(MediaCodec codec) {
-        if (codec != null) {
-            try {
-                MediaCodecInfo codecInfo = codec.getCodecInfo();
-                MediaCodecInfo.CodecCapabilities capabilities = codecInfo.getCapabilitiesForType(MIME_TYPE);
-                for (int colorFormat : capabilities.colorFormats) {
-                    if (colorFormat == MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420SemiPlanar) {
-                        return colorFormat; // NV12
-                    }
+    private static void showToast(final String message) {
+        try {
+            Handler mainHandler = new Handler(Looper.getMainLooper());
+            mainHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        MagApplication app = MagApplication.getInstance();
+                        if (app != null) {
+                            Toast.makeText(app, message, Toast.LENGTH_LONG).show();
+                        }
+                    } catch (Throwable ignored) {}
                 }
-                for (int colorFormat : capabilities.colorFormats) {
-                    if (colorFormat == MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420Planar) {
-                        return colorFormat; // I420
-                    }
-                }
-            } catch (Throwable t) {
-                Log.w(TAG, "chooseColorFormat error: " + t.getMessage());
-            }
-        }
-        return MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420SemiPlanar; // default NV12
-    }
-
-    private static MediaCodecInfo selectCodec(String mimeType) {
-        int numCodecs = MediaCodecList.getCodecCount();
-        for (int i = 0; i < numCodecs; i++) {
-            MediaCodecInfo codecInfo = MediaCodecList.getCodecInfoAt(i);
-            if (!codecInfo.isEncoder()) continue;
-            String[] types = codecInfo.getSupportedTypes();
-            for (String type : types) {
-                if (type.equalsIgnoreCase(mimeType)) {
-                    return codecInfo;
-                }
-            }
-        }
-        return null;
+            });
+        } catch (Throwable ignored) {}
     }
 
     /**

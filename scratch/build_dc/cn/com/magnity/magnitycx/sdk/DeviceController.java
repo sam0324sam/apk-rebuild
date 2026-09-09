@@ -811,22 +811,13 @@ public class DeviceController {
     }
 
     public static boolean startRecording(String path, int w, int h, int bitrate, int fps, int format) {
-        sIsRecording = true;
-        int actualFps = fps;
-        int actualBitrate = bitrate;
-        // Handle parameter inversion between bitrate (kbps, e.g. 2048) and fps (e.g. 20)
-        if (fps > 60 && bitrate <= 60) {
-            actualFps = bitrate;
-            actualBitrate = fps;
-        } else if (bitrate > 60 && fps <= 60) {
-            actualFps = fps;
-            actualBitrate = bitrate;
-        }
-        if (actualFps < 5 || actualFps > 60) actualFps = 20;
-        if (actualBitrate < 200) actualBitrate = 2000;
+        int actualFps = (fps <= 60 && fps >= 5) ? fps : ((bitrate <= 60 && bitrate >= 5) ? bitrate : 20);
+        int actualBitrate = (bitrate >= 200) ? bitrate : ((fps >= 200) ? fps : 2000);
 
         Log.i(TAG, "startRecording: path=" + path + ", w=" + w + ", h=" + h + ", fps=" + actualFps + ", bitrate=" + actualBitrate);
-        return VideoRecorder.getInstance().start(path, w, h, actualFps, actualBitrate);
+        boolean ok = VideoRecorder.getInstance().start(path, w, h, actualFps, actualBitrate);
+        sIsRecording = ok;
+        return ok;
     }
 
     public static void stopRecording() {

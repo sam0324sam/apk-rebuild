@@ -359,14 +359,14 @@
 .method public static adjustTempOffset(Landroid/content/Context;I)V
     .locals 4
 
-    .line 1002
+    .line 993
     sget v0, Lcn/com/magnity/magnitycx/sdk/DeviceController;->sManualTempOffset:I
 
     add-int/2addr v0, p1
 
     sput v0, Lcn/com/magnity/magnitycx/sdk/DeviceController;->sManualTempOffset:I
 
-    .line 1004
+    .line 995
     :try_start_0
     const-string p1, "user_manual_temp_offset"
 
@@ -378,17 +378,17 @@
 
     goto :goto_0
 
-    .line 1005
+    .line 996
     :catchall_0
     move-exception p1
 
     :goto_0
     nop
 
-    .line 1006
+    .line 997
     if-eqz p0, :cond_0
 
-    .line 1007
+    .line 998
     sget p1, Lcn/com/magnity/magnitycx/sdk/DeviceController;->sManualTempOffset:I
 
     int-to-float p1, p1
@@ -397,7 +397,7 @@
 
     div-float/2addr p1, v0
 
-    .line 1008
+    .line 999
     sget-object v1, Lcn/com/magnity/magnitycx/sdk/DeviceController;->sState:Lcn/com/magnity/magnitycx/sdk/State;
 
     iget v1, v1, Lcn/com/magnity/magnitycx/sdk/State;->intAveTemperature:I
@@ -406,7 +406,7 @@
 
     div-float/2addr v1, v0
 
-    .line 1009
+    .line 1000
     sget-object v0, Ljava/util/Locale;->US:Ljava/util/Locale;
 
     invoke-static {p1}, Ljava/lang/Float;->valueOf(F)Ljava/lang/Float;
@@ -435,7 +435,7 @@
 
     move-result-object p1
 
-    .line 1011
+    .line 1002
     :try_start_1
     invoke-static {p0, p1, v3}, Landroid/widget/Toast;->makeText(Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;
 
@@ -447,14 +447,14 @@
 
     goto :goto_1
 
-    .line 1012
+    .line 1003
     :catchall_1
     move-exception p0
 
     :goto_1
     nop
 
-    .line 1014
+    .line 1005
     :cond_0
     return-void
 .end method
@@ -462,24 +462,24 @@
 .method public static adjustTempOffsetDown(Landroid/content/Context;)V
     .locals 1
 
-    .line 1021
+    .line 1012
     const/16 v0, -0x1f4
 
     invoke-static {p0, v0}, Lcn/com/magnity/magnitycx/sdk/DeviceController;->adjustTempOffset(Landroid/content/Context;I)V
 
-    .line 1022
+    .line 1013
     return-void
 .end method
 
 .method public static adjustTempOffsetUp(Landroid/content/Context;)V
     .locals 1
 
-    .line 1017
+    .line 1008
     const/16 v0, 0x1f4
 
     invoke-static {p0, v0}, Lcn/com/magnity/magnitycx/sdk/DeviceController;->adjustTempOffset(Landroid/content/Context;I)V
 
-    .line 1018
+    .line 1009
     return-void
 .end method
 
@@ -594,10 +594,10 @@
 .method private static calcAutumn(F)I
     .locals 2
 
-    .line 945
+    .line 936
     nop
 
-    .line 946
+    .line 937
     const/high16 v0, 0x437f0000    # 255.0f
 
     mul-float v0, v0, p0
@@ -608,7 +608,7 @@
 
     move-result v0
 
-    .line 947
+    .line 938
     const/high16 v1, 0x3f800000    # 1.0f
 
     sub-float/2addr v1, p0
@@ -623,7 +623,7 @@
 
     move-result p0
 
-    .line 948
+    .line 939
     shl-int/lit8 v0, v0, 0x8
 
     const/high16 v1, -0x10000
@@ -638,7 +638,7 @@
 .method private static calcGlowbow(F)I
     .locals 4
 
-    .line 938
+    .line 929
     const/high16 v0, 0x43a00000    # 320.0f
 
     mul-float v0, v0, p0
@@ -649,7 +649,7 @@
 
     move-result v0
 
-    .line 939
+    .line 930
     const v1, 0x3e4ccccd    # 0.2f
 
     sub-float v1, p0, v1
@@ -670,7 +670,7 @@
 
     move-result v1
 
-    .line 940
+    .line 931
     const v3, 0x3f333333    # 0.7f
 
     sub-float/2addr p0, v3
@@ -689,7 +689,7 @@
 
     move-result p0
 
-    .line 941
+    .line 932
     shl-int/lit8 v0, v0, 0x10
 
     const/high16 v2, -0x1000000
@@ -708,10 +708,12 @@
 .method private static calcHighContrast(F)I
     .locals 10
 
-    .line 980
+    .line 971
     float-to-double v0, p0
 
     const-wide v2, 0x400921fb54442d18L    # Math.PI
+
+    invoke-static {v0, v1}, Ljava/lang/Double;->isNaN(D)Z
 
     mul-double v0, v0, v2
 
@@ -737,7 +739,7 @@
 
     move-result p0
 
-    .line 981
+    .line 972
     add-double/2addr v2, v0
 
     invoke-static {v2, v3}, Ljava/lang/Math;->sin(D)D
@@ -754,7 +756,7 @@
 
     move-result v2
 
-    .line 982
+    .line 973
     const-wide/high16 v3, 0x4010000000000000L    # 4.0
 
     add-double/2addr v0, v3
@@ -773,7 +775,7 @@
 
     move-result v0
 
-    .line 983
+    .line 974
     shl-int/lit8 p0, p0, 0x10
 
     const/high16 v1, -0x1000000
@@ -792,7 +794,7 @@
 .method private static calcHotMetal(F)I
     .locals 5
 
-    .line 959
+    .line 950
     const/high16 v0, 0x437f0000    # 255.0f
 
     mul-float v1, p0, v0
@@ -807,7 +809,7 @@
 
     move-result v1
 
-    .line 960
+    .line 951
     const v2, 0x3eb33333    # 0.35f
 
     sub-float v2, p0, v2
@@ -830,7 +832,7 @@
 
     move-result v2
 
-    .line 961
+    .line 952
     const/high16 v4, 0x3f400000    # 0.75f
 
     sub-float/2addr p0, v4
@@ -851,7 +853,7 @@
 
     move-result p0
 
-    .line 962
+    .line 953
     shl-int/lit8 v0, v1, 0x10
 
     const/high16 v1, -0x1000000
@@ -870,7 +872,7 @@
 .method private static calcIronbow(F)I
     .locals 7
 
-    .line 914
+    .line 905
     const/4 v0, 0x0
 
     const/high16 v1, 0x43000000    # 128.0f
@@ -883,10 +885,10 @@
 
     if-gez v4, :cond_0
 
-    .line 915
+    .line 906
     div-float/2addr p0, v3
 
-    .line 916
+    .line 907
     mul-float v1, v1, p0
 
     float-to-int v1, v1
@@ -895,7 +897,7 @@
 
     float-to-int p0, p0
 
-    .line 917
+    .line 908
     goto :goto_0
 
     :cond_0
@@ -907,12 +909,12 @@
 
     if-gez v6, :cond_1
 
-    .line 918
+    .line 909
     sub-float/2addr p0, v3
 
     div-float/2addr p0, v3
 
-    .line 919
+    .line 910
     const/high16 v0, 0x42fe0000    # 127.0f
 
     mul-float v0, v0, p0
@@ -931,7 +933,7 @@
 
     float-to-int p0, v2
 
-    .line 920
+    .line 911
     goto :goto_0
 
     :cond_1
@@ -943,12 +945,12 @@
 
     if-gez v6, :cond_2
 
-    .line 921
+    .line 912
     sub-float/2addr p0, v5
 
     div-float/2addr p0, v3
 
-    .line 922
+    .line 913
     const/high16 v2, 0x43200000    # 160.0f
 
     mul-float p0, p0, v2
@@ -957,20 +959,20 @@
 
     float-to-int p0, p0
 
-    .line 923
+    .line 914
     move v0, p0
 
     const/4 p0, 0x0
 
     goto :goto_0
 
-    .line 924
+    .line 915
     :cond_2
     sub-float/2addr p0, v2
 
     div-float/2addr p0, v3
 
-    .line 925
+    .line 916
     const/high16 v0, 0x41f80000    # 31.0f
 
     mul-float v0, v0, p0
@@ -987,7 +989,7 @@
 
     float-to-int p0, p0
 
-    .line 927
+    .line 918
     :goto_0
     invoke-static {v1}, Lcn/com/magnity/magnitycx/sdk/DeviceController;->clamp(I)I
 
@@ -1019,7 +1021,7 @@
 .method private static calcJet(F)I
     .locals 6
 
-    .line 966
+    .line 957
     const/high16 v0, 0x40800000    # 4.0f
 
     mul-float v0, v0, p0
@@ -1050,7 +1052,7 @@
 
     move-result v1
 
-    .line 967
+    .line 958
     const/high16 v3, 0x3f000000    # 0.5f
 
     sub-float v4, v0, v3
@@ -1071,7 +1073,7 @@
 
     move-result v4
 
-    .line 968
+    .line 959
     add-float/2addr v0, v3
 
     const/high16 v3, 0x40200000    # 2.5f
@@ -1090,7 +1092,7 @@
 
     move-result p0
 
-    .line 969
+    .line 960
     shl-int/lit8 v0, v1, 0x10
 
     const/high16 v1, -0x1000000
@@ -1109,7 +1111,7 @@
 .method private static calcRainbow(F)I
     .locals 8
 
-    .line 931
+    .line 922
     const/high16 v0, 0x3f000000    # 0.5f
 
     sub-float v1, p0, v0
@@ -1136,7 +1138,7 @@
 
     float-to-int v3, v3
 
-    .line 932
+    .line 923
     invoke-static {v1}, Ljava/lang/Math;->abs(F)F
 
     move-result v1
@@ -1159,7 +1161,7 @@
 
     float-to-int v1, v1
 
-    .line 933
+    .line 924
     sub-float/2addr v0, p0
 
     mul-float v0, v0, v2
@@ -1176,7 +1178,7 @@
 
     float-to-int p0, p0
 
-    .line 934
+    .line 925
     invoke-static {v3}, Lcn/com/magnity/magnitycx/sdk/DeviceController;->clamp(I)I
 
     move-result v0
@@ -1207,32 +1209,32 @@
 .method private static calcRedHot(I)I
     .locals 2
 
-    .line 987
+    .line 978
     const/16 v0, 0xc0
 
     if-lt p0, v0, :cond_0
 
-    .line 988
+    .line 979
     add-int/lit16 v0, p0, -0xc0
 
     mul-int/lit8 v0, v0, 0x4
 
-    .line 989
+    .line 980
     nop
 
-    .line 990
+    .line 981
     sub-int/2addr p0, v0
 
     invoke-static {p0}, Lcn/com/magnity/magnitycx/sdk/DeviceController;->clamp(I)I
 
     move-result v0
 
-    .line 991
+    .line 982
     invoke-static {p0}, Lcn/com/magnity/magnitycx/sdk/DeviceController;->clamp(I)I
 
     move-result p0
 
-    .line 992
+    .line 983
     const/high16 v1, -0x10000
 
     shl-int/lit8 v0, v0, 0x8
@@ -1243,7 +1245,7 @@
 
     return p0
 
-    .line 994
+    .line 985
     :cond_0
     shl-int/lit8 v0, p0, 0x10
 
@@ -1263,17 +1265,17 @@
 .method private static calcRedSaturation(I)I
     .locals 2
 
-    .line 973
+    .line 964
     const/16 v0, 0xda
 
     if-lt p0, v0, :cond_0
 
-    .line 974
+    .line 965
     const/high16 p0, -0x10000
 
     return p0
 
-    .line 976
+    .line 967
     :cond_0
     shl-int/lit8 v0, p0, 0x10
 
@@ -1293,7 +1295,7 @@
 .method private static calcWinter(F)I
     .locals 3
 
-    .line 952
+    .line 943
     const/high16 v0, 0x43000000    # 128.0f
 
     mul-float v0, v0, p0
@@ -1304,7 +1306,7 @@
 
     move-result v0
 
-    .line 953
+    .line 944
     const/high16 v1, 0x437f0000    # 255.0f
 
     mul-float v1, v1, p0
@@ -1315,7 +1317,7 @@
 
     move-result v1
 
-    .line 954
+    .line 945
     const/high16 v2, 0x43070000    # 135.0f
 
     mul-float p0, p0, v2
@@ -1330,7 +1332,7 @@
 
     move-result p0
 
-    .line 955
+    .line 946
     shl-int/lit8 v0, v0, 0x10
 
     const/high16 v2, -0x1000000
@@ -1349,28 +1351,28 @@
 .method public static calibrateToTarget(Landroid/content/Context;I)V
     .locals 4
 
-    .line 1025
+    .line 1016
     sget-object v0, Lcn/com/magnity/magnitycx/sdk/DeviceController;->sState:Lcn/com/magnity/magnitycx/sdk/State;
 
     iget v0, v0, Lcn/com/magnity/magnitycx/sdk/State;->intAveTemperature:I
 
-    .line 1026
+    .line 1017
     if-gtz v0, :cond_0
 
     const v0, 0x88b8
 
-    .line 1027
+    .line 1018
     :cond_0
     sub-int v0, p1, v0
 
-    .line 1028
+    .line 1019
     sget v1, Lcn/com/magnity/magnitycx/sdk/DeviceController;->sManualTempOffset:I
 
     add-int/2addr v1, v0
 
     sput v1, Lcn/com/magnity/magnitycx/sdk/DeviceController;->sManualTempOffset:I
 
-    .line 1030
+    .line 1021
     :try_start_0
     const-string v0, "user_manual_temp_offset"
 
@@ -1382,17 +1384,17 @@
 
     goto :goto_0
 
-    .line 1031
+    .line 1022
     :catchall_0
     move-exception v0
 
     :goto_0
     nop
 
-    .line 1032
+    .line 1023
     if-eqz p0, :cond_1
 
-    .line 1033
+    .line 1024
     sget v0, Lcn/com/magnity/magnitycx/sdk/DeviceController;->sManualTempOffset:I
 
     int-to-float v0, v0
@@ -1401,12 +1403,12 @@
 
     div-float/2addr v0, v1
 
-    .line 1034
+    .line 1025
     int-to-float p1, p1
 
     div-float/2addr p1, v1
 
-    .line 1035
+    .line 1026
     sget-object v1, Ljava/util/Locale;->US:Ljava/util/Locale;
 
     invoke-static {p1}, Ljava/lang/Float;->valueOf(F)Ljava/lang/Float;
@@ -1435,7 +1437,7 @@
 
     move-result-object p1
 
-    .line 1037
+    .line 1028
     :try_start_1
     invoke-static {p0, p1, v3}, Landroid/widget/Toast;->makeText(Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;
 
@@ -1447,14 +1449,14 @@
 
     goto :goto_1
 
-    .line 1038
+    .line 1029
     :catchall_1
     move-exception p0
 
     :goto_1
     nop
 
-    .line 1040
+    .line 1031
     :cond_1
     return-void
 .end method
@@ -1462,7 +1464,7 @@
 .method private static clamp(I)I
     .locals 1
 
-    .line 998
+    .line 989
     if-gez p0, :cond_0
 
     const/4 p0, 0x0
@@ -2232,13 +2234,19 @@
     sput-boolean v2, Lcn/com/magnity/magnitycx/sdk/DeviceController;->sIsCalibrating:Z
 
     .line 364
+    goto :goto_d
+
+    :goto_c
     throw v0
+
+    :goto_d
+    goto :goto_c
 .end method
 
 .method public static doRecording(Landroid/graphics/Bitmap;)Z
     .locals 1
 
-    .line 842
+    .line 833
     sget-boolean v0, Lcn/com/magnity/magnitycx/sdk/DeviceController;->sIsRecording:Z
 
     if-nez v0, :cond_0
@@ -2247,7 +2255,7 @@
 
     return p0
 
-    .line 843
+    .line 834
     :cond_0
     invoke-static {}, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->getInstance()Lcn/com/magnity/magnitycx/sdk/VideoRecorder;
 
@@ -2263,7 +2271,7 @@
 .method public static getEX()I
     .locals 1
 
-    .line 851
+    .line 842
     const/4 v0, 0x0
 
     return v0
@@ -2272,37 +2280,37 @@
 .method public static getExtParameter(Lcn/com/magnity/magnitycx/sdk/ExtPara;)V
     .locals 2
 
-    .line 864
+    .line 855
     if-eqz p0, :cond_0
 
-    .line 865
+    .line 856
     const/4 v0, 0x0
 
     iput-boolean v0, p0, Lcn/com/magnity/magnitycx/sdk/ExtPara;->bIsothermal:Z
 
-    .line 866
+    .line 857
     sget v1, Lcn/com/magnity/magnitycx/sdk/DeviceController;->sFlipMode:I
 
     iput v1, p0, Lcn/com/magnity/magnitycx/sdk/ExtPara;->dwFlip:I
 
-    .line 867
+    .line 858
     iput v0, p0, Lcn/com/magnity/magnitycx/sdk/ExtPara;->intAutoEnlargeRange:I
 
-    .line 868
+    .line 859
     iput v0, p0, Lcn/com/magnity/magnitycx/sdk/ExtPara;->intBrightOffset:I
 
-    .line 869
+    .line 860
     iput v0, p0, Lcn/com/magnity/magnitycx/sdk/ExtPara;->intContrastOffset:I
 
-    .line 870
+    .line 861
     const/16 v1, 0x61a8
 
     iput v1, p0, Lcn/com/magnity/magnitycx/sdk/ExtPara;->intCurrentEnvTemperature:I
 
-    .line 871
+    .line 862
     iput v0, p0, Lcn/com/magnity/magnitycx/sdk/ExtPara;->intDetailRatio:I
 
-    .line 873
+    .line 864
     :cond_0
     return-void
 .end method
@@ -3534,7 +3542,7 @@
 .method private static initPalettes()V
     .locals 7
 
-    .line 883
+    .line 874
     const/4 v0, 0x0
 
     const/4 v1, 0x0
@@ -3544,14 +3552,14 @@
 
     if-ge v1, v2, :cond_0
 
-    .line 884
+    .line 875
     int-to-float v2, v1
 
     const/high16 v3, 0x437f0000    # 255.0f
 
     div-float/2addr v2, v3
 
-    .line 886
+    .line 877
     sget-object v3, Lcn/com/magnity/magnitycx/sdk/DeviceController;->PALETTES:[[I
 
     aget-object v3, v3, v0
@@ -3570,7 +3578,7 @@
 
     aput v4, v3, v1
 
-    .line 888
+    .line 879
     sget-object v3, Lcn/com/magnity/magnitycx/sdk/DeviceController;->PALETTES:[[I
 
     const/4 v4, 0x1
@@ -3591,7 +3599,7 @@
 
     aput v4, v3, v1
 
-    .line 890
+    .line 881
     sget-object v3, Lcn/com/magnity/magnitycx/sdk/DeviceController;->PALETTES:[[I
 
     const/4 v4, 0x2
@@ -3604,7 +3612,7 @@
 
     aput v4, v3, v1
 
-    .line 892
+    .line 883
     sget-object v3, Lcn/com/magnity/magnitycx/sdk/DeviceController;->PALETTES:[[I
 
     const/4 v4, 0x3
@@ -3617,7 +3625,7 @@
 
     aput v4, v3, v1
 
-    .line 894
+    .line 885
     sget-object v3, Lcn/com/magnity/magnitycx/sdk/DeviceController;->PALETTES:[[I
 
     const/4 v4, 0x4
@@ -3630,7 +3638,7 @@
 
     aput v4, v3, v1
 
-    .line 896
+    .line 887
     sget-object v3, Lcn/com/magnity/magnitycx/sdk/DeviceController;->PALETTES:[[I
 
     const/4 v4, 0x5
@@ -3643,7 +3651,7 @@
 
     aput v4, v3, v1
 
-    .line 898
+    .line 889
     sget-object v3, Lcn/com/magnity/magnitycx/sdk/DeviceController;->PALETTES:[[I
 
     const/4 v4, 0x6
@@ -3656,7 +3664,7 @@
 
     aput v4, v3, v1
 
-    .line 900
+    .line 891
     sget-object v3, Lcn/com/magnity/magnitycx/sdk/DeviceController;->PALETTES:[[I
 
     const/4 v4, 0x7
@@ -3669,7 +3677,7 @@
 
     aput v4, v3, v1
 
-    .line 902
+    .line 893
     sget-object v3, Lcn/com/magnity/magnitycx/sdk/DeviceController;->PALETTES:[[I
 
     const/16 v4, 0x8
@@ -3682,7 +3690,7 @@
 
     aput v4, v3, v1
 
-    .line 904
+    .line 895
     sget-object v3, Lcn/com/magnity/magnitycx/sdk/DeviceController;->PALETTES:[[I
 
     const/16 v4, 0x9
@@ -3695,7 +3703,7 @@
 
     aput v4, v3, v1
 
-    .line 906
+    .line 897
     sget-object v3, Lcn/com/magnity/magnitycx/sdk/DeviceController;->PALETTES:[[I
 
     const/16 v4, 0xa
@@ -3708,7 +3716,7 @@
 
     aput v2, v3, v1
 
-    .line 908
+    .line 899
     sget-object v2, Lcn/com/magnity/magnitycx/sdk/DeviceController;->PALETTES:[[I
 
     const/16 v3, 0xb
@@ -3721,12 +3729,12 @@
 
     aput v3, v2, v1
 
-    .line 883
+    .line 874
     add-int/lit8 v1, v1, 0x1
 
     goto/16 :goto_0
 
-    .line 910
+    .line 901
     :cond_0
     return-void
 .end method
@@ -3752,7 +3760,7 @@
 .method public static isRecording()Z
     .locals 1
 
-    .line 838
+    .line 829
     sget-boolean v0, Lcn/com/magnity/magnitycx/sdk/DeviceController;->sIsRecording:Z
 
     if-eqz v0, :cond_0
@@ -4849,6 +4857,8 @@
     move/from16 v25, v3
 
     aget v3, v17, v5
+    :try_end_5
+    .catchall {:try_start_5 .. :try_end_5} :catchall_2
 
     .line 546
     if-ge v3, v11, :cond_28
@@ -4947,10 +4957,18 @@
 
     int-to-double v13, v15
 
+    invoke-static {v10, v11}, Ljava/lang/Double;->isNaN(D)Z
+
+    invoke-static {v13, v14}, Ljava/lang/Double;->isNaN(D)Z
+
     div-double/2addr v10, v13
 
     .line 567
     long-to-double v8, v8
+
+    invoke-static {v8, v9}, Ljava/lang/Double;->isNaN(D)Z
+
+    invoke-static {v13, v14}, Ljava/lang/Double;->isNaN(D)Z
 
     div-double/2addr v8, v13
 
@@ -4960,6 +4978,7 @@
 
     const-wide/16 v13, 0x0
 
+    :try_start_6
     invoke-static {v13, v14, v8, v9}, Ljava/lang/Math;->max(DD)D
 
     move-result-wide v8
@@ -5365,13 +5384,18 @@
     invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     move-result-object v1
+    :try_end_6
+    .catchall {:try_start_6 .. :try_end_6} :catchall_2
 
     int-to-double v3, v0
 
     const-wide v5, 0x408f400000000000L    # 1000.0
 
+    invoke-static {v3, v4}, Ljava/lang/Double;->isNaN(D)Z
+
     div-double/2addr v3, v5
 
+    :try_start_7
     invoke-virtual {v1, v3, v4}, Ljava/lang/StringBuilder;->append(D)Ljava/lang/StringBuilder;
 
     move-result-object v0
@@ -5385,11 +5409,16 @@
     sget-object v1, Lcn/com/magnity/magnitycx/sdk/DeviceController;->sState:Lcn/com/magnity/magnitycx/sdk/State;
 
     iget v1, v1, Lcn/com/magnity/magnitycx/sdk/State;->intAveTemperature:I
+    :try_end_7
+    .catchall {:try_start_7 .. :try_end_7} :catchall_2
 
     int-to-double v3, v1
 
+    invoke-static {v3, v4}, Ljava/lang/Double;->isNaN(D)Z
+
     div-double/2addr v3, v5
 
+    :try_start_8
     invoke-virtual {v0, v3, v4}, Ljava/lang/StringBuilder;->append(D)Ljava/lang/StringBuilder;
 
     move-result-object v0
@@ -5403,11 +5432,16 @@
     sget-object v1, Lcn/com/magnity/magnitycx/sdk/DeviceController;->sState:Lcn/com/magnity/magnitycx/sdk/State;
 
     iget v1, v1, Lcn/com/magnity/magnitycx/sdk/State;->intMinTemperature:I
+    :try_end_8
+    .catchall {:try_start_8 .. :try_end_8} :catchall_2
 
     int-to-double v3, v1
 
+    invoke-static {v3, v4}, Ljava/lang/Double;->isNaN(D)Z
+
     div-double/2addr v3, v5
 
+    :try_start_9
     invoke-virtual {v0, v3, v4}, Ljava/lang/StringBuilder;->append(D)Ljava/lang/StringBuilder;
 
     move-result-object v0
@@ -5421,11 +5455,16 @@
     sget-object v1, Lcn/com/magnity/magnitycx/sdk/DeviceController;->sState:Lcn/com/magnity/magnitycx/sdk/State;
 
     iget v1, v1, Lcn/com/magnity/magnitycx/sdk/State;->intMaxTemperature:I
+    :try_end_9
+    .catchall {:try_start_9 .. :try_end_9} :catchall_2
 
     int-to-double v3, v1
 
+    invoke-static {v3, v4}, Ljava/lang/Double;->isNaN(D)Z
+
     div-double/2addr v3, v5
 
+    :try_start_a
     invoke-virtual {v0, v3, v4}, Ljava/lang/StringBuilder;->append(D)Ljava/lang/StringBuilder;
 
     move-result-object v0
@@ -5469,8 +5508,8 @@
     move-result-object v0
 
     invoke-static {v2, v0}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
-    :try_end_5
-    .catchall {:try_start_5 .. :try_end_5} :catchall_2
+    :try_end_a
+    .catchall {:try_start_a .. :try_end_a} :catchall_2
 
     .line 621
     :cond_37
@@ -5489,12 +5528,12 @@
     move-exception v0
 
     .line 623
-    :try_start_6
+    :try_start_b
     const-string v1, "pushFrame error"
 
     invoke-static {v2, v1, v0}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
-    :try_end_6
-    .catchall {:try_start_6 .. :try_end_6} :catchall_3
+    :try_end_b
+    .catchall {:try_start_b .. :try_end_b} :catchall_3
 
     .line 624
     nop
@@ -5527,12 +5566,12 @@
 .method public static resetCalibration(Landroid/content/Context;)V
     .locals 2
 
-    .line 1043
+    .line 1034
     const/4 v0, 0x0
 
     sput v0, Lcn/com/magnity/magnitycx/sdk/DeviceController;->sManualTempOffset:I
 
-    .line 1045
+    .line 1036
     :try_start_0
     const-string v1, "user_manual_temp_offset"
 
@@ -5542,17 +5581,17 @@
 
     goto :goto_0
 
-    .line 1046
+    .line 1037
     :catchall_0
     move-exception v1
 
     :goto_0
     nop
 
-    .line 1047
+    .line 1038
     if-eqz p0, :cond_0
 
-    .line 1049
+    .line 1040
     :try_start_1
     const-string v1, "\u6eab\u5ea6\u6821\u6e96\u5df2\u91cd\u7f6e (0.0\u00b0C)"
 
@@ -5566,14 +5605,14 @@
 
     goto :goto_1
 
-    .line 1050
+    .line 1041
     :catchall_1
     move-exception p0
 
     :goto_1
     nop
 
-    .line 1052
+    .line 1043
     :cond_0
     return-void
 .end method
@@ -5581,7 +5620,7 @@
 .method public static saveDDT(Ljava/lang/String;)Z
     .locals 0
 
-    .line 847
+    .line 838
     const/4 p0, 0x1
 
     return p0
@@ -5872,7 +5911,7 @@
 .method public static setAutoEnlarge(I)V
     .locals 0
 
-    .line 861
+    .line 852
     return-void
 .end method
 
@@ -5916,29 +5955,29 @@
 .method public static setEX(III)V
     .locals 0
 
-    .line 855
+    .line 846
     return-void
 .end method
 
 .method public static setEmissivity(II)V
     .locals 0
 
-    .line 858
+    .line 849
     return-void
 .end method
 
 .method public static setExtParameter(Lcn/com/magnity/magnitycx/sdk/ExtPara;)V
     .locals 1
 
-    .line 876
+    .line 867
     if-eqz p0, :cond_0
 
-    .line 877
+    .line 868
     iget p0, p0, Lcn/com/magnity/magnitycx/sdk/ExtPara;->dwFlip:I
 
     sput p0, Lcn/com/magnity/magnitycx/sdk/DeviceController;->sFlipMode:I
 
-    .line 878
+    .line 869
     new-instance p0, Ljava/lang/StringBuilder;
 
     invoke-direct {p0}, Ljava/lang/StringBuilder;-><init>()V
@@ -5963,7 +6002,7 @@
 
     invoke-static {v0, p0}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 880
+    .line 871
     :cond_0
     return-void
 .end method
@@ -5981,7 +6020,7 @@
 .method public static showCalibrationDialog(Landroid/app/Activity;)V
     .locals 1
 
-    .line 1055
+    .line 1046
     if-eqz p0, :cond_1
 
     invoke-virtual {p0}, Landroid/app/Activity;->isFinishing()Z
@@ -5992,7 +6031,7 @@
 
     goto :goto_0
 
-    .line 1056
+    .line 1047
     :cond_0
     new-instance v0, Lcn/com/magnity/magnitycx/sdk/DeviceController$2;
 
@@ -6000,10 +6039,10 @@
 
     invoke-virtual {p0, v0}, Landroid/app/Activity;->runOnUiThread(Ljava/lang/Runnable;)V
 
-    .line 1104
+    .line 1095
     return-void
 
-    .line 1055
+    .line 1046
     :cond_1
     :goto_0
     return-void
@@ -6183,89 +6222,59 @@
 .end method
 
 .method public static startRecording(Ljava/lang/String;IIIII)Z
-    .locals 7
+    .locals 6
 
     .line 814
-    const/4 p5, 0x1
+    const/4 p5, 0x5
 
-    sput-boolean p5, Lcn/com/magnity/magnitycx/sdk/DeviceController;->sIsRecording:Z
+    const/16 v0, 0x3c
 
-    .line 815
-    nop
+    if-gt p4, v0, :cond_0
 
-    .line 816
-    nop
+    if-lt p4, p5, :cond_0
 
-    .line 818
-    const/16 p5, 0x3c
+    move v4, p4
 
-    if-le p4, p5, :cond_0
-
-    if-gt p3, p5, :cond_0
-
-    .line 819
-    nop
-
-    .line 820
     goto :goto_0
 
-    .line 821
     :cond_0
-    if-le p3, p5, :cond_1
+    if-gt p3, v0, :cond_1
 
-    if-gt p4, p5, :cond_1
+    if-lt p3, p5, :cond_1
 
-    .line 822
-    nop
+    move v4, p3
 
-    .line 823
-    nop
+    goto :goto_0
 
-    .line 825
     :cond_1
-    move v6, p4
+    const/16 p5, 0x14
 
-    move p4, p3
+    const/16 v4, 0x14
 
-    move p3, v6
-
+    .line 815
     :goto_0
-    const/4 v0, 0x5
+    const/16 p5, 0xc8
 
-    if-lt p3, v0, :cond_3
+    if-lt p3, p5, :cond_2
 
-    if-le p3, p5, :cond_2
+    move v5, p3
 
     goto :goto_1
 
     :cond_2
-    move v4, p3
+    if-lt p4, p5, :cond_3
 
-    goto :goto_2
+    move v5, p4
+
+    goto :goto_1
 
     :cond_3
-    :goto_1
-    const/16 p3, 0x14
-
-    const/16 v4, 0x14
-
-    .line 826
-    :goto_2
-    const/16 p3, 0xc8
-
-    if-ge p4, p3, :cond_4
-
-    const/16 p4, 0x7d0
+    const/16 p3, 0x7d0
 
     const/16 v5, 0x7d0
 
-    goto :goto_3
-
-    :cond_4
-    move v5, p4
-
-    .line 828
-    :goto_3
+    .line 817
+    :goto_1
     new-instance p3, Ljava/lang/StringBuilder;
 
     invoke-direct {p3}, Ljava/lang/StringBuilder;-><init>()V
@@ -6328,7 +6337,7 @@
 
     invoke-static {p4, p3}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 829
+    .line 818
     invoke-static {}, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->getInstance()Lcn/com/magnity/magnitycx/sdk/VideoRecorder;
 
     move-result-object v0
@@ -6343,6 +6352,10 @@
 
     move-result p0
 
+    .line 819
+    sput-boolean p0, Lcn/com/magnity/magnitycx/sdk/DeviceController;->sIsRecording:Z
+
+    .line 820
     return p0
 .end method
 
@@ -6388,33 +6401,33 @@
 .method public static stopRecording()V
     .locals 1
 
-    .line 833
+    .line 824
     const/4 v0, 0x0
 
     sput-boolean v0, Lcn/com/magnity/magnitycx/sdk/DeviceController;->sIsRecording:Z
 
-    .line 834
+    .line 825
     invoke-static {}, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->getInstance()Lcn/com/magnity/magnitycx/sdk/VideoRecorder;
 
     move-result-object v0
 
     invoke-virtual {v0}, Lcn/com/magnity/magnitycx/sdk/VideoRecorder;->stop()V
 
-    .line 835
+    .line 826
     return-void
 .end method
 
 .method public static toggleHorizontalFlip(Landroid/content/Context;)V
     .locals 2
 
-    .line 1106
+    .line 1097
     sget v0, Lcn/com/magnity/magnitycx/sdk/DeviceController;->sFlipMode:I
 
     xor-int/lit8 v0, v0, 0x1
 
     sput v0, Lcn/com/magnity/magnitycx/sdk/DeviceController;->sFlipMode:I
 
-    .line 1108
+    .line 1099
     :try_start_0
     const-string v0, "flipMode"
 
@@ -6426,14 +6439,14 @@
 
     goto :goto_0
 
-    .line 1109
+    .line 1100
     :catchall_0
     move-exception v0
 
     :goto_0
     nop
 
-    .line 1111
+    .line 1102
     :try_start_1
     sget-object v0, Lcn/com/magnity/magnitycx/MagApplication;->magParameter:Lcn/com/magnity/magnitycx/sdk/MagParameter;
 
@@ -6445,17 +6458,17 @@
 
     goto :goto_1
 
-    .line 1112
+    .line 1103
     :catchall_1
     move-exception v0
 
     :goto_1
     nop
 
-    .line 1113
+    .line 1104
     if-eqz p0, :cond_1
 
-    .line 1114
+    .line 1105
     sget v0, Lcn/com/magnity/magnitycx/sdk/DeviceController;->sFlipMode:I
 
     and-int/lit8 v0, v0, 0x1
@@ -6469,7 +6482,7 @@
     :cond_0
     const-string v0, "\u5df2\u95dc\u9589\u6c34\u5e73\u7ffb\u8f49"
 
-    .line 1116
+    .line 1107
     :goto_2
     const/4 v1, 0x0
 
@@ -6484,14 +6497,14 @@
 
     goto :goto_3
 
-    .line 1117
+    .line 1108
     :catchall_2
     move-exception p0
 
     :goto_3
     nop
 
-    .line 1119
+    .line 1110
     :cond_1
     return-void
 .end method

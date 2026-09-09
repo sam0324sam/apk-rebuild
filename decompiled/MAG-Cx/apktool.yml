@@ -7,8 +7,8 @@ sdkInfo:
   minSdkVersion: 21
   targetSdkVersion: 28
 versionInfo:
-  versionCode: 226
-  versionName: 2.2.6-ready
+  versionCode: 227
+  versionName: 2.2.7-ready
 resourcesInfo:
   packageId: 127
   keepRawValues: true

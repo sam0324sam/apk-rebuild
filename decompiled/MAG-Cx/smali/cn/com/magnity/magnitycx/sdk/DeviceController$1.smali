@@ -74,5 +74,11 @@
     invoke-static {v0}, Lcn/com/magnity/magnitycx/sdk/DeviceController;->access$102(Z)Z
 
     .line 290
+    goto :goto_3
+
+    :goto_2
     throw v1
+
+    :goto_3
+    goto :goto_2
 .end method

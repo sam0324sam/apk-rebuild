@@ -14,6 +14,10 @@ public class MediaCodec {
         return new MediaCodec();
     }
 
+    public static MediaCodec createByCodecName(String name) throws IOException {
+        return new MediaCodec();
+    }
+
     public void configure(MediaFormat format, Object surface, Object crypto, int flags) {}
     public void start() {}
     public void stop() {}
