@@ -7,8 +7,8 @@ sdkInfo:
   minSdkVersion: 21
   targetSdkVersion: 28
 versionInfo:
-  versionCode: 222
-  versionName: 2.2.2-calibratable
+  versionCode: 223
+  versionName: 2.2.3-flipped
 resourcesInfo:
   packageId: 127
   keepRawValues: true

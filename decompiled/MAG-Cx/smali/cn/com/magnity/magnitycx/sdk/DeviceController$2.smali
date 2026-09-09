@@ -30,7 +30,7 @@
         }
     .end annotation
 
-    .line 950
+    .line 991
     iput-object p1, p0, Lcn/com/magnity/magnitycx/sdk/DeviceController$2;->val$activity:Landroid/app/Activity;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -43,7 +43,7 @@
 .method public run()V
     .locals 9
 
-    .line 954
+    .line 995
     :try_start_0
     invoke-static {}, Lcn/com/magnity/magnitycx/sdk/DeviceController;->access$200()Lcn/com/magnity/magnitycx/sdk/State;
 
@@ -57,7 +57,7 @@
 
     div-float/2addr v0, v1
 
-    .line 955
+    .line 996
     invoke-static {}, Lcn/com/magnity/magnitycx/sdk/DeviceController;->access$300()I
 
     move-result v2
@@ -66,8 +66,8 @@
 
     div-float/2addr v2, v1
 
-    .line 956
-    const/4 v1, 0x5
+    .line 997
+    const/4 v1, 0x6
 
     new-array v1, v1, [Ljava/lang/CharSequence;
 
@@ -95,20 +95,41 @@
 
     aput-object v3, v1, v7
 
-    const-string v3, "\u91cd\u7f6e\u88dc\u511f\u70ba 0.0\u00b0C"
+    .line 1002
+    invoke-static {}, Lcn/com/magnity/magnitycx/sdk/DeviceController;->access$400()I
 
+    move-result v3
+
+    and-int/2addr v3, v5
+
+    if-eqz v3, :cond_0
+
+    const-string v3, "\u6c34\u5e73\u7ffb\u8f49: [\u5df2\u958b\u555f] (\u9ede\u64ca\u5207\u63db\u70ba\u95dc\u9589)"
+
+    goto :goto_0
+
+    :cond_0
+    const-string v3, "\u6c34\u5e73\u7ffb\u8f49: [\u5df2\u95dc\u9589] (\u9ede\u64ca\u5207\u63db\u70ba\u958b\u555f)"
+
+    :goto_0
     const/4 v7, 0x4
 
     aput-object v3, v1, v7
 
-    .line 963
+    const-string v3, "\u91cd\u7f6e\u88dc\u511f\u70ba 0.0\u00b0C"
+
+    const/4 v7, 0x5
+
+    aput-object v3, v1, v7
+
+    .line 1005
     new-instance v3, Landroid/app/AlertDialog$Builder;
 
     iget-object v7, p0, Lcn/com/magnity/magnitycx/sdk/DeviceController$2;->val$activity:Landroid/app/Activity;
 
     invoke-direct {v3, v7}, Landroid/app/AlertDialog$Builder;-><init>(Landroid/content/Context;)V
 
-    .line 964
+    .line 1006
     sget-object v7, Ljava/util/Locale;->US:Ljava/util/Locale;
 
     const-string v8, "\u6eab\u5ea6\u6821\u6e96 (\u76ee\u524d: %.1f\u00b0C | \u88dc\u511f: %+.1f\u00b0C)"
@@ -133,7 +154,7 @@
 
     invoke-virtual {v3, v0}, Landroid/app/AlertDialog$Builder;->setTitle(Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;
 
-    .line 965
+    .line 1007
     new-instance v0, Lcn/com/magnity/magnitycx/sdk/DeviceController$2$1;
 
     iget-object v2, p0, Lcn/com/magnity/magnitycx/sdk/DeviceController$2;->val$activity:Landroid/app/Activity;
@@ -142,33 +163,33 @@
 
     invoke-virtual {v3, v1, v0}, Landroid/app/AlertDialog$Builder;->setItems([Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;
 
-    .line 987
+    .line 1032
     const-string v0, "\u53d6\u6d88"
 
     const/4 v1, 0x0
 
     invoke-virtual {v3, v0, v1}, Landroid/app/AlertDialog$Builder;->setNegativeButton(Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;
 
-    .line 988
+    .line 1033
     invoke-virtual {v3}, Landroid/app/AlertDialog$Builder;->show()Landroid/app/AlertDialog;
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
-    .line 991
-    goto :goto_0
+    .line 1036
+    goto :goto_1
 
-    .line 989
+    .line 1034
     :catchall_0
     move-exception v0
 
-    .line 990
+    .line 1035
     const-string v1, "DeviceController"
 
     const-string v2, "showCalibrationDialog error"
 
     invoke-static {v1, v2, v0}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
 
-    .line 992
-    :goto_0
+    .line 1037
+    :goto_1
     return-void
 .end method

@@ -62,9 +62,15 @@
    - **螢幕長按一鍵體溫校準**：長按熱像儀畫面中央彈出選單，支援一鍵校準為 36.4°C / 36.8°C / 微調 / 重置。
    - **永久記憶**：校準補償值自動寫入 `SharedPreferences`，下次開機自動生效。
 
+10. **影像翻轉引擎實作與版本號顯式校準 (V2.2.3-Flipped)**：
+    - **影像水平/垂直翻轉生效**：在 `DeviceController` 中完整實作 `setExtParameter(ExtPara)` 接收 `dwFlip`，並在 `getOutputBMPData` 輸出 Bitmap 像素時依據直向 90° 矩陣執行逆向映射（水平翻轉反轉 Y，垂直翻轉反轉 X），完美同步原廠 `ImageViewer` 的十字座標翻轉機制，徹底修復「設定內翻轉無效」與「拍攝右側物體卻顯示在右側的鏡像反轉」問題。
+    - **長按選單快捷翻轉**：長按螢幕校準彈窗內新增【切換水平翻轉】，無須進設定頁即可一鍵校正鏡像。
+    - **版本號顯式同步**：在 `AndroidManifest.xml` 與 `apktool.yml` 顯式標記 `versionCode: 223` 與 `versionName: 2.2.3-flipped`，解決 Android 系統應用資訊與 App 關於頁面版本號未更新的問題。
+
 ## 產出檔案清單 (Artifacts)
-- **`MAG-Cx-v2.2.2-Calibratable.apk`**（專案根目錄）：最新版手動校準與音量鍵微調安裝包。
-- **`MAG-Cx-Xiaomi-64bit-Ready.apk`**（專案根目錄）：最新版鏡像副本。
+- **`MAG-Cx-v2.2.3-Flipped.apk`**（GitHub Releases）：最新版影像翻轉修復與手動校準安裝包。
+- **`MAG-Cx-Xiaomi-64bit-Ready.apk`**（GitHub Releases）：最新版鏡像副本。
 - **`啟動熱成像觀測.bat`** / **`pc_thermal_viewer.py`**：PC 端熱成像即時畫面觀測器。
+
 
 

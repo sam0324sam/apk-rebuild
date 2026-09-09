@@ -43,7 +43,7 @@
         }
     .end annotation
 
-    .line 965
+    .line 1007
     iput-object p2, p0, Lcn/com/magnity/magnitycx/sdk/DeviceController$2$1;->val$activity:Landroid/app/Activity;
 
     iput-object p1, p0, Lcn/com/magnity/magnitycx/sdk/DeviceController$2$1;->this$0:Lcn/com/magnity/magnitycx/sdk/DeviceController$2;
@@ -58,12 +58,12 @@
 .method public onClick(Landroid/content/DialogInterface;I)V
     .locals 0
 
-    .line 968
+    .line 1010
     packed-switch p2, :pswitch_data_0
 
     goto :goto_0
 
-    .line 982
+    .line 1027
     :pswitch_0
     iget-object p1, p0, Lcn/com/magnity/magnitycx/sdk/DeviceController$2$1;->val$activity:Landroid/app/Activity;
 
@@ -71,47 +71,56 @@
 
     goto :goto_0
 
-    .line 979
+    .line 1024
     :pswitch_1
+    iget-object p1, p0, Lcn/com/magnity/magnitycx/sdk/DeviceController$2$1;->val$activity:Landroid/app/Activity;
+
+    invoke-static {p1}, Lcn/com/magnity/magnitycx/sdk/DeviceController;->toggleHorizontalFlip(Landroid/content/Context;)V
+
+    .line 1025
+    goto :goto_0
+
+    .line 1021
+    :pswitch_2
     iget-object p1, p0, Lcn/com/magnity/magnitycx/sdk/DeviceController$2$1;->val$activity:Landroid/app/Activity;
 
     invoke-static {p1}, Lcn/com/magnity/magnitycx/sdk/DeviceController;->adjustTempOffsetDown(Landroid/content/Context;)V
 
-    .line 980
+    .line 1022
     goto :goto_0
 
-    .line 976
-    :pswitch_2
+    .line 1018
+    :pswitch_3
     iget-object p1, p0, Lcn/com/magnity/magnitycx/sdk/DeviceController$2$1;->val$activity:Landroid/app/Activity;
 
     invoke-static {p1}, Lcn/com/magnity/magnitycx/sdk/DeviceController;->adjustTempOffsetUp(Landroid/content/Context;)V
 
-    .line 977
+    .line 1019
     goto :goto_0
 
-    .line 973
-    :pswitch_3
+    .line 1015
+    :pswitch_4
     iget-object p1, p0, Lcn/com/magnity/magnitycx/sdk/DeviceController$2$1;->val$activity:Landroid/app/Activity;
 
     const p2, 0x8fc0
 
     invoke-static {p1, p2}, Lcn/com/magnity/magnitycx/sdk/DeviceController;->calibrateToTarget(Landroid/content/Context;I)V
 
-    .line 974
+    .line 1016
     goto :goto_0
 
-    .line 970
-    :pswitch_4
+    .line 1012
+    :pswitch_5
     iget-object p1, p0, Lcn/com/magnity/magnitycx/sdk/DeviceController$2$1;->val$activity:Landroid/app/Activity;
 
     const p2, 0x8e30
 
     invoke-static {p1, p2}, Lcn/com/magnity/magnitycx/sdk/DeviceController;->calibrateToTarget(Landroid/content/Context;I)V
 
-    .line 971
+    .line 1013
     nop
 
-    .line 985
+    .line 1030
     :goto_0
     return-void
 
@@ -119,6 +128,7 @@
 
     :pswitch_data_0
     .packed-switch 0x0
+        :pswitch_5
         :pswitch_4
         :pswitch_3
         :pswitch_2
